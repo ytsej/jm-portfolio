@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "contact": "Frontend Tasks",
+    "type": "outgoing",
+    "status": "Completed",
+    "time": "Yesterday",
+    "description": "Built responsive UI components with React and Tailwind CSS"
+  },
+  {
+    "id": "2",
+    "contact": "API Integration",
+    "type": "incoming",
+    "status": "Completed",
+    "time": "2 days ago",
+    "description": "Connected frontend to REST APIs using fetch and async/await"
+  },
+  {
+    "id": "3",
+    "contact": "Hardware Setup",
+    "type": "outgoing",
+    "status": "Completed",
+    "time": "3 days ago",
+    "description": "PC assembly and Windows 11 installation for client system"
+  },
+  {
+    "id": "4",
+    "contact": "Database Config",
+    "type": "incoming",
+    "status": "Completed",
+    "time": "Last week",
+    "description": "Configured Firebase and MySQL connections for project backend"
+  }
+]

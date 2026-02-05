@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "name": "Frontend Developer",
+    "avatar": "🎨",
+    "role": "UI Development",
+    "skills": ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
+    "description": "Building reliable web interfaces with modern technologies. Focus on responsive design and user experience."
+  },
+  {
+    "id": "2",
+    "name": "Full-Stack Developer",
+    "avatar": "⚙️",
+    "role": "Backend & APIs",
+    "skills": ["PHP", "Python", "Java", "Firebase", "MySQL", "Supabase", "REST APIs", "Postman"],
+    "description": "Developing backend systems and integrating databases. Comfortable with API testing and server-side logic."
+  },
+  {
+    "id": "3",
+    "name": "Hardware Tech",
+    "avatar": "🖥️",
+    "role": "Systems & Assembly",
+    "skills": ["PC Assembly", "OS Installation", "Troubleshooting", "Hardware Knowledge"],
+    "description": "Hands-on with hardware setup, OS configuration, and system troubleshooting. Patient with hardware parts."
+  },
+  {
+    "id": "4",
+    "name": "Unity Game Dev",
+    "avatar": "🎮",
+    "role": "Game Development",
+    "skills": ["Unity", "C#", "Game Logic", "3D Environments", "Prototyping"],
+    "description": "Creating game prototypes and simulations. Experience with Unity development and interactive scenarios."
+  }
+]
