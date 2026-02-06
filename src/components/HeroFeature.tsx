@@ -181,13 +181,13 @@ export default function HeroFeature({
 
           {isWelcome ? (
             <>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider uppercase text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
+              <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider uppercase text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
                 JM.EXE
               </h2>
-              <p className="text-gray-200 drop-shadow-md max-w-xl text-xs sm:text-sm md:text-base font-semibold">
+              <p className="text-gray-200 drop-shadow-md max-w-xl text-[11px] sm:text-sm md:text-base font-semibold">
                 IT Student • Frontend / API • Hardware & Systems
               </p>
-              <p className="text-gray-200 drop-shadow-md max-w-xl text-xs sm:text-sm md:text-base leading-relaxed">
+              <p className="hidden sm:block text-gray-200 drop-shadow-md max-w-xl text-xs sm:text-sm md:text-base leading-relaxed">
                 Building reliable web interfaces and practical systems — from UI to APIs, databases, and device troubleshooting. Comfortable with real-world setups: OS installs, PC assembly, and hands-on problem solving.
               </p>
 
@@ -222,14 +222,14 @@ export default function HeroFeature({
             </>
           ) : (
             <>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider uppercase text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
+              <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wider uppercase text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
                 {featuredProject?.title}
               </h2>
-              <p className="text-base sm:text-lg text-gray-200 drop-shadow-md mb-2">
+              <p className="text-sm sm:text-lg text-gray-200 drop-shadow-md mb-2">
                 {featuredProject?.subtitle}
               </p>
               {featuredProject?.shortDescription && (
-                <p className="text-xs sm:text-sm text-gray-300 drop-shadow-md leading-relaxed max-w-2xl">
+                <p className="hidden sm:block text-xs sm:text-sm text-gray-300 drop-shadow-md leading-relaxed max-w-2xl">
                   {featuredProject.shortDescription}
                 </p>
               )}

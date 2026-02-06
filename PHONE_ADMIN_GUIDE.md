@@ -1,30 +1,59 @@
 # JM.EXE Phone - Admin Guide
 
-## Phone Gallery Upload
+## Phone Gallery Admin Panel
 
 ### Access
-Navigate to: **http://localhost:3003/admin/phone-gallery**
+- **Local**: `http://localhost:3003/admin/phone-gallery`
+- **Production**: `https://your-domain.vercel.app/admin/phone-gallery`
+
+### Features
+
+✅ **Upload Images**: Select and upload multiple images  
+✅ **View Gallery**: See all images in a responsive grid  
+✅ **Delete Images**: Remove images with a single click  
+✅ **Cloud Storage**: Uses Vercel Blob Storage in production  
+✅ **Local Fallback**: Uses local filesystem in development  
 
 ### How to Add Images
 
-1. Click "Choose Files"
-2. Select unlimited images (JPEG, PNG, WEBP)
-3. Click "Upload Images"
-4. Images automatically copy to `public/images/phone-gallery/`
-5. Gallery JSON auto-updates
-6. Open the phone to see new images!
+1. Navigate to the admin panel
+2. Click "Choose Files" in the Upload section
+3. Select unlimited images (JPEG, PNG, WEBP)
+4. Click "Upload Images"
+5. Images are uploaded to cloud storage (production) or local filesystem (dev)
+6. Gallery updates automatically
+7. Open the phone to see new images!
 
-### What Gets Uploaded
+### How to Delete Images
 
-Images are saved to:
+1. Scroll to the Gallery Images section
+2. Hover over any image
+3. Click the "Delete" button
+4. Confirm deletion
+5. Image is removed from storage and gallery updates
+
+### Storage Locations
+
+**Production (Vercel Blob Storage):**
+- Images stored in Vercel Blob Storage
+- URLs stored in `src/data/phone-gallery.json`
+- Accessible from anywhere
+
+**Development (Local Filesystem):**
+- Images saved to `public/images/phone-gallery/`
+- URLs stored in `src/data/phone-gallery.json`
+- Works without cloud setup
+
+### Gallery JSON
+
+Image URLs are stored in: `src/data/phone-gallery.json`
+
+```json
+[
+  "/images/phone-gallery/gallery-1234567890-001.jpg",
+  "https://blob.vercel-storage.com/phone-gallery/gallery-1234567890-002.png"
+]
 ```
-public/images/phone-gallery/
-  ├── gallery-1707123456-001.jpg
-  ├── gallery-1707123456-002.png
-  └── ...
-```
-
-And paths are added to: `src/data/phone-gallery.json`
 
 ### Phone Apps
 
