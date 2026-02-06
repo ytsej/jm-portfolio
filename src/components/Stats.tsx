@@ -25,10 +25,11 @@ export default function Stats() {
         <p className="text-xl text-gray-300 mb-2">{profile.title}</p>
         <p className="text-gray-400 leading-relaxed mb-6">{profile.summary}</p>
         
-        {/* Resume Download */}
+        {/* Resume View */}
         <a
           href="/images/jm/cv.pdf"
-          download
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-6 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-lg transition-all duration-200 hover:scale-105 group"
         >
           <svg
@@ -45,7 +46,7 @@ export default function Stats() {
             />
           </svg>
           <span className="font-display text-sm uppercase tracking-wider text-white">
-            Download Resume (PDF)
+            View Resume (PDF)
           </span>
         </a>
       </div>
