@@ -5,7 +5,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { portfolioData } from "@/src/data/portfolio";
 
-const slides = ["/images/jm/gta/hero-1.webp", "/images/jm/gta/hero-2.webp", "/images/jm/gta/hero-3.webp"];
+// Each slide keeps its subject in frame: the wide desktop hero crops top and
+// bottom, phones crop the sides. Focus is "x% y%" of the image, measured from
+// where the head and body sit (heads at roughly 12%, 26%, and 5% from the top).
+const slides = [
+  { src: "/images/jm/gta/hero-1.webp", focus: "72% 15%" },
+  { src: "/images/jm/gta/hero-2.webp", focus: "80% 40%" },
+  { src: "/images/jm/gta/hero-3.webp", focus: "75% 0%" },
+];
 
 // First screen: who I am, what I do, and quick facts
 export default function HeroFeature() {
@@ -26,7 +33,7 @@ export default function HeroFeature() {
     return () => clearInterval(id);
   }, []);
 
-  const currentSrc = slides[index];
+  const current = slides[index];
 
   return (
     <section
@@ -36,7 +43,7 @@ export default function HeroFeature() {
       {/* initial={false}: the first slide is visible before hydration */}
       <AnimatePresence initial={false} mode="wait">
         <motion.div
-          key={currentSrc}
+          key={current.src}
           className="absolute inset-0"
           initial={{ opacity: 0, x: 40 }}
           animate={{
@@ -49,6 +56,8 @@ export default function HeroFeature() {
         >
           <motion.div
             className="absolute inset-0"
+            // Zoom around the subject so the slow push-in never crops the head
+            style={{ transformOrigin: current.focus }}
             animate={
               prefersReducedMotion
                 ? {}
@@ -61,11 +70,12 @@ export default function HeroFeature() {
             transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
           >
             <Image
-              src={currentSrc}
+              src={current.src}
               alt=""
               fill
               sizes="(min-width: 1280px) 1240px, 100vw"
-              className="object-cover object-[70%_center]"
+              className="object-cover"
+              style={{ objectPosition: current.focus }}
               priority
             />
           </motion.div>
