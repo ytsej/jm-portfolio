@@ -50,7 +50,7 @@ The same young Filipino man in a black hoodie, sitting at a desk in a dim high-r
 The same young Filipino man walking confidently down a palm-lined boulevard at dusk, laptop bag over one shoulder, wireless earbuds, holding a phone showing a notification. Hills and a city skyline behind him, warm orange sky. Low-angle shot, subject on the right third.
 ```
 
-## Menu tiles (5 larawan)
+## Menu tiles (4 larawan)
 
 Sukat: **1536 × 1024** (3:2). Ipinapakita ang mga ito bilang malapad na strip (halos 3:1), kaya ilagay ang pangunahing bagay sa **gitnang pahalang na bahagi**. Mapuputol ang itaas at ibaba.
 
@@ -66,16 +66,10 @@ Top-down view of a heist-style planning table at night: printed website wirefram
 A neon-lit control room at night: a wall of screens showing connected workflow nodes and arrows, glowing cables linking a laptop, a phone with chat notifications and a spreadsheet on a tablet, small gears and lightning icons floating between them. Main objects arranged across the horizontal middle band.
 ```
 
-### `stat.png`: STATS
+### `stat.png`: PROFILE
 
 ```
 A stylized character stats screen inside a garage at night: a large monitor showing skill bars and a radar, a gaming chair, a scooter helmet on the desk, warm light from a half-open garage door. Main objects arranged across the horizontal middle band.
-```
-
-### `stack.png`: STACKS
-
-```
-A circular selection wheel, like a video game item wheel, floating over a dark city background, each slot holding a tech tool instead of a weapon: a laptop, a keyboard, a database server, a smartphone, a wrench, a coffee cup, a cloud icon and a terminal window. Centered horizontally, glowing orange highlight on one slot.
 ```
 
 ### `role.png`: ROLES

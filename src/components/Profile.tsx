@@ -64,17 +64,40 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
           {/* How I work */}
           <section className="gta-panel">
             <ListHeader>How I work</ListHeader>
-            <ol className="divide-y divide-white/10">
-              {howIWork.map((item, i) => (
-                <li key={item.title} className="flex gap-4 px-5 py-4">
-                  <span className="font-display text-3xl leading-none text-emerald-400">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="font-hud text-base font-semibold uppercase tracking-wider text-white">{item.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-white/75">{item.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <a
+              href="/images/jm/how-i-work.webp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block bg-[#0b1220] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
+            >
+              <Image
+                src="/images/jm/how-i-work.webp"
+                alt="How I Work: spec first, test the work, fail loudly, verify the output, and keep the team in sync."
+                width={1600}
+                height={900}
+                sizes="(min-width: 1024px) 800px, 100vw"
+                className="h-auto w-full"
+              />
+              <span className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 font-hud text-xs uppercase tracking-wider text-white opacity-80 group-hover:opacity-100">
+                Open full size ↗
+              </span>
+            </a>
+            <details className="group/details border-t border-white/10">
+              <summary className="cursor-pointer list-none px-5 py-3 font-hud text-sm font-semibold uppercase tracking-wider text-white/70 hover:text-white">
+                Read as text
+              </summary>
+              <ol className="divide-y divide-white/10">
+                {howIWork.map((item, i) => (
+                  <li key={item.title} className="flex gap-4 px-5 py-4">
+                    <span className="font-display text-3xl leading-none text-emerald-400">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3 className="font-hud text-base font-semibold uppercase tracking-wider text-white">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-white/75">{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </details>
           </section>
 
           {/* Experience */}

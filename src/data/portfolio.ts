@@ -475,7 +475,7 @@ export const portfolioData: PortfolioData = {
     {
       company: "iTip (Kuwait)",
       role: "Software Developer",
-      period: "Ongoing",
+      period: "Sep 2026 – Present",
       location: "Remote",
       bullets: [
         "Improving iTip, an existing QR-code tipping platform with Admin, Merchant, and Staff portals.",
