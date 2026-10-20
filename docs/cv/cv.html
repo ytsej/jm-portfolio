@@ -22,6 +22,8 @@
   ul { margin: 2px 0 0 16px; }
   li { margin-bottom: 1px; }
   .skills p { margin-bottom: 1px; }
+  ul.projects { margin-left: 16px; }
+  ul.projects li { margin-bottom: 2px; }
   .skills b { font-weight: 700; }
 </style>
 </head>
@@ -36,7 +38,7 @@
 
 <section>
   <h2>PROFESSIONAL SUMMARY</h2>
-  <p>Software developer who builds websites and automates business workflows. Built and launched two client websites and Zapier workflows that triage email with OpenAI and generate weekly reports, and now works on a payments platform for Kuwait. Tests the work, adds error handling so that a failed AI result is flagged to the team instead of failing silently, and uses AI coding tools spec-first with every result reviewed.</p>
+  <p>Software developer who builds websites and automates business workflows. Built and launched two client websites and Zapier workflows that triage email with OpenAI and generate weekly reports, and now works on a payments platform for Kuwait. Tests the work, adds error handling so that a failed AI result is flagged to the team instead of failing silently, and uses Claude Code and Codex to ship faster, writing the spec and tests first and reviewing every change.</p>
 </section>
 
 <section>
@@ -56,7 +58,7 @@
     <div class="row"><span class="org">DoGoodie</span><span>Jul 2026 - Sep 2026</span></div>
     <div class="row"><span class="role">Web Developer and Automation Developer (Contract)</span><span>Remote</span></div>
     <ul>
-      <li>Built the Ethical Capacity Lab website independently and the DoGoodie website, both now live (see Client Projects).</li>
+      <li>Built the Ethical Capacity Lab website independently and the DoGoodie website, both now live (see Projects).</li>
       <li>Automated Gmail triage in Zapier: OpenAI classifies each business email and JavaScript validates the result, so prioritized alerts reach the team's Discord and an invalid AI result goes to human review instead of failing silently.</li>
       <li>Built a weekly KPI tracker in Google Sheets (Vercel and Meta Business Suite metrics) with a Zapier workflow that generates the report from a Google Docs template.</li>
       <li>Set up search basics (page titles and descriptions, social-sharing tags, sitemap, robots.txt) and Google Analytics 4.</li>
@@ -84,31 +86,14 @@
 </section>
 
 <section>
-  <h2>CLIENT PROJECTS</h2>
-  <div class="item">
-    <div class="row"><span class="org">Ethical Capacity Lab website (ethicalcapacitylab.org)</span><span>DoGoodie, 2026</span></div>
-    <ul>
-      <li>Next.js and TypeScript site routing five audiences, with server-side form validation, consent-gated GA4, and accessibility tests.</li>
-    </ul>
-  </div>
-  <div class="item">
-    <div class="row"><span class="org">DoGoodie website (dogoodiebuilders.com)</span><span>DoGoodie, 2026</span></div>
-    <ul>
-      <li>Static site with a Vercel serverless intake API that validates challenge submissions and writes them to Google Sheets.</li>
-    </ul>
-  </div>
-  <div class="item">
-    <div class="row"><span class="org">DoGoodie automations: Email Inquiry Classifier and Weekly KPI Report</span><span>DoGoodie, 2026</span></div>
-    <ul>
-      <li>Zapier workflows for AI email triage to Discord and weekly KPI reports from a Google Docs template.</li>
-    </ul>
-  </div>
-  <div class="item">
-    <div class="row"><span class="org">iTip: QR-code digital tipping platform</span><span>iTip Kuwait, ongoing</span></div>
-    <ul>
-      <li>TanStack Start, React and Supabase platform with Admin, Merchant and Staff portals; Payzah payments and pilot QA.</li>
-    </ul>
-  </div>
+  <h2>PROJECTS</h2>
+  <ul class="projects">
+    <li><b>iTip:</b> QR-code tipping platform for Kuwait (TanStack Start, React, Supabase) with Admin, Merchant and Staff portals; Payzah payments and pilot QA.</li>
+    <li><b>Ethical Capacity Lab:</b> Next.js and TypeScript site routing five audiences, with server-side form validation, consent-gated GA4 and accessibility tests. Live at ethicalcapacitylab.org.</li>
+    <li><b>DoGoodie:</b> Static site with a Vercel serverless intake API that validates challenge submissions and writes them to Google Sheets. Live at dogoodiebuilders.com.</li>
+    <li><b>DoGoodie Automations:</b> Zapier workflows for AI email triage to Discord and weekly KPI reports from a Google Docs template.</li>
+    <li><b>CARESIM:</b> BSIT capstone (team project), a simulation game and learning management system for caregiver NC II. Built the web LMS and Unity scenes for the Android game.</li>
+  </ul>
 </section>
 
 <section>
