@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import messagesData from "@/src/data/phone-messages.json";
 import callLogsData from "@/src/data/phone-call-logs.json";
-import { contactMethods, socials, emailContact, whatsappContact, type ContactLink } from "@/src/data/contacts";
+import { contactMethods, socials, type ContactLink } from "@/src/data/contacts";
 import { portfolioData, type Project } from "@/src/data/portfolio";
 import { automations, type Automation } from "@/src/data/automations";
 
@@ -247,31 +247,6 @@ export default function PhoneMenu() {
                   </AnimatePresence>
                 </div>
 
-                {/* Bottom Controls */}
-                <div className="px-4 pb-4 flex items-center justify-between gap-3 flex-shrink-0 bg-black/50 border-t border-white/10">
-                  <a
-                    href={emailContact.link}
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/50 rounded-xl transition-colors"
-                  >
-                    <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span className="text-xs font-display uppercase tracking-wider text-white">
-                      Email
-                    </span>
-                  </a>
-                  <a
-                    href={whatsappContact.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl transition-colors"
-                  >
-                    <PhoneIcon className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-display uppercase tracking-wider text-white">
-                      WhatsApp
-                    </span>
-                  </a>
-                </div>
               </div>
             </div>
           </motion.div>

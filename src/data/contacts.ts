@@ -54,6 +54,3 @@ export const socials: ContactLink[] = [
     icon: "🎵",
   },
 ];
-
-export const emailContact = contactMethods[0];
-export const whatsappContact = contactMethods[3];
