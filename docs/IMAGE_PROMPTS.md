@@ -78,6 +78,18 @@ A stylized character stats screen inside a garage at night: a large monitor show
 Character-switch screen composition: three versions of the same young Filipino man side by side in three panels with colored borders (teal, green, orange): one as a software developer with a laptop, one as an automation engineer with a tablet showing workflow nodes, one as a QA tester with a checklist and magnifying glass. Faces and torsos in the horizontal middle band.
 ```
 
+## Profile picture (GTA version)
+
+Sukat: **1024 × 1024** (square). Ang totoong litrato mo (`profile.webp`) ang default sa PROFILE. Kapag nandito na ang GTA version, lalabas ang PHOTO | GTA switch.
+
+I-upload ang totoong headshot mo bilang reference.
+
+### `profile-gta.png`: Portrait
+
+```
+Head-and-shoulders portrait of the man in the reference photo: short messy black hair, black suit jacket over a white collared shirt, calm and confident expression, facing the camera. Keep his face shape and features clearly recognizable. Square composition with the same framing as the reference: head in the upper middle, shoulders reaching the bottom edge. Background: a warm sunset city skyline with palm trees, softly blurred.
+```
+
 ## Opsyonal
 
 ### `og.png`: link preview

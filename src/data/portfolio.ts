@@ -76,6 +76,9 @@ export interface PortfolioData {
     availability: string;
     summary: string;
     resumeUrl: string;
+    photo: string;
+    // GTA V-style portrait; the PHOTO | GTA switch appears once this is set
+    photoGta?: string;
   };
   howIWork: WorkPrinciple[];
   experience: Experience[];
@@ -443,6 +446,7 @@ export const portfolioData: PortfolioData = {
     summary:
       "Software developer who builds websites and automates business workflows. I've built and launched client websites with Next.js and serverless APIs, and Zapier and n8n workflows that triage email with AI, generate reports, and sync CRM data. I test my work, design it so a failed AI result is flagged to the team instead of failing silently, and use AI coding tools spec-first with every result reviewed.",
     resumeUrl: "/images/jm/cv.pdf",
+    photo: "/images/jm/profile.webp",
   },
   howIWork: [
     {

@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useState, type PointerEvent } from "react";
+import { cn } from "@/src/lib/cn";
 import { portfolioData } from "@/src/data/portfolio";
 import { ListHeader, SectionHeading } from "./GtaUi";
 import type { TabId } from "./TopTabs";
@@ -15,21 +17,7 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 items-start">
         {/* Character card */}
         <div className="gta-panel lg:sticky lg:top-4">
-          <div className="relative aspect-[4/3] lg:aspect-[3/4] overflow-hidden bg-black">
-            <Image
-              src="/images/jm/1.png"
-              alt={profile.name}
-              fill
-              sizes="(min-width: 1024px) 400px, 100vw"
-              className="object-cover object-[78%_center]"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-5">
-              <h2 className="font-display text-3xl sm:text-4xl tracking-wider uppercase leading-none">{profile.name}</h2>
-              <p className="mt-2 font-hud text-sm font-semibold uppercase tracking-wider text-emerald-400">{profile.title}</p>
-            </div>
-          </div>
+          <ProfilePhoto name={profile.name} title={profile.title} photo={profile.photo} photoGta={profile.photoGta} />
           <dl className="divide-y divide-white/10 font-hud text-sm uppercase tracking-wider">
             <div className="flex justify-between gap-4 px-5 py-2.5">
               <dt className="text-white/50">Base</dt>
@@ -141,5 +129,74 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
         </div>
       </div>
     </>
+  );
+}
+
+// Real photo by default; when a GTA portrait exists, a PHOTO | GTA switch
+// toggles it, and hovering with a mouse previews it.
+function ProfilePhoto({ name, title, photo, photoGta }: { name: string; title: string; photo: string; photoGta?: string }) {
+  const [style, setStyle] = useState<"photo" | "gta">("photo");
+  const [hovering, setHovering] = useState(false);
+  const showGta = Boolean(photoGta) && (style === "gta" || hovering);
+
+  const onPointerEnter = (e: PointerEvent) => {
+    if (photoGta && e.pointerType === "mouse") setHovering(true);
+  };
+
+  return (
+    <div
+      className="relative aspect-square overflow-hidden bg-black"
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={() => setHovering(false)}
+    >
+      <Image
+        src={photo}
+        alt={name}
+        fill
+        sizes="(min-width: 1024px) 400px, 100vw"
+        className={cn("object-cover object-top transition-opacity duration-300", showGta ? "opacity-0" : "opacity-100")}
+        priority
+      />
+      {photoGta && (
+        <Image
+          src={photoGta}
+          alt={`${name}, GTA V-style portrait`}
+          fill
+          sizes="(min-width: 1024px) 400px, 100vw"
+          className={cn("object-cover object-top transition-opacity duration-300", showGta ? "opacity-100" : "opacity-0")}
+        />
+      )}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <h2 className="font-display text-3xl sm:text-4xl tracking-wider uppercase leading-none">{name}</h2>
+        <p className="mt-2 font-hud text-sm font-semibold uppercase tracking-wider text-emerald-400">{title}</p>
+      </div>
+
+      {photoGta && (
+        <div
+          role="group"
+          aria-label="Portrait style"
+          className="absolute left-3 top-3 inline-flex bg-black/75 p-0.5 font-hud text-xs font-semibold uppercase tracking-wider"
+        >
+          {(["photo", "gta"] as const).map((option) => (
+            <button
+              key={option}
+              type="button"
+              aria-pressed={style === option}
+              onClick={() => {
+                setStyle(option);
+                setHovering(false);
+              }}
+              className={cn(
+                "px-3 py-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400",
+                style === option ? "bg-white text-black" : "text-white/70 hover:text-white"
+              )}
+            >
+              {option === "photo" ? "Photo" : "GTA"}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
