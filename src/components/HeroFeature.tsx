@@ -23,6 +23,7 @@ export default function HeroFeature({
 }: HeroFeatureProps) {
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [manilaTime, setManilaTime] = useState("");
   const prefersReducedMotion = useReducedMotion();
 
   const isWelcome = mode === "welcome" || !featuredProject;
@@ -30,6 +31,14 @@ export default function HeroFeature({
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
+    // Manila local time (GMT+8), so visitors abroad know when I'm online
+    const updateTime = () =>
+      setManilaTime(
+        new Date().toLocaleTimeString("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit" })
+      );
+    updateTime();
+    const timer = setInterval(updateTime, 30000);
+    return () => clearInterval(timer);
   }, []);
 
   // Use project images when in Project mode, otherwise use jm images
@@ -205,7 +214,7 @@ export default function HeroFeature({
                   <span className="text-emerald-400">Focus:</span> Web &amp; automation
                 </span>
                 <span>
-                  <span className="text-emerald-400">Now:</span> <span className="normal-case">iTip</span> (Kuwait)
+                  <span className="text-emerald-400">Manila:</span> {manilaTime || "--:--"} (GMT+8)
                 </span>
               </div>
 
