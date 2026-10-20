@@ -1,7 +1,7 @@
 "use client";
 
 import HeroFeature from "./HeroFeature";
-import SelectedWork from "./SelectedWork";
+import FeaturedWork from "./FeaturedWork";
 import TileGrid from "./TileGrid";
 import type { TabId } from "@/src/data/sections";
 
@@ -10,19 +10,12 @@ interface HomeDashboardProps {
   onOpenCase: (path: string) => void;
 }
 
-// Order follows what a recruiter needs first: who, selected work, then everything else
+// Order follows what a recruiter needs first: who, featured work, then everything else
 export default function HomeDashboard({ onNavigate, onOpenCase }: HomeDashboardProps) {
-  const viewWork = () => {
-    const target = document.getElementById("selected-work");
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    // Move keyboard and screen reader focus along with the scroll
-    target?.querySelector<HTMLElement>("h2")?.focus({ preventScroll: true });
-  };
-
   return (
     <div className="space-y-8 sm:space-y-10">
-      <HeroFeature onNavigate={onNavigate} onViewWork={viewWork} />
-      <SelectedWork onOpenCase={onOpenCase} onNavigate={onNavigate} />
+      <HeroFeature onNavigate={onNavigate} />
+      <FeaturedWork onOpenCase={onOpenCase} />
       <TileGrid onTileClick={onNavigate} />
     </div>
   );

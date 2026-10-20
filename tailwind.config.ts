@@ -12,6 +12,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // GTA mission yellow, used for ongoing work
+        "gta-yellow": "#f5c542",
       },
       fontFamily: {
         display: ["var(--font-bebas)"],

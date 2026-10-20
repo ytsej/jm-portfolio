@@ -9,13 +9,8 @@ import { handleInternalClick } from "@/src/lib/nav";
 
 const slides = ["/images/jm/gta/hero-1.webp", "/images/jm/gta/hero-2.webp", "/images/jm/gta/hero-3.webp"];
 
-interface HeroFeatureProps {
-  onNavigate: (tab: TabId) => void;
-  onViewWork: () => void;
-}
-
-// First screen: who I am, what I do, and the three ways forward (work, resume, contact)
-export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps) {
+// First screen: who I am, what I do, and quick facts with resume and contact links
+export default function HeroFeature({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -122,7 +117,7 @@ export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps
           through.
         </p>
 
-        <dl className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-x-6 gap-y-1 font-hud text-xs sm:text-sm uppercase tracking-wider text-white/85">
+        <dl className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-x-6 gap-y-1 pt-1 font-hud text-xs sm:text-sm uppercase tracking-wider text-white/85">
           <div>
             <dt className="inline text-emerald-400">Status: </dt>
             <dd className="inline">{profile.availability}</dd>
@@ -139,23 +134,32 @@ export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps
             <dt className="inline text-emerald-400">Timezone: </dt>
             <dd className="inline">GMT+8</dd>
           </div>
+          <div>
+            <dt className="inline text-emerald-400">Resume: </dt>
+            <dd className="inline">
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+              >
+                View PDF ↗
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt className="inline text-emerald-400">Contact: </dt>
+            <dd className="inline">
+              <a
+                href={sectionPath("quit")}
+                onClick={(e) => handleInternalClick(e, () => onNavigate("quit"))}
+                className="underline underline-offset-4 hover:text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+              >
+                Email, LinkedIn, WhatsApp
+              </a>
+            </dd>
+          </div>
         </dl>
-
-        <div className="flex flex-wrap gap-2 pt-1">
-          <button type="button" onClick={onViewWork} className="gta-btn gta-btn-primary">
-            View selected work
-          </button>
-          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="gta-btn">
-            Resume (PDF)
-          </a>
-          <a
-            href={sectionPath("quit")}
-            onClick={(e) => handleInternalClick(e, () => onNavigate("quit"))}
-            className="gta-btn"
-          >
-            Contact
-          </a>
-        </div>
       </div>
     </section>
   );

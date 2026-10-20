@@ -10,14 +10,14 @@ Developed with AI-assisted tools (ChatGPT, Codex, Claude Code, and Claude) for c
 
 | Tab (URL) | What it shows |
 | --- | --- |
-| HOME (`/`) | Name, role, and Work / Resume / Contact actions; three selected cases plus the ongoing iTip role; Explore tiles |
+| HOME (`/`) | Name, role, value statement, and quick facts with Resume and Contact links; three featured cases plus the ongoing iTip role; Explore tiles |
 | PROJECTS (`/projects`) | Client & work projects, then academic & personal builds, with a brief that opens at `/projects/<slug>` |
 | AUTOMATION (`/automation`) | Featured Zapier and n8n workflow cards plus "View all", each opening at `/automation/<id>` |
 | PROFILE (`/profile`) | Headshot with a GTA-style character switch, about, How I Work, experience, education, resume |
-| STACKS (`/stacks`) | Skills grouped like the resume |
-| ROLES (`/roles`) | Kinds of work, most relevant first |
+| STACKS (`/stacks`) | Skills grouped like the resume, each with its logo (`src/components/TechIcon.tsx`) |
+| ROLES (`/roles`) | Kinds of work, most relevant first, with logo + name skill chips |
 | ACHIEVEMENTS (`/achievements`) | Milestones, locked ones in progress |
-| CONTACT (`/contact`) | Email, LinkedIn, GitHub, WhatsApp, and a Social Club group |
+| CONTACT (`/contact`) | Email, LinkedIn, GitHub, WhatsApp (green), and a purple Social Club group |
 
 Every section and case has its own URL, so refresh, Back/Forward, and shared links land on the same view. Tabs switch in place through the History API, with no page reload.
 

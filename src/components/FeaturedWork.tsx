@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { automations } from "@/src/data/automations";
 import { portfolioData } from "@/src/data/portfolio";
-import { automationPath, projectPath, sectionPath, type TabId } from "@/src/data/sections";
+import { automationPath, projectPath } from "@/src/data/sections";
 import { handleInternalClick } from "@/src/lib/nav";
 import { LabelBadge } from "./GtaUi";
 
@@ -56,19 +56,14 @@ const cases: CaseCard[] = [
   },
 ];
 
-interface SelectedWorkProps {
-  onOpenCase: (path: string) => void;
-  onNavigate: (tab: TabId) => void;
-}
-
-export default function SelectedWork({ onOpenCase, onNavigate }: SelectedWorkProps) {
+export default function FeaturedWork({ onOpenCase }: { onOpenCase: (path: string) => void }) {
   const itip = portfolioData.projects.find((p) => p.slug === "itip");
 
   return (
-    <section id="selected-work" aria-labelledby="selected-work-title" className="scroll-mt-4">
+    <section aria-labelledby="featured-work-title">
       <div className="mb-3 sm:mb-4">
-        <h2 id="selected-work-title" tabIndex={-1} className="gta-title text-3xl sm:text-4xl leading-none focus:outline-none">
-          Selected work
+        <h2 id="featured-work-title" className="gta-title text-3xl sm:text-4xl leading-none">
+          Featured work
         </h2>
         <p className="mt-2 max-w-3xl text-sm sm:text-base text-white/75">
           Three examples of what I can own: client websites, a client automation, and an engineering demo. Each case
@@ -128,7 +123,7 @@ export default function SelectedWork({ onOpenCase, onNavigate }: SelectedWorkPro
         <div className="mt-[2px] flex flex-col gap-3 bg-black/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 bg-amber-300 px-2 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
+              <span className="inline-flex items-center gap-1.5 bg-gta-yellow px-2 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
                 Ongoing
               </span>
               <span className="font-hud text-xs font-semibold uppercase tracking-wider text-white/60">
@@ -152,30 +147,6 @@ export default function SelectedWork({ onOpenCase, onNavigate }: SelectedWorkPro
           </a>
         </div>
       )}
-
-      <p className="mt-3 text-sm text-white/70">
-        More client, academic, and personal work is in{" "}
-        <SectionLink tab="missions" onNavigate={onNavigate}>
-          Projects
-        </SectionLink>{" "}
-        and{" "}
-        <SectionLink tab="automation" onNavigate={onNavigate}>
-          Automation
-        </SectionLink>
-        .
-      </p>
     </section>
-  );
-}
-
-function SectionLink({ tab, onNavigate, children }: { tab: TabId; onNavigate: (tab: TabId) => void; children: string }) {
-  return (
-    <a
-      href={sectionPath(tab)}
-      onClick={(e) => handleInternalClick(e, () => onNavigate(tab))}
-      className="text-emerald-400 underline underline-offset-4 hover:text-emerald-300"
-    >
-      {children}
-    </a>
   );
 }
