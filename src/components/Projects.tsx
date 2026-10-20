@@ -10,13 +10,14 @@ import type { Project } from "@/src/data/portfolio";
 
 interface ProjectsProps {
   projects: Project[];
+  initialSelectedId?: string;
 }
 
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects, initialSelectedId }: ProjectsProps) {
   const clientProjects = projects.filter((p) => p.category === "client");
   const otherProjects = projects.filter((p) => p.category !== "client");
 
-  const [selectedId, setSelectedId] = useState(projects[0]?.id);
+  const [selectedId, setSelectedId] = useState(initialSelectedId ?? projects[0]?.id);
   const [panelProject, setPanelProject] = useState<Project | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 

@@ -20,6 +20,19 @@ export default function Home() {
     portfolioData.projects[0]
   );
   const [heroMode, setHeroMode] = useState<"welcome" | "project">("welcome");
+  const [focusProjectId, setFocusProjectId] = useState<string | undefined>();
+
+  // The phone's Job List asks to open a project in the PROJECTS tab
+  useEffect(() => {
+    const onNavigate = (e: Event) => {
+      const { tab, projectId } = (e as CustomEvent<{ tab: TabId; projectId?: string }>).detail;
+      setFocusProjectId(projectId);
+      setActiveTab(tab);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    window.addEventListener("jm:navigate", onNavigate);
+    return () => window.removeEventListener("jm:navigate", onNavigate);
+  }, []);
 
   // Tab order for Q/E navigation
   const tabs: TabId[] = tabList.map((tab) => tab.id);
@@ -95,7 +108,7 @@ export default function Home() {
           />
         );
       case "missions":
-        return <Projects projects={portfolioData.projects} />;
+        return <Projects projects={portfolioData.projects} initialSelectedId={focusProjectId} />;
       case "automation":
         return <Automation />;
       case "profile":

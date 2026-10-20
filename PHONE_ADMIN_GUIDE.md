@@ -65,7 +65,7 @@ The JM.EXE Phone includes 4 interactive apps:
 
 2. **Contacts** 👤
    - Role-based contacts (Frontend Dev, Full-Stack, etc.)
-   - Edit: `src/data/phone-contacts.json`
+   - Edit: `src/data/contacts.ts` (shared with the CONTACT tab)
 
 3. **Gallery** 🖼️
    - Your uploaded images

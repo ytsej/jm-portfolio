@@ -31,7 +31,7 @@ export default function HeroFeature({
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
-    // Manila local time (GMT+8), so visitors abroad know when I'm online
+    // Philippine time (GMT+8), so visitors abroad know when I'm online
     const updateTime = () =>
       setManilaTime(
         new Date().toLocaleTimeString("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit" })
@@ -214,7 +214,7 @@ export default function HeroFeature({
                   <span className="text-emerald-400">Focus:</span> Web &amp; automation
                 </span>
                 <span>
-                  <span className="text-emerald-400">Manila:</span> {manilaTime || "--:--"} (GMT+8)
+                  <span className="text-emerald-400">Timezone:</span> GMT+8 · {manilaTime || "--:--"}
                 </span>
               </div>
 

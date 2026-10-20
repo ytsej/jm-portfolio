@@ -1,54 +1,13 @@
 "use client";
 
 import { portfolioData } from "@/src/data/portfolio";
+import { contactMethods, socials, type ContactLink } from "@/src/data/contacts";
 import { ListHeader, SectionHeading } from "./GtaUi";
 
 export default function Quit() {
   const { profile } = portfolioData;
 
-  const contactMethods = [
-    {
-      label: "Email",
-      value: "jmcruzada.delacruz@gmail.com",
-      link: "mailto:jmcruzada.delacruz@gmail.com",
-    },
-    {
-      label: "LinkedIn",
-      value: "linkedin.com/in/johnmark-c-delacruz",
-      link: "https://www.linkedin.com/in/johnmark-c-delacruz",
-    },
-    {
-      label: "GitHub",
-      value: "github.com/jjimuu",
-      link: "https://github.com/jjimuu",
-    },
-    {
-      label: "WhatsApp",
-      value: "+63 967 412 1386",
-      link: "https://wa.me/639674121386",
-    },
-  ];
-
-  // Personal socials, kept below the work contacts
-  const socials = [
-    {
-      label: "Facebook",
-      value: "facebook.com/destinefanboi",
-      link: "https://www.facebook.com/destinefanboi",
-    },
-    {
-      label: "Instagram",
-      value: "@jm_deecee",
-      link: "https://www.instagram.com/jm_deecee/",
-    },
-    {
-      label: "TikTok",
-      value: "@_ytsej",
-      link: "https://www.tiktok.com/@_ytsej",
-    },
-  ];
-
-  const renderRow = (method: { label: string; value: string; link: string }, compact?: boolean) => (
+  const renderRow = (method: ContactLink, compact?: boolean) => (
     <a
       key={method.label}
       href={method.link}
