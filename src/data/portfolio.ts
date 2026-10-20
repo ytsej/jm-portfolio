@@ -447,6 +447,7 @@ export const portfolioData: PortfolioData = {
       "Software developer who builds websites and automates business workflows. I've built and launched client websites with Next.js and serverless APIs, and Zapier and n8n workflows that triage email with AI, generate reports, and sync CRM data. I test my work, design it so a failed AI result is flagged to the team instead of failing silently, and use AI coding tools spec-first with every result reviewed.",
     resumeUrl: "/images/jm/cv.pdf",
     photo: "/images/jm/profile.webp",
+    photoGta: "/images/jm/gta/profile-gta.webp",
   },
   howIWork: [
     {
