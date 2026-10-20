@@ -21,8 +21,8 @@ export const contactMethods: ContactLink[] = [
   },
   {
     label: "GitHub",
-    value: "github.com/jjimuu",
-    link: "https://github.com/jjimuu",
+    value: "github.com/ytsej",
+    link: "https://github.com/ytsej",
     icon: "💻",
   },
   {

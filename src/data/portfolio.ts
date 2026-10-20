@@ -1,5 +1,18 @@
+// Recruiter-facing case summary, shown before the technical details.
+// Leave a field out rather than guess; the panel only renders what's set.
+export interface CaseStudy {
+  problem: string;
+  responsibility: string;
+  decision?: string;
+  result: string;
+  evidence: string;
+  limits: string;
+}
+
 export interface Project {
   id: string;
+  // URL segment for /projects/<slug>
+  slug: string;
   title: string;
   subtitle: string;
   role: string;
@@ -20,6 +33,7 @@ export interface Project {
   };
   tags: string[];
   images: string[];
+  caseStudy?: CaseStudy;
 }
 
 // Load projects from JSON file (admin-created projects auto-saved here)
@@ -98,21 +112,32 @@ export interface PortfolioData {
 const staticProjects: Project[] = [
   {
     id: "digital-tipping-platform",
+    slug: "itip",
     title: "iTip: Digital Tipping Platform",
     subtitle: "Web Platform / Payments (Kuwait)",
     role: "Full-Stack Developer",
     status: "Ongoing",
     category: "client",
     shortDescription:
-      "iTip is a QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. Pilot launch in progress.",
+      "iTip is a QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. I joined the existing app; the Payzah payment integration is still in progress.",
     description:
-      "iTip is a digital tipping platform for Kuwait that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI am improving the existing application: integrating Payzah payments, verifying fee calculations, fixing bugs, and coordinating QA testing for the pilot launch. The platform is not public yet, so the screenshots show its marketing pages only, with no merchant or customer data.",
+      "iTip is a digital tipping platform for Kuwait that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI joined the existing application as a full-stack developer. I am working on the Payzah payment integration, checking fee calculations, fixing bugs, and coordinating QA testing. The integration and testing are still in progress, and the platform is not public yet, so the screenshots show its marketing pages only, with no merchant or customer data.",
     bullets: [
-      "Payzah payment gateway integration",
-      "Fee calculation verification",
+      "Payzah payment gateway integration (in progress)",
+      "Fee calculation checks",
       "Bug fixes in the existing application",
-      "QA test coordination for the pilot launch",
+      "QA test coordination",
     ],
+    caseStudy: {
+      problem:
+        "Guests in Kuwait need a quick way to tip service staff by scanning a QR code, while admins, merchants, and staff each need their own portal.",
+      responsibility:
+        "I joined an existing codebase; I did not build the original platform. My part is the Payzah payment integration, fee calculation checks, bug fixes, and QA coordination.",
+      result:
+        "In progress. The Payzah integration and its testing are not finished, no real transactions have run, and the platform has not launched.",
+      evidence: "Screenshots of the public marketing pages only. The app itself is private.",
+      limits: "Payment results, pilot readiness, and launch will be added here only once they actually happen.",
+    },
     links: {},
     tags: ["TanStack Start", "React", "TypeScript", "Supabase", "Tailwind CSS", "Payzah", "QA Testing"],
     images: [
@@ -124,6 +149,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "ethical-capacity-lab-website",
+    slug: "ethical-capacity-lab",
     title: "Ethical Capacity Lab Website",
     subtitle: "Client Website / Next.js",
     role: "Full-Stack Web Developer (DoGoodie contract)",
@@ -143,8 +169,21 @@ const staticProjects: Project[] = [
     ],
     links: {
       live: "https://ethicalcapacitylab.org",
+      github: "https://github.com/ytsej/ethical-capacity-lab",
     },
     tags: ["Next.js", "React", "TypeScript", "Formspree", "Google Analytics 4", "Vitest", "Playwright", "axe-core", "Vercel"],
+    caseStudy: {
+      problem:
+        "The Ethical Capacity Lab needed one public front door for itself and its two programs, DoGoodie and the Liberation from Suffering Network, so five different audiences could each find a clear next step.",
+      responsibility:
+        "I built the whole site: pages and audience pathways, the submissions route, analytics consent, search setup, tests, and deployment. The client provided the content and direction. This site and the DoGoodie website came from the same DoGoodie contract, so they are one client engagement, not two clients.",
+      decision:
+        "No database, CMS, or user accounts by design. Forms post to a server route that validates input before forwarding it to Formspree, which keeps the attack surface and running costs small for a content site.",
+      result: "Live at ethicalcapacitylab.org, with a guided Start Here flow and a QR code entry point.",
+      evidence: "The live site and its public code on GitHub.",
+      limits:
+        "Content changes need a code edit and a redeploy because there is no CMS, and form delivery depends on Formspree being available.",
+    },
     images: [
       "/images/projects/ethical-capacity-lab/img-001.webp",
       "/images/projects/ethical-capacity-lab/img-002.webp",
@@ -154,6 +193,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "dogoodie-website",
+    slug: "dogoodie",
     title: "DoGoodie Website",
     subtitle: "Client Website / Static Site + Serverless API",
     role: "Full-Stack Web Developer (DoGoodie contract)",
@@ -175,6 +215,19 @@ const staticProjects: Project[] = [
       live: "https://dogoodiebuilders.com",
     },
     tags: ["HTML", "CSS", "JavaScript", "Node.js", "Vercel Functions", "Google Sheets API", "Formspree", "Google Analytics 4"],
+    caseStudy: {
+      problem:
+        "DoGoodie needed a launch website for its builder community and The $5 Impact Hack, plus a safe way for organizations to submit challenges straight into the team's spreadsheet.",
+      responsibility:
+        "I built the whole site: the shared design system, every page, the challenge-intake API, analytics consent, tests, and deployment. DoGoodie provided the content and program direction. The same contract also covered the Ethical Capacity Lab website.",
+      decision:
+        "The intake API writes to Google Sheets through Vercel OIDC and Workload Identity Federation instead of a service-account key, so there is no long-lived private key stored anywhere to leak.",
+      result:
+        "Live at dogoodiebuilders.com. Valid challenge submissions are written to the team's Google Sheet and trigger a Formspree notification.",
+      evidence: "The live site. The code repository is private, so it is not linked here.",
+      limits:
+        "Content changes need a code edit and a redeploy because there is no CMS, and the intake form depends on Google Sheets and Formspree being available.",
+    },
     images: [
       "/images/projects/dogoodie/img-001.webp",
       "/images/projects/dogoodie/img-002.webp",
@@ -184,6 +237,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444",
+    slug: "caresim",
     title: "CARESIM: Caregiving Education Platform",
     subtitle: "BSIT Capstone Project / Web LMS & Android Simulation Game",
     role: "Frontend Developer (Web LMS) / Unity Scene Developer (Mobile Game)",
@@ -243,6 +297,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "hoa-profiling-system-(multi-tenant-edition)-1770309399098",
+    slug: "hoa-profiling-system",
     title: "HOA Profiling System (Multi-Tenant Edition)",
     subtitle: "Web App / Management System",
     role: "Full-Stack Developer",
@@ -281,6 +336,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "cvsu-imus-alumni-management-system-1770305402008",
+    slug: "cvsu-alumni-management-system",
     title: "CvSU Imus Alumni Management System",
     subtitle: "Web App / Information System",
     role: "Frontend Developer & UI/UX Designer",
@@ -360,6 +416,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "jmqtie-pet-shop-management-system-1770307977613",
+    slug: "pet-shop-management-system",
     title: "Jmqtie Pet Shop Management System",
     subtitle: "Desktop Application (Java)",
     role: "Frontend Developer • UI Designer • System Prototyping",
@@ -392,6 +449,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "tetrad-interactive-group-portfolio-1770308119786",
+    slug: "tetrad-group-portfolio",
     title: "Tetrad Interactive Group Portfolio",
     subtitle: "Web App (Portfolio Website)",
     role: "Frontend Developer",
@@ -439,7 +497,18 @@ const knownIds = new Set(staticProjects.map((p) => p.id));
 const knownTitles = new Set(staticProjects.map((p) => p.title.toLowerCase()));
 const extraProjects = dynamicProjects
   .filter((p) => !knownIds.has(p.id) && !knownTitles.has(p.title.toLowerCase()))
-  .map((p) => ({ ...p, category: p.category ?? "academic" }));
+  .map((p) => ({
+    ...p,
+    slug: p.slug ?? slugify(p.title),
+    category: p.category ?? "academic",
+  }));
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 export const portfolioData: PortfolioData = {
   profile: {
@@ -448,7 +517,7 @@ export const portfolioData: PortfolioData = {
     location: "Bacoor, Cavite, Philippines",
     availability: "Open to full-time roles",
     summary:
-      "Software developer who builds websites and automates business workflows. I've built and launched client websites with Next.js and serverless APIs, and Zapier and n8n workflows that triage email with AI, generate reports, and sync CRM data. I test my work, design it so a failed AI result is flagged to the team instead of failing silently, and use AI coding tools spec-first with every result reviewed.",
+      "Software developer who builds websites and automates business workflows. For a client, I built and launched two websites with Next.js and serverless APIs, plus Zapier workflows that triage email with AI and generate weekly reports. My n8n demos show lead routing and CRM sync with replay and failure checks. I test my work, design it so a failed AI result is flagged to the team instead of failing silently, and use AI coding tools spec-first with every result reviewed.",
     resumeUrl: "/images/jm/cv.pdf",
     photo: "/images/jm/profile.webp",
     photoGta: "/images/jm/gta/profile-gta.webp",
@@ -488,8 +557,8 @@ export const portfolioData: PortfolioData = {
       location: "Remote",
       bullets: [
         "Improving iTip, an existing QR-code tipping platform with Admin, Merchant, and Staff portals.",
-        "Integrating Payzah payments and verifying fee calculations.",
-        "Fixing bugs and coordinating QA testing for the pilot launch.",
+        "Working on the Payzah payment integration (in progress) and checking fee calculations.",
+        "Fixing bugs and coordinating QA testing.",
       ],
     },
     {
@@ -574,7 +643,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       title: "QA & Testing",
-      description: "Manual testing, bug tracking, and data validation, plus automated unit and browser checks. Currently coordinating QA for a payments pilot.",
+      description: "Manual testing, bug tracking, and data validation, plus automated unit and browser checks. Currently coordinating QA for a payment integration.",
       skills: ["Manual testing", "Bug tracking", "Vitest", "Playwright", "Data validation"],
     },
     {

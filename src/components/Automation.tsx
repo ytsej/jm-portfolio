@@ -1,42 +1,38 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AutomationDetailsPanel from "./AutomationDetailsPanel";
 import { LabelBadge, ListHeader, SectionHeading } from "./GtaUi";
 import { automationIntro, automations, type Automation as AutomationItem } from "@/src/data/automations";
+import { automationPath } from "@/src/data/sections";
+import { handleInternalClick } from "@/src/lib/nav";
 
-export default function Automation({
-  initialOpenId,
-  onInitialOpenHandled,
-}: {
-  initialOpenId?: string;
-  onInitialOpenHandled?: () => void;
-}) {
+interface AutomationProps {
+  // From the URL: /automation/<id> opens that workflow's details
+  caseSlug?: string;
+  onOpenCase: (path: string) => void;
+  onCloseCase: () => void;
+}
+
+export default function Automation({ caseSlug, onOpenCase, onCloseCase }: AutomationProps) {
   const featured = automations.filter((a) => a.featured);
   const others = automations.filter((a) => !a.featured);
 
-  const [showAll, setShowAll] = useState(false);
-  const initialItem = automations.find((a) => a.id === initialOpenId) ?? null;
-  const [selected, setSelected] = useState<AutomationItem | null>(initialItem);
-  const [isPanelOpen, setIsPanelOpen] = useState(Boolean(initialItem));
+  const caseItem = automations.find((a) => a.id === caseSlug) ?? null;
+  const [showAll, setShowAll] = useState(Boolean(caseItem && !caseItem.featured));
+  // Keeps the last workflow rendered while the panel slides out
+  const [selected, setSelected] = useState<AutomationItem | null>(caseItem);
 
-  // Only open the requested workflow once; later visits to the tab start closed
   useEffect(() => {
-    if (initialOpenId) onInitialOpenHandled?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (caseItem) setSelected(caseItem);
+  }, [caseItem]);
 
-  const open = (item: AutomationItem) => {
-    setSelected(item);
-    setIsPanelOpen(true);
-  };
-
-  const close = () => {
-    setIsPanelOpen(false);
-    setTimeout(() => setSelected(null), 300);
-  };
+  const linkProps = (item: AutomationItem) => ({
+    href: automationPath(item.id),
+    onClick: (e: MouseEvent) => handleInternalClick(e, () => onOpenCase(automationPath(item.id))),
+  });
 
   return (
     <>
@@ -52,40 +48,37 @@ export default function Automation({
       />
 
       {/* Featured */}
-      <ListHeader count={featured.length}>Featured workflows</ListHeader>
+      <ListHeader count={featured.length}>Featured: client work, then demos</ListHeader>
       <div className="mt-[2px] grid grid-cols-1 sm:grid-cols-2 gap-[2px]">
         {featured.map((item) => (
-          <button
+          <a
             key={item.id}
-            type="button"
-            onClick={() => open(item)}
-            className="group relative block w-full bg-black/70 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
+            {...linkProps(item)}
+            className="group relative flex w-full flex-col bg-black/70 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-[#0b1220]">
               <Image
                 src={item.image}
-                alt={`${item.title} workflow card`}
+                alt=""
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
                 className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </div>
-            <div className="flex items-center justify-between gap-3 bg-black/80 px-4 py-3">
-              <div className="min-w-0">
-                <h3 className="truncate font-hud text-base sm:text-lg font-semibold uppercase tracking-wide text-white">
-                  {item.title}
-                </h3>
-                <p className="truncate text-xs sm:text-sm text-white/65">{item.tagline}</p>
-              </div>
-              <div className="flex flex-shrink-0 flex-col items-end gap-1">
-                <span className="bg-white px-1.5 py-0.5 font-hud text-[11px] font-bold uppercase tracking-wider text-black">
+            <div className="flex flex-1 flex-col gap-2 bg-black/80 px-4 py-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
                   {item.platform}
                 </span>
                 <LabelBadge label={item.label} />
               </div>
+              <h3 className="font-hud text-lg font-semibold uppercase leading-tight tracking-wide text-white">
+                {item.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-white/75">{item.tagline}</p>
             </div>
             <span className="pointer-events-none absolute inset-0 ring-0 ring-inset ring-white/0 transition-all group-hover:ring-2 group-hover:ring-white/80" />
-          </button>
+          </a>
         ))}
       </div>
 
@@ -115,10 +108,9 @@ export default function Automation({
             </ListHeader>
             <div className="mt-[2px] flex flex-col gap-[2px]">
               {others.map((item) => (
-                <button
+                <a
                   key={item.id}
-                  type="button"
-                  onClick={() => open(item)}
+                  {...linkProps(item)}
                   className="gta-row group normal-case focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
                 >
                   <span className="flex min-w-0 items-center gap-3">
@@ -126,24 +118,24 @@ export default function Automation({
                       <Image src={item.image} alt="" fill sizes="80px" className="object-cover object-top" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block truncate uppercase">{item.title}</span>
-                      <span className="block truncate font-body text-xs normal-case tracking-normal text-white/60 group-hover:text-inherit">
+                      <span className="block uppercase">{item.title}</span>
+                      <span className="block font-body text-sm normal-case tracking-normal text-white/70 group-hover:text-inherit">
                         {item.tagline}
                       </span>
                     </span>
                   </span>
                   <span className="flex flex-shrink-0 flex-col items-end gap-1">
-                    <span className="text-xs text-white/60 group-hover:text-inherit">{item.platform}</span>
+                    <span className="text-xs text-white/70 group-hover:text-inherit">{item.platform}</span>
                     {item.label === "client" && <LabelBadge label="client" />}
                   </span>
-                </button>
+                </a>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <AutomationDetailsPanel item={selected} isOpen={isPanelOpen} onClose={close} />
+      <AutomationDetailsPanel item={selected} isOpen={Boolean(caseItem)} onClose={onCloseCase} />
     </>
   );
 }

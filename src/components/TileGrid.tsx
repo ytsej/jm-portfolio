@@ -4,7 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/src/lib/cn";
-import type { TabId } from "./TopTabs";
+import { handleInternalClick } from "@/src/lib/nav";
+import { sectionPath, type TabId } from "@/src/data/sections";
+import { ListHeader } from "./GtaUi";
 
 interface Tile {
   id: TabId;
@@ -32,7 +34,9 @@ export default function TileGrid({ onTileClick }: TileGridProps) {
   };
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4 w-full h-full">
+    <nav aria-label="Explore">
+      <ListHeader>Explore</ListHeader>
+      <div className="mt-[2px] grid grid-cols-2 lg:grid-cols-4 gap-[2px]">
       {tiles.map((tile) => {
         const hasError = imageErrors[tile.id];
         return (
@@ -47,7 +51,8 @@ export default function TileGrid({ onTileClick }: TileGridProps) {
           />
         );
       })}
-    </div>
+      </div>
+    </nav>
   );
 }
 
@@ -69,8 +74,9 @@ function GameTile({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.button
-      onClick={onClick}
+    <motion.a
+      href={sectionPath(tile.id)}
+      onClick={(e) => handleInternalClick(e, onClick)}
       onMouseEnter={() => setHovered(tile.id)}
       onMouseLeave={() => setHovered(null)}
       whileHover={
@@ -83,7 +89,7 @@ function GameTile({
       }
       whileTap={prefersReducedMotion ? {} : { scale: 0.98, opacity: 0.95 }}
       className={cn(
-        "relative w-full h-24 sm:h-28 lg:h-32 overflow-hidden glass-panel transition-all duration-300",
+        "relative block w-full h-24 sm:h-28 overflow-hidden glass-panel transition-all duration-300",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70",
         hovered === tile.id ? "shadow-[0_0_24px_rgba(52,211,153,0.45)]" : "shadow-[0_0_12px_rgba(0,0,0,0.45)]"
       )}
@@ -103,9 +109,9 @@ function GameTile({
         >
           <Image
             src={tile.image}
-            alt={tile.label}
+            alt=""
             fill
-            sizes="(min-width: 1024px) 33vw, 100vw"
+            sizes="(min-width: 1024px) 25vw, 50vw"
             className="object-cover"
             onError={onImageError}
           />
@@ -141,9 +147,9 @@ function GameTile({
       {/* Label */}
       <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 lg:p-4 z-10">
         <div className="flex items-center justify-between">
-          <h3 className="font-hud text-base sm:text-lg lg:text-xl font-semibold tracking-[0.1em] uppercase text-white drop-shadow-lg">
+          <span className="font-hud text-base sm:text-lg font-semibold tracking-[0.1em] uppercase text-white drop-shadow-lg">
             {tile.label}
-          </h3>
+          </span>
           <svg
             className={cn(
               "w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white drop-shadow-lg transition-all",
@@ -157,6 +163,6 @@ function GameTile({
           </svg>
         </div>
       </div>
-    </motion.button>
+    </motion.a>
   );
 }

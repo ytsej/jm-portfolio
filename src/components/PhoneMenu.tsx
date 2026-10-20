@@ -8,6 +8,8 @@ import callLogsData from "@/src/data/phone-call-logs.json";
 import { contactMethods, socials, type ContactLink } from "@/src/data/contacts";
 import { portfolioData, type Project } from "@/src/data/portfolio";
 import { automations, type Automation } from "@/src/data/automations";
+import { automationPath, projectPath } from "@/src/data/sections";
+import { useFocusTrap } from "@/src/lib/useFocusTrap";
 
 type AppScreen = "home" | "messages" | "contacts" | "jobs" | "workflows" | "internet" | "gallery" | "phone";
 type MessageThread = typeof messagesData[0];
@@ -32,6 +34,12 @@ export default function PhoneMenu() {
   const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const phoneRef = useRef<HTMLDivElement>(null);
+  const [screenEl, setScreenEl] = useState<HTMLDivElement | null>(null);
+  // Set when the phone is put away, so the open button takes focus once it's back
+  const restoreFocus = useRef(false);
+
+  // Focus stays inside the phone while it's open
+  useFocusTrap(screenEl, isOpen);
 
   useEffect(() => {
     setMounted(true);
@@ -52,22 +60,15 @@ export default function PhoneMenu() {
     return () => clearInterval(interval);
   }, []);
 
+  // Escape puts the phone away; the page behind it stays where it is
   useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        if (currentScreen !== "home") {
-          setCurrentScreen("home");
-          setSelectedMessage(null);
-          setSelectedCallLog(null);
-          setSelectedGalleryImage(null);
-        } else {
-          setIsOpen(false);
-        }
-      }
+      if (e.key === "Escape") handleClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentScreen]);
+  }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -82,15 +83,16 @@ export default function PhoneMenu() {
     }
   }, [isOpen]);
 
-  const handleClose = () => {
+  function handleClose() {
     setIsOpen(false);
+    restoreFocus.current = true;
     setTimeout(() => {
       setCurrentScreen("home");
       setSelectedMessage(null);
       setSelectedCallLog(null);
       setSelectedGalleryImage(null);
     }, 300);
-  };
+  }
 
   const handleBack = () => {
     if (selectedMessage || selectedCallLog || selectedGalleryImage) {
@@ -107,10 +109,16 @@ export default function PhoneMenu() {
   if (!mounted) return null;
 
   return (
-    <div ref={phoneRef} className="fixed bottom-6 right-6 z-[100]">
+    <div ref={phoneRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100]">
       <AnimatePresence mode="wait">
         {!isOpen ? (
           <motion.button
+            ref={(el: HTMLButtonElement | null) => {
+              if (el && restoreFocus.current) {
+                restoreFocus.current = false;
+                el.focus();
+              }
+            }}
             key="phone-button"
             initial={false}
             animate={
@@ -128,19 +136,24 @@ export default function PhoneMenu() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 border-2 border-emerald-400/50 shadow-lg flex items-center justify-center"
-            aria-label="Open JM.EXE Phone"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 border-2 border-emerald-400/50 shadow-lg flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            aria-label="Open phone menu"
           >
-            <PhoneIcon className="w-8 h-8 text-white" />
+            <PhoneIcon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
           </motion.button>
         ) : (
           <motion.div
+            ref={setScreenEl}
             key="phone-ui"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Phone menu"
+            tabIndex={-1}
             initial={{ opacity: 0, y: 100, scale: 0.9, rotate: -5 }}
             animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, y: 100, scale: 0.85, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="relative w-[320px] sm:w-[360px]"
+            className="relative w-[min(360px,calc(100vw-2rem))] focus:outline-none"
             style={{ transformOrigin: "bottom right" }}
           >
             <div className="relative bg-black rounded-[2.5rem] p-4 shadow-2xl border-4 border-gray-800 overflow-hidden">
@@ -158,7 +171,7 @@ export default function PhoneMenu() {
                 }}
               />
 
-              <div className="relative bg-gradient-to-br from-gray-950 via-black to-gray-950 rounded-[2rem] overflow-hidden flex flex-col h-[600px]">
+              <div className="relative bg-gradient-to-br from-gray-950 via-black to-gray-950 rounded-[2rem] overflow-hidden flex flex-col h-[min(600px,calc(100dvh-5rem))]">
                 {/* Status Bar */}
                 <div className="px-4 py-2 bg-black/50 backdrop-blur-sm border-b border-white/10 flex items-center justify-between flex-shrink-0">
                   <div className="text-white text-xs font-semibold">{time}</div>
@@ -170,6 +183,16 @@ export default function PhoneMenu() {
                       />
                     </div>
                     <span className="text-[10px] text-emerald-400 font-bold">{BATTERY_LEVEL}%</span>
+                    <button
+                      type="button"
+                      onClick={handleClose}
+                      aria-label="Close phone"
+                      className="ml-1 flex h-6 w-6 items-center justify-center rounded-full text-white/70 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                    >
+                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
@@ -205,7 +228,7 @@ export default function PhoneMenu() {
                         projects={portfolioData.projects}
                         onOpenProject={(project) => {
                           window.dispatchEvent(
-                            new CustomEvent("jm:navigate", { detail: { tab: "missions", projectId: project.id } })
+                            new CustomEvent("jm:navigate", { detail: { path: projectPath(project.slug) } })
                           );
                           handleClose();
                         }}
@@ -218,7 +241,7 @@ export default function PhoneMenu() {
                         items={automations}
                         onOpen={(item) => {
                           window.dispatchEvent(
-                            new CustomEvent("jm:navigate", { detail: { tab: "automation", automationId: item.id } })
+                            new CustomEvent("jm:navigate", { detail: { path: automationPath(item.id) } })
                           );
                           handleClose();
                         }}

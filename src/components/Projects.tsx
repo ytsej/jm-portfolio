@@ -1,32 +1,41 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/src/lib/cn";
 import ProjectDetailsPanel from "./ProjectDetailsPanel";
 import { HighlightBadge, ListHeader, SectionHeading, StatusBadge } from "./GtaUi";
 import type { Project } from "@/src/data/portfolio";
+import { projectPath } from "@/src/data/sections";
+import { handleInternalClick } from "@/src/lib/nav";
 
 interface ProjectsProps {
   projects: Project[];
-  initialSelectedId?: string;
+  // From the URL: /projects/<slug> opens that project's brief
+  caseSlug?: string;
+  onOpenCase: (path: string) => void;
+  onCloseCase: () => void;
 }
 
-export default function Projects({ projects, initialSelectedId }: ProjectsProps) {
+export default function Projects({ projects, caseSlug, onOpenCase, onCloseCase }: ProjectsProps) {
   const clientProjects = projects.filter((p) => p.category === "client");
   const otherProjects = projects.filter((p) => p.category !== "client");
 
-  const [selectedId, setSelectedId] = useState(initialSelectedId ?? projects[0]?.id);
-  const [panelProject, setPanelProject] = useState<Project | null>(null);
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const caseProject = projects.find((p) => p.slug === caseSlug) ?? null;
+  const [selectedId, setSelectedId] = useState(caseProject?.id ?? projects[0]?.id);
+  // Keeps the last brief rendered while the panel slides out
+  const [panelProject, setPanelProject] = useState<Project | null>(caseProject);
+
+  useEffect(() => {
+    if (!caseProject) return;
+    setPanelProject(caseProject);
+    setSelectedId(caseProject.id);
+  }, [caseProject]);
 
   const selected = projects.find((p) => p.id === selectedId) ?? projects[0];
 
-  const openPanel = (project: Project) => {
-    setPanelProject(project);
-    setIsPanelOpen(true);
-  };
+  const openPanel = (project: Project) => onOpenCase(projectPath(project.slug));
 
   const handleRowClick = (project: Project) => {
     setSelectedId(project.id);
@@ -34,11 +43,6 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
     if (typeof window !== "undefined" && !window.matchMedia("(min-width: 1024px)").matches) {
       openPanel(project);
     }
-  };
-
-  const handleClosePanel = () => {
-    setIsPanelOpen(false);
-    setTimeout(() => setPanelProject(null), 300);
   };
 
   const renderRows = (items: Project[]) =>
@@ -50,12 +54,13 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
           type="button"
           onClick={() => handleRowClick(project)}
           onDoubleClick={() => openPanel(project)}
+          aria-pressed={isActive}
           className={cn(
             "gta-row focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400",
             isActive && "gta-row-active"
           )}
         >
-          <span className="min-w-0 truncate">{project.title}</span>
+          <span className="min-w-0 break-words">{project.title}</span>
           <span className="flex flex-shrink-0 items-center gap-2">
             {project.highlight && <HighlightBadge label={project.highlight} />}
             <StatusBadge status={project.status} inverted={isActive} />
@@ -68,7 +73,7 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
     <>
       <SectionHeading
         title="Projects"
-        subtitle="Client work first, then academic and personal builds. Select a project to preview it, then open the full brief."
+        subtitle="Client work first, then academic and personal builds. Select a project to preview it, then open the brief for my part, the result, and the limits."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-4 lg:gap-6 items-start">
@@ -128,7 +133,7 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
                     <h2 className="font-display text-3xl tracking-wider uppercase leading-none">{selected.title}</h2>
                     <p className="mt-2 font-hud text-sm uppercase tracking-wider text-emerald-400">{selected.role}</p>
                   </div>
-                  <p className="text-sm leading-relaxed text-white/80">
+                  <p className="text-[15px] leading-relaxed text-white/85">
                     {selected.shortDescription ?? selected.description.split("\n")[0]}
                   </p>
                   {selected.tags.length > 0 && (
@@ -141,9 +146,13 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
                     </div>
                   )}
                   <div className="flex flex-wrap gap-2 pt-1">
-                    <button type="button" onClick={() => openPanel(selected)} className="gta-btn gta-btn-primary">
+                    <a
+                      href={projectPath(selected.slug)}
+                      onClick={(e) => handleInternalClick(e, () => openPanel(selected))}
+                      className="gta-btn gta-btn-primary"
+                    >
                       Open brief
-                    </button>
+                    </a>
                     {selected.links.live && (
                       <a href={selected.links.live} target="_blank" rel="noopener noreferrer" className="gta-btn">
                         Live site ↗
@@ -157,7 +166,7 @@ export default function Projects({ projects, initialSelectedId }: ProjectsProps)
         </div>
       </div>
 
-      <ProjectDetailsPanel project={panelProject} isOpen={isPanelOpen} onClose={handleClosePanel} />
+      <ProjectDetailsPanel project={panelProject} isOpen={Boolean(caseProject)} onClose={onCloseCase} />
     </>
   );
 }

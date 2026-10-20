@@ -7,14 +7,6 @@
   --foreground: #f5f5f5;
 }
 
-/* Optional GTA title font. Drop the file in public/fonts to enable it;
-   otherwise headings fall back to Bebas Neue. */
-@font-face {
-  font-family: "Pricedown";
-  src: url("/fonts/pricedown.woff2") format("woff2");
-  font-display: swap;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -119,7 +111,7 @@ body::after {
   }
 
   .gta-title {
-    font-family: "Pricedown", var(--font-bebas), sans-serif;
+    font-family: var(--font-bebas), sans-serif;
     @apply tracking-wide text-white;
     text-shadow: 0 2px 0 #000, 0 0 18px rgba(0, 0, 0, 0.6);
   }

@@ -1,17 +1,24 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import PhoneMenu from "./PhoneMenu";
 import IntroVideo from "./IntroVideo";
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
-  const [isIntroVisible, setIsIntroVisible] = useState(false);
+  const [isIntroOpen, setIsIntroOpen] = useState(false);
+
+  // The footer's "Play intro" control asks for the intro
+  useEffect(() => {
+    const play = () => setIsIntroOpen(true);
+    window.addEventListener("jm:play-intro", play);
+    return () => window.removeEventListener("jm:play-intro", play);
+  }, []);
 
   return (
     <>
-      <IntroVideo onVisibilityChange={setIsIntroVisible} />
+      <IntroVideo open={isIntroOpen} onClose={() => setIsIntroOpen(false)} />
       {children}
-      {!isIntroVisible && <PhoneMenu />}
+      {!isIntroOpen && <PhoneMenu />}
     </>
   );
 }

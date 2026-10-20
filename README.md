@@ -8,18 +8,29 @@ Developed with AI-assisted tools (ChatGPT, Codex, Claude Code, and Claude) for c
 
 ## Sections
 
-| Tab | What it shows |
+| Tab (URL) | What it shows |
 | --- | --- |
-| HOME | Hero slides, quick tiles, featured work carousel |
-| PROJECTS | Client & work projects, then academic & personal builds, with a details panel |
-| AUTOMATION | Featured Zapier and n8n workflow cards plus "View all", each with what was tested and its limits |
-| PROFILE | Headshot with a GTA-style character switch, about, How I Work, experience, education, resume |
-| STACKS | Skills grouped like the resume |
-| ROLES | Kinds of work, most relevant first |
-| ACHIEVEMENTS | Milestones, locked ones in progress |
-| CONTACT | Email, LinkedIn, GitHub, WhatsApp, and a Social Club group |
+| HOME (`/`) | Name, role, and Work / Resume / Contact actions; three selected cases plus the ongoing iTip role; Explore tiles |
+| PROJECTS (`/projects`) | Client & work projects, then academic & personal builds, with a brief that opens at `/projects/<slug>` |
+| AUTOMATION (`/automation`) | Featured Zapier and n8n workflow cards plus "View all", each opening at `/automation/<id>` |
+| PROFILE (`/profile`) | Headshot with a GTA-style character switch, about, How I Work, experience, education, resume |
+| STACKS (`/stacks`) | Skills grouped like the resume |
+| ROLES (`/roles`) | Kinds of work, most relevant first |
+| ACHIEVEMENTS (`/achievements`) | Milestones, locked ones in progress |
+| CONTACT (`/contact`) | Email, LinkedIn, GitHub, WhatsApp, and a Social Club group |
 
-Keyboard: `Q` / `E` switch tabs, `Enter` selects, `Esc` closes a panel or returns home.
+Every section and case has its own URL, so refresh, Back/Forward, and shared links land on the same view. Tabs switch in place through the History API, with no page reload.
+
+Keyboard: `Q` / `E` switch tabs, `Enter` selects, `Esc` closes the top overlay (brief, image viewer, phone, intro) or returns home. Overlays keep `Tab` focus inside and return focus to the control that opened them. The intro video plays only from the footer's "Play intro" control.
+
+Featured cases carry a `caseStudy` (problem, my part, key decision, result, evidence, limits) that the panels show before the technical details.
+
+## Search and AI answers
+
+- Per-page titles, descriptions, canonical URLs, and Open Graph tags: `app/[[...path]]/page.tsx`
+- `robots.txt`, `sitemap.xml`, and `llms.txt` are generated from the same data: `app/robots.ts`, `app/sitemap.ts`, `app/llms.txt/route.ts`
+- Person and WebSite structured data (JSON-LD): `app/layout.tsx`
+- The site URL comes from Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, so it switches to a custom domain automatically: `src/data/site.ts`
 
 ## Getting started
 
@@ -34,8 +45,9 @@ npm run build && npm start
 | What | Where |
 | --- | --- |
 | Profile, experience, skills, roles, achievements, projects | `src/data/portfolio.ts` |
+| Section labels, URLs, and search descriptions | `src/data/sections.ts` |
 | Automation workflows | `src/data/automations.ts` |
-| Contact links | `src/components/Quit.tsx` |
+| Contact links | `src/data/contacts.ts` |
 | Phone menu messages, contacts, call logs | `src/data/phone-*.json` |
 | Resume PDF | `public/images/jm/cv.pdf` (HTML source in `docs/cv/cv.html`) |
 
@@ -54,7 +66,7 @@ When replacing an image, save it as WebP under a **new filename** and update the
 
 - Bebas Neue (display) and Inter (body) from Google Fonts
 - Barlow Semi Condensed for the HUD-style labels
-- Optional Pricedown title font: add `public/fonts/pricedown.woff2`; otherwise titles fall back to Bebas Neue
+- Titles use Bebas Neue. To switch to Pricedown, add `public/fonts/pricedown.woff2` and an `@font-face` for it in `app/globals.css` (only once the file exists, so there is no 404)
 
 ## Environment variables
 
