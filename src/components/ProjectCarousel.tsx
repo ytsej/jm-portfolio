@@ -23,7 +23,7 @@ export default function ProjectCarousel({
   };
 
   return (
-    <div className="w-full overflow-visible space-y-3">
+    <div className="w-full overflow-visible">
       <div className="flex gap-3 sm:gap-4 overflow-x-auto py-3 sm:py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent scroll-smooth snap-x snap-mandatory">
         {projects.map((project) => {
           const isSelected = selectedProjectId === project.id;
@@ -80,22 +80,6 @@ export default function ProjectCarousel({
                 />
               )}
             </button>
-          );
-        })}
-      </div>
-
-      {/* Progress dots */}
-      <div className="flex items-center gap-2 justify-center">
-        {projects.map((project) => {
-          const isSelected = selectedProjectId === project.id;
-          return (
-            <span
-              key={project.id}
-              className={cn(
-                "h-1.5 rounded-full bg-white/30 transition-all duration-300",
-                isSelected ? "w-6 bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.75)]" : "w-3"
-              )}
-            />
           );
         })}
       </div>
