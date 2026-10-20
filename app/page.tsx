@@ -21,12 +21,16 @@ export default function Home() {
   );
   const [heroMode, setHeroMode] = useState<"welcome" | "project">("welcome");
   const [focusProjectId, setFocusProjectId] = useState<string | undefined>();
+  const [focusAutomationId, setFocusAutomationId] = useState<string | undefined>();
 
-  // The phone's Job List asks to open a project in the PROJECTS tab
+  // Phone apps (Job List, Workflows) ask to open a project or workflow
   useEffect(() => {
     const onNavigate = (e: Event) => {
-      const { tab, projectId } = (e as CustomEvent<{ tab: TabId; projectId?: string }>).detail;
+      const { tab, projectId, automationId } = (
+        e as CustomEvent<{ tab: TabId; projectId?: string; automationId?: string }>
+      ).detail;
       setFocusProjectId(projectId);
+      setFocusAutomationId(automationId);
       setActiveTab(tab);
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -110,7 +114,9 @@ export default function Home() {
       case "missions":
         return <Projects projects={portfolioData.projects} initialSelectedId={focusProjectId} />;
       case "automation":
-        return <Automation />;
+        return (
+          <Automation initialOpenId={focusAutomationId} onInitialOpenHandled={() => setFocusAutomationId(undefined)} />
+        );
       case "profile":
         return <Profile onTabChange={setActiveTab} />;
       case "inventory":

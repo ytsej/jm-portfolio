@@ -7,8 +7,9 @@ import messagesData from "@/src/data/phone-messages.json";
 import callLogsData from "@/src/data/phone-call-logs.json";
 import { contactMethods, socials, emailContact, whatsappContact, type ContactLink } from "@/src/data/contacts";
 import { portfolioData, type Project } from "@/src/data/portfolio";
+import { automations, type Automation } from "@/src/data/automations";
 
-type AppScreen = "home" | "messages" | "contacts" | "jobs" | "internet" | "gallery" | "phone";
+type AppScreen = "home" | "messages" | "contacts" | "jobs" | "workflows" | "internet" | "gallery" | "phone";
 type MessageThread = typeof messagesData[0];
 type CallLog = typeof callLogsData[0];
 
@@ -181,6 +182,7 @@ export default function PhoneMenu() {
                         onAppClick={setCurrentScreen}
                         messagesCount={messagesData.length}
                         jobsCount={portfolioData.projects.length}
+                        workflowsCount={automations.length}
                         galleryCount={galleryImages.length}
                         callLogsCount={callLogsData.length}
                       />
@@ -204,6 +206,19 @@ export default function PhoneMenu() {
                         onOpenProject={(project) => {
                           window.dispatchEvent(
                             new CustomEvent("jm:navigate", { detail: { tab: "missions", projectId: project.id } })
+                          );
+                          handleClose();
+                        }}
+                        onBack={handleBack}
+                      />
+                    )}
+                    {currentScreen === "workflows" && (
+                      <WorkflowsScreen
+                        key="workflows"
+                        items={automations}
+                        onOpen={(item) => {
+                          window.dispatchEvent(
+                            new CustomEvent("jm:navigate", { detail: { tab: "automation", automationId: item.id } })
                           );
                           handleClose();
                         }}
@@ -271,12 +286,14 @@ function HomeScreen({
   onAppClick,
   messagesCount,
   jobsCount,
+  workflowsCount,
   galleryCount,
   callLogsCount,
 }: {
   onAppClick: (screen: AppScreen) => void;
   messagesCount: number;
   jobsCount: number;
+  workflowsCount: number;
   galleryCount: number;
   callLogsCount: number;
 }) {
@@ -284,6 +301,7 @@ function HomeScreen({
     { id: "messages", label: "Messages", icon: "💬", badge: messagesCount, screen: "messages" },
     { id: "contacts", label: "Contacts", icon: "👤", screen: "contacts" },
     { id: "jobs", label: "Job List", icon: "📋", badge: jobsCount, screen: "jobs" },
+    { id: "workflows", label: "Workflows", icon: "⚙️", badge: workflowsCount, screen: "workflows" },
     { id: "internet", label: "Internet", icon: "🌐", screen: "internet" },
     { id: "resume", label: "Resume", icon: "📄", href: portfolioData.profile.resumeUrl },
     { id: "gallery", label: "Gallery", icon: "🖼️", badge: galleryCount, screen: "gallery" },
@@ -291,22 +309,23 @@ function HomeScreen({
   ];
 
   const tileClass =
-    "relative aspect-square rounded-2xl p-2 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-emerald-400/50 transition-all flex flex-col items-center justify-center gap-2";
+    "relative h-full w-full rounded-2xl p-2 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-emerald-400/50 transition-all flex flex-col items-center justify-center gap-2";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="p-5 h-full overflow-y-auto"
+      className="p-4 h-full flex flex-col"
     >
-      <h2 className="font-display text-2xl uppercase tracking-wider text-white mb-5 text-center">Phone</h2>
-      <div className="grid grid-cols-3 gap-3">
+      <h2 className="font-display text-2xl uppercase tracking-wider text-white mb-4 text-center">Phone</h2>
+      {/* 2 x 4 grid that stretches to fill the screen */}
+      <div className="grid flex-1 grid-cols-2 grid-rows-4 gap-3 min-h-0">
         {apps.map((app, i) => {
           const content = (
             <>
-              <span className="text-3xl">{app.icon}</span>
-              <span className="text-[10px] text-white uppercase font-display tracking-wider leading-tight text-center">
+              <span className="text-4xl">{app.icon}</span>
+              <span className="text-xs text-white uppercase font-display tracking-wider leading-tight text-center">
                 {app.label}
               </span>
               {app.badge ? (
@@ -322,8 +341,9 @@ function HomeScreen({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.05 }}
-              whileHover={{ y: -3, scale: 1.04 }}
+              whileHover={{ y: -3, scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
+              className="min-h-0"
             >
               {app.href ? (
                 <a href={app.href} target="_blank" rel="noopener noreferrer" className={tileClass}>
@@ -506,6 +526,46 @@ function JobListScreen({
             <span className="mt-0.5 block text-xs text-gray-400 truncate">
               {project.highlight ? `${project.highlight} · ` : ""}
               {project.category === "client" ? "Client & work" : "Academic & personal"}
+            </span>
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+// Workflows Screen: automation cards, opens the AUTOMATION tab with the panel
+function WorkflowsScreen({
+  items,
+  onOpen,
+  onBack,
+}: {
+  items: Automation[];
+  onOpen: (item: Automation) => void;
+  onBack: () => void;
+}) {
+  return (
+    <motion.div
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -300, opacity: 0 }}
+      className="p-4 h-full overflow-y-auto"
+    >
+      <ScreenHeader title="Workflows" onBack={onBack} />
+      <div className="space-y-2 pb-4">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => onOpen(item)}
+            className="w-full p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-colors"
+          >
+            <span className="flex items-center justify-between gap-2">
+              <span className="text-sm font-semibold text-white truncate">{item.title}</span>
+              <span className="flex-shrink-0 text-[10px] uppercase tracking-wider text-emerald-400">{item.platform}</span>
+            </span>
+            <span className="mt-0.5 block text-xs text-gray-400 truncate">
+              {item.label === "client" ? "Client work · DoGoodie" : "Portfolio demo"}
             </span>
           </button>
         ))}

@@ -1,19 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AutomationDetailsPanel from "./AutomationDetailsPanel";
 import { LabelBadge, ListHeader, SectionHeading } from "./GtaUi";
 import { automationIntro, automations, type Automation as AutomationItem } from "@/src/data/automations";
 
-export default function Automation() {
+export default function Automation({
+  initialOpenId,
+  onInitialOpenHandled,
+}: {
+  initialOpenId?: string;
+  onInitialOpenHandled?: () => void;
+}) {
   const featured = automations.filter((a) => a.featured);
   const others = automations.filter((a) => !a.featured);
 
   const [showAll, setShowAll] = useState(false);
-  const [selected, setSelected] = useState<AutomationItem | null>(null);
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const initialItem = automations.find((a) => a.id === initialOpenId) ?? null;
+  const [selected, setSelected] = useState<AutomationItem | null>(initialItem);
+  const [isPanelOpen, setIsPanelOpen] = useState(Boolean(initialItem));
+
+  // Only open the requested workflow once; later visits to the tab start closed
+  useEffect(() => {
+    if (initialOpenId) onInitialOpenHandled?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const open = (item: AutomationItem) => {
     setSelected(item);
