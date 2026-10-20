@@ -23,16 +23,35 @@ export default function Quit() {
       link: "https://github.com/jjimuu",
     },
     {
-      label: "Facebook",
-      value: "facebook.com/destinefanboi",
-      link: "https://www.facebook.com/destinefanboi",
-    },
-    {
       label: "Mobile",
       value: "09498422084",
       link: "tel:+639498422084",
     },
   ];
+
+  // Personal socials, kept below the work contacts
+  const socials = [
+    {
+      label: "Facebook",
+      value: "facebook.com/destinefanboi",
+      link: "https://www.facebook.com/destinefanboi",
+    },
+  ];
+
+  const renderRow = (method: { label: string; value: string; link: string }, compact?: boolean) => (
+    <a
+      key={method.label}
+      href={method.link}
+      target={method.link.startsWith("http") ? "_blank" : undefined}
+      rel={method.link.startsWith("http") ? "noopener noreferrer" : undefined}
+      className={`gta-row group focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400${compact ? " py-2 text-sm" : ""}`}
+    >
+      <span>{method.label}</span>
+      <span className="truncate font-body text-sm normal-case tracking-normal text-white/70 group-hover:text-inherit">
+        {method.value}
+      </span>
+    </a>
+  );
 
   return (
     <>
@@ -44,20 +63,12 @@ export default function Quit() {
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-4 lg:gap-6 items-start">
         <div className="flex flex-col gap-[2px]">
           <ListHeader count={contactMethods.length}>Contacts</ListHeader>
-          {contactMethods.map((method) => (
-            <a
-              key={method.label}
-              href={method.link}
-              target={method.link.startsWith("http") ? "_blank" : undefined}
-              rel={method.link.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="gta-row group focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
-            >
-              <span>{method.label}</span>
-              <span className="truncate font-body text-sm normal-case tracking-normal text-white/70 group-hover:text-inherit">
-                {method.value}
-              </span>
-            </a>
-          ))}
+          {contactMethods.map((method) => renderRow(method))}
+
+          <ListHeader count={socials.length} className="mt-3">
+            Social Club
+          </ListHeader>
+          {socials.map((method) => renderRow(method, true))}
         </div>
 
         <section className="gta-panel">
