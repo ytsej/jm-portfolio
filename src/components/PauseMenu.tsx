@@ -143,8 +143,8 @@ export default function PauseMenu() {
         </SectionShell>
       </main>
 
-      {/* Footer HUD: GTA-style instructional buttons. Bottom padding keeps it clear of the phone button. */}
-      <footer className="w-full pt-4 pb-24 sm:pb-6">
+      {/* Footer HUD: GTA-style instructional buttons. The footer text sits on the left, clear of the phone button. */}
+      <footer className="w-full pt-4 pb-6">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="font-hud text-xs sm:text-sm uppercase tracking-wider text-white/60">
