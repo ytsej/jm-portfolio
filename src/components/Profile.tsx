@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { portfolioData } from "@/src/data/portfolio";
+import { faqs } from "@/src/data/faq";
 import { ListHeader, SectionHeading } from "./GtaUi";
 import type { TabId } from "./TopTabs";
 
@@ -90,6 +91,21 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
                 </article>
               ))}
             </div>
+          </section>
+
+          {/* Quick answers: same text as the FAQPage structured data */}
+          <section className="gta-panel" aria-labelledby="quick-answers">
+            <ListHeader count={faqs.length}>
+              <span id="quick-answers">Quick answers</span>
+            </ListHeader>
+            <dl className="divide-y divide-white/10">
+              {faqs.map((item) => (
+                <div key={item.question} className="px-5 py-4">
+                  <dt className="font-hud text-base font-semibold uppercase tracking-wider text-white">{item.question}</dt>
+                  <dd className="mt-1 text-sm leading-relaxed text-white/80">{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </section>
 
           {/* Education */}
