@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import type { Project } from "@/src/data/portfolio";
 import { useFocusTrap } from "@/src/lib/useFocusTrap";
-import { CaseSummary } from "./GtaUi";
+import { CaseSummary, isOngoingStatus } from "./GtaUi";
 
 interface ProjectDetailsPanelProps {
   project: Project | null;
@@ -101,7 +101,11 @@ export default function ProjectDetailsPanel({
                     </span>
                   )}
                   {project.status && (
-                    <span className="inline-block bg-white px-3 py-1 font-hud text-xs font-bold uppercase tracking-wider text-black">
+                    <span
+                      className={`inline-block px-3 py-1 font-hud text-xs font-bold uppercase tracking-wider text-black ${
+                        isOngoingStatus(project.status) ? "bg-gta-yellow" : "bg-white"
+                      }`}
+                    >
                       {project.status}
                     </span>
                   )}

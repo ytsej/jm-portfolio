@@ -20,7 +20,7 @@ export function ListHeader({ children, count, className }: { children: ReactNode
   return (
     <div className={cn("gta-header flex items-center justify-between", className)}>
       <span>{children}</span>
-      {count !== undefined && <span className="text-white/50">{count}</span>}
+      {count !== undefined && <span className="opacity-60">{count}</span>}
     </div>
   );
 }
@@ -39,7 +39,15 @@ export function LabelBadge({ label }: { label: "client" | "demo" }) {
 
 export function StatusBadge({ status, inverted }: { status: string; inverted?: boolean }) {
   if (!status) return null;
-  const isLive = /live|ongoing|in progress/i.test(status);
+  // Ongoing work is a GTA mission-yellow badge, readable on both dark and selected rows
+  if (isOngoingStatus(status)) {
+    return (
+      <span className="inline-flex items-center bg-gta-yellow px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
+        {status}
+      </span>
+    );
+  }
+  const isLive = /live/i.test(status);
   return (
     <span
       className={cn(
@@ -52,6 +60,8 @@ export function StatusBadge({ status, inverted }: { status: string; inverted?: b
     </span>
   );
 }
+
+export const isOngoingStatus = (status: string) => /ongoing|in progress/i.test(status);
 
 export function HighlightBadge({ label }: { label: string }) {
   return (

@@ -4,18 +4,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { portfolioData } from "@/src/data/portfolio";
-import { sectionPath, type TabId } from "@/src/data/sections";
-import { handleInternalClick } from "@/src/lib/nav";
 
 const slides = ["/images/jm/gta/hero-1.webp", "/images/jm/gta/hero-2.webp", "/images/jm/gta/hero-3.webp"];
 
-interface HeroFeatureProps {
-  onNavigate: (tab: TabId) => void;
-  onViewWork: () => void;
-}
-
-// First screen: who I am, what I do, and the three ways forward (work, resume, contact)
-export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps) {
+// First screen: who I am, what I do, and quick facts
+export default function HeroFeature() {
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -122,7 +115,7 @@ export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps
           through.
         </p>
 
-        <dl className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-x-6 gap-y-1 font-hud text-xs sm:text-sm uppercase tracking-wider text-white/85">
+        <dl className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-x-6 gap-y-1 pt-1 font-hud text-xs sm:text-sm uppercase tracking-wider text-white/85">
           <div>
             <dt className="inline text-emerald-400">Status: </dt>
             <dd className="inline">{profile.availability}</dd>
@@ -140,22 +133,6 @@ export default function HeroFeature({ onNavigate, onViewWork }: HeroFeatureProps
             <dd className="inline">GMT+8</dd>
           </div>
         </dl>
-
-        <div className="flex flex-wrap gap-2 pt-1">
-          <button type="button" onClick={onViewWork} className="gta-btn gta-btn-primary">
-            View selected work
-          </button>
-          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="gta-btn">
-            Resume (PDF)
-          </a>
-          <a
-            href={sectionPath("quit")}
-            onClick={(e) => handleInternalClick(e, () => onNavigate("quit"))}
-            className="gta-btn"
-          >
-            Contact
-          </a>
-        </div>
       </div>
     </section>
   );

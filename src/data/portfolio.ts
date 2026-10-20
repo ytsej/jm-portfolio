@@ -602,16 +602,16 @@ export const portfolioData: PortfolioData = {
   },
   skillGroups: [
     {
-      name: "Websites",
-      items: ["HTML", "CSS", "JavaScript", "TypeScript", "Next.js", "React", "Tailwind CSS", "Bootstrap", "PHP", "MySQL"],
+      name: "Front end",
+      items: ["HTML", "CSS", "JavaScript", "TypeScript", "Next.js", "React", "Tailwind CSS", "Bootstrap"],
     },
     {
       name: "Back end",
-      items: ["Node.js (Express)", "Vercel Functions", "Firebase", "Supabase", "OpenAI API", "Google Sheets API"],
+      items: ["Node.js (Express)", "PHP", "MySQL", "Vercel Functions", "Firebase", "Supabase", "OpenAI API", "Google Sheets API"],
     },
     {
       name: "Automation",
-      items: ["Zapier (with JavaScript code steps)", "n8n", "GoHighLevel API", "Webhooks", "Gmail, Discord, Google Docs integrations"],
+      items: ["Zapier (with JavaScript code steps)", "n8n", "GoHighLevel API", "Webhooks", "Gmail", "Discord", "Google Docs"],
     },
     {
       name: "Quality assurance",
