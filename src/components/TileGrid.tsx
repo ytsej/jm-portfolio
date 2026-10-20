@@ -36,7 +36,7 @@ export default function TileGrid({ onTileClick }: TileGridProps) {
   return (
     <nav aria-label="Explore">
       <ListHeader>Explore</ListHeader>
-      <div className="mt-[2px] grid grid-cols-2 lg:grid-cols-4 gap-[2px]">
+      <div className="mt-[2px] grid grid-cols-2 gap-[2px] lg:mt-3 lg:grid-cols-4 lg:gap-4">
       {tiles.map((tile) => {
         const hasError = imageErrors[tile.id];
         return (
