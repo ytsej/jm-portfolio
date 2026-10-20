@@ -185,10 +185,10 @@ const staticProjects: Project[] = [
         "Content changes need a code edit and a redeploy because there is no CMS, and form delivery depends on Formspree being available.",
     },
     images: [
-      "/images/projects/ethical-capacity-lab/img-001.webp",
-      "/images/projects/ethical-capacity-lab/img-002.webp",
-      "/images/projects/ethical-capacity-lab/img-003.webp",
-      "/images/projects/ethical-capacity-lab/img-004.webp",
+      "/images/projects/ethical-capacity-lab/redesign-001.webp",
+      "/images/projects/ethical-capacity-lab/redesign-002.webp",
+      "/images/projects/ethical-capacity-lab/redesign-003.webp",
+      "/images/projects/ethical-capacity-lab/redesign-004.webp",
     ],
   },
   {

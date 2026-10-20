@@ -3,7 +3,7 @@
 import { portfolioData } from "@/src/data/portfolio";
 import type { IconName } from "@/src/data/icon-data";
 import { SectionHeading } from "./GtaUi";
-import { LabelIcon, TechIcon } from "./TechIcon";
+import { TechChip, TechIcon } from "./TechIcon";
 
 // Rotating accent colors, like the character-switch wheel
 const accents = ["#65b4d4", "#72cc72", "#ffa357"];
@@ -46,13 +46,9 @@ export default function Crew() {
                 <h2 className="font-display text-2xl tracking-wider uppercase leading-none">{role.title}</h2>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/75">{role.description}</p>
-              {/* Logo plus name: not every logo is recognizable, and recruiters scan the text */}
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {role.skills.map((skill) => (
-                  <span key={skill} className="gta-chip gap-1.5 py-1 text-emerald-400">
-                    <LabelIcon label={skill} className="h-3.5 w-3.5 flex-shrink-0" />
-                    <span className="text-white/85">{skill}</span>
-                  </span>
+                  <TechChip key={skill} label={skill} />
                 ))}
               </div>
             </article>
