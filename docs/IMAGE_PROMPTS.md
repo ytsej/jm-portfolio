@@ -1,6 +1,6 @@
 # GTA V-style image prompts
 
-Prompts para sa mga larawan ng portfolio. I-generate sa AI image tool, tapos i-save gamit ang eksaktong filename sa `public/images/jm/` para mapalitan ang luma nang walang code change.
+Prompts para sa mga larawan ng portfolio. I-generate sa AI image tool gamit ang filename sa bawat section. Naka-WebP ang mga larawan sa site sa `public/images/jm/gta/` (hal. `hero-1.webp`, `tile-projects.webp`), kaya kapag papalitan, i-convert sa WebP at gumamit ng bagong filename para hindi ma-cache ang luma.
 
 ## Paano gamitin
 

@@ -24,10 +24,31 @@ const hud = Barlow_Semi_Condensed({
   display: "swap",
 });
 
+const title = "JM.EXE | John Mark Dela Cruz, Software Developer";
+const description =
+  "Portfolio of John Mark Dela Cruz, a software developer focused on web development and workflow & AI automation. Projects, automation case studies, and resume.";
+
 export const metadata: Metadata = {
-  title: "JM.EXE | John Mark Dela Cruz, Software Developer",
-  description:
-    "Portfolio of John Mark Dela Cruz, a software developer focused on web development and workflow & AI automation. Projects, automation case studies, and resume.",
+  // Absolute base for the link-preview image; Vercel provides the production domain at build time
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://jm-exe.vercel.app"
+  ),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "John Mark Dela Cruz, illustrated in GTA V style with his scooter over a sunset city" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og.jpg"],
+  },
   icons: {
     icon: "/images/jm/logo.png",
     shortcut: "/images/jm/logo.png",

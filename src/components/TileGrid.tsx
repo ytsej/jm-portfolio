@@ -13,10 +13,10 @@ interface Tile {
 }
 
 const tiles: Tile[] = [
-  { id: "missions", label: "PROJECTS", image: "/images/jm/project.png" },
-  { id: "automation", label: "AUTOMATION", image: "/images/jm/automation.png" },
-  { id: "profile", label: "PROFILE", image: "/images/jm/stat.png" },
-  { id: "crew", label: "ROLES", image: "/images/jm/role.png" },
+  { id: "missions", label: "PROJECTS", image: "/images/jm/gta/tile-projects.webp" },
+  { id: "automation", label: "AUTOMATION", image: "/images/jm/gta/tile-automation.webp" },
+  { id: "profile", label: "PROFILE", image: "/images/jm/gta/tile-profile.webp" },
+  { id: "crew", label: "ROLES", image: "/images/jm/gta/tile-roles.webp" },
 ];
 
 interface TileGridProps {

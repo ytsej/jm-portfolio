@@ -38,9 +38,9 @@ export default function HeroFeature({
       return featuredProject.images;
     }
     return [
-      "/images/jm/1.png",
-      "/images/jm/2.png",
-      "/images/jm/3.png",
+      "/images/jm/gta/hero-1.webp",
+      "/images/jm/gta/hero-2.webp",
+      "/images/jm/gta/hero-3.webp",
     ];
   }, [isWelcome, featuredProject?.images]);
 
@@ -99,10 +99,10 @@ export default function HeroFeature({
       </AnimatePresence>
 
       {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-black via-black/70 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/10 to-transparent mix-blend-screen pointer-events-none" />
-      <div className="absolute inset-0 backdrop-blur-[1px] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent pointer-events-none" />
+      {/* Text covers most of the image on phones, so darken it more there */}
+      <div className="absolute inset-0 bg-black/50 sm:hidden pointer-events-none" />
       <div className="absolute inset-0 opacity-30 mix-blend-overlay pointer-events-none" style={{ backgroundImage: "linear-gradient(transparent 95%, rgba(255,255,255,0.08) 95%)", backgroundSize: "100% 3px" }} />
       <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E\")" }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%)" }} />
