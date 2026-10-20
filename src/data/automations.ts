@@ -102,11 +102,11 @@ export const automations: Automation[] = [
     image: "/images/automation/07-zapier-weekly-kpi-report.webp",
     tagline: "A KPI row in the spreadsheet becomes a report from a Docs template.",
     summary:
-      "Built for DoGoodie. An eligible KPI row in Google Sheets passes a filter, becomes a report from a Google Docs template, and the tracker row is updated afterward.",
+      "Built for DoGoodie. An eligible KPI row in Google Sheets passes a filter, becomes a report from a Google Docs template, and the tracker row is updated afterward. It produced DoGoodie's weekly KPI report during the engagement.",
     tools: ["Google Sheets", "Filter by Zapier", "Google Docs"],
-    evidence: "Published and on at the 18 Oct 2026 review.",
+    evidence: "Ran weekly for DoGoodie while the engagement was active. Still published at the 18 Oct 2026 review.",
     scope:
-      "No runs in the 30 days before the review, so current end-to-end output is unverified. Triggered by a spreadsheet row rather than a weekly schedule.",
+      "Not in use since the DoGoodie engagement ended, so there are no recent runs. Triggered by a new or updated spreadsheet row rather than a schedule.",
   },
   {
     id: "authenticated-ghl-contacts",

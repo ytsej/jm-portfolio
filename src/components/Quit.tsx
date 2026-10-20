@@ -24,8 +24,8 @@ export default function Quit() {
     },
     {
       label: "WhatsApp",
-      value: "+63 949 842 2084",
-      link: "https://wa.me/639498422084",
+      value: "+63 967 412 1386",
+      link: "https://wa.me/639674121386",
     },
   ];
 
@@ -35,6 +35,16 @@ export default function Quit() {
       label: "Facebook",
       value: "facebook.com/destinefanboi",
       link: "https://www.facebook.com/destinefanboi",
+    },
+    {
+      label: "Instagram",
+      value: "@jm_deecee",
+      link: "https://www.instagram.com/jm_deecee/",
+    },
+    {
+      label: "TikTok",
+      value: "@_ytsej",
+      link: "https://www.tiktok.com/@_ytsej",
     },
   ];
 

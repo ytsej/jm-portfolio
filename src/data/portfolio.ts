@@ -153,15 +153,15 @@ const staticProjects: Project[] = [
   },
   {
     id: "digital-tipping-platform",
-    title: "Digital Tipping Platform (Kuwait)",
-    subtitle: "Web Platform / Payments",
+    title: "iTip — Digital Tipping Platform",
+    subtitle: "Web Platform / Payments (Kuwait)",
     role: "Software Developer",
     status: "Ongoing",
     category: "client",
     shortDescription:
-      "A QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. Private project, pilot launch in progress.",
+      "iTip is a QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. Pilot launch in progress.",
     description:
-      "A digital tipping platform that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI am improving the existing application: integrating Payzah payments, verifying fee calculations, fixing bugs, and coordinating QA testing for the pilot launch. The platform is private, so there are no public links or screenshots.",
+      "iTip is a digital tipping platform for Kuwait that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI am improving the existing application: integrating Payzah payments, verifying fee calculations, fixing bugs, and coordinating QA testing for the pilot launch. The platform is not public yet, so the screenshots show its marketing pages only, with no merchant or customer data.",
     bullets: [
       "Payzah payment gateway integration",
       "Fee calculation verification",
@@ -169,8 +169,13 @@ const staticProjects: Project[] = [
       "QA test coordination for the pilot launch",
     ],
     links: {},
-    tags: ["Payzah", "QA Testing"],
-    images: [],
+    tags: ["TanStack Start", "React", "TypeScript", "Supabase", "Tailwind CSS", "Payzah", "QA Testing"],
+    images: [
+      "/images/projects/itip/img-001.webp",
+      "/images/projects/itip/img-002.webp",
+      "/images/projects/itip/img-003.webp",
+      "/images/projects/itip/img-004.webp",
+    ],
   },
   {
     id: "hoa-profiling-system-(multi-tenant-edition)-1770309399098",
@@ -350,11 +355,11 @@ const staticProjects: Project[] = [
   {
     id: "jmqtie-pet-shop-management-system-1770307977613",
     title: "Jmqtie Pet Shop Management System",
-    subtitle: "System (Web Application)",
+    subtitle: "Desktop Application (Java)",
     role: "Frontend Developer • UI Designer • System Prototyping",
     status: "Completed",
     category: "academic",
-    shortDescription: "A desktop-based Pet Shop Management System designed to manage products, users, customers, and billing operations in a single platform.",
+    shortDescription: "A second-year Java desktop app for managing a pet shop's products, users, customers, and billing in one place.",
     description: "The Jmqtie Pet Shop Management System is a Java-based application built to streamline daily operations of a small pet shop business. The system provides structured modules for managing pets and products, user accounts, customers, and sales transactions with integrated billing and receipt generation.\r\n\r\nThe application focuses on simplicity and usability, featuring a clean interface with clear navigation and role-based access for administrators. It supports basic inventory tracking, customer billing, and user management while maintaining data consistency through a MySQL database. The system was designed and prototyped with usability in mind, ensuring that common business tasks can be performed efficiently.",
     bullets: [
       "User authentication and admin access",
@@ -370,11 +375,6 @@ const staticProjects: Project[] = [
     tags: [
       "Java",
       "MySQL",
-      "HTML",
-      "CSS",
-      "Bootstrap",
-      "JavaScript",
-      "jQuery",
     ],
     images: [
       "/images/projects/jmqtie-pet-shop-management-system-1770307977613/img-005.jpeg",
@@ -473,12 +473,12 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      company: "Digital Tipping Platform (Kuwait)",
+      company: "iTip (Kuwait)",
       role: "Software Developer",
       period: "Ongoing",
       location: "Remote",
       bullets: [
-        "Improving an existing QR-code tipping platform with Admin, Merchant, and Staff portals.",
+        "Improving iTip, an existing QR-code tipping platform with Admin, Merchant, and Staff portals.",
         "Integrating Payzah payments and verifying fee calculations.",
         "Fixing bugs and coordinating QA testing for the pilot launch.",
       ],
@@ -618,7 +618,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "payments-pilot",
       title: "Payments Pilot",
-      description: "Launch the digital tipping platform pilot with Payzah payments. In progress.",
+      description: "Launch the iTip pilot with Payzah payments. In progress.",
       unlocked: false,
     },
   ],

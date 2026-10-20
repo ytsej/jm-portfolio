@@ -237,7 +237,7 @@ export default function PhoneMenu() {
                     </span>
                   </a>
                   <a
-                    href="https://wa.me/639498422084"
+                    href="https://wa.me/639674121386"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl transition-colors"
