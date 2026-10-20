@@ -24,6 +24,7 @@ const hud = Barlow_Semi_Condensed({
   display: "swap",
 });
 
+// Browser tab shows the brand only; link previews keep the full name
 const title = "JM.EXE | John Mark Dela Cruz, Software Developer";
 const description =
   "Portfolio of John Mark Dela Cruz, a software developer focused on web development and workflow & AI automation. Projects, automation case studies, and resume.";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : "https://jm-exe.vercel.app"
   ),
-  title,
+  title: "JM.EXE",
   description,
   openGraph: {
     title,

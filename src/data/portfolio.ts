@@ -246,7 +246,7 @@ const staticProjects: Project[] = [
     title: "HOA Profiling System (Multi-Tenant Edition)",
     subtitle: "Web App / Management System",
     role: "Full-Stack Developer",
-    status: "",
+    status: "Completed",
     category: "academic",
     shortDescription: "A secure, multi-tenant web application designed to digitize resident profiling and household management for Homeowners Associations using an efficient 'Invite & Fill' workflow.",
     description: "The HOA Profiling System is a modern, mobile-responsive platform built to replace traditional paper-based resident record-keeping used by Homeowners Associations (HOAs). The system is designed with a multi-tenant architecture, allowing multiple independent HOAs to operate within a shared infrastructure while maintaining strict data isolation and security.\r\n\r\nThe platform follows a streamlined two-step 'Invite & Fill' workflow. HOA officers initiate household registration by completing an initial profiling form, which automatically generates a secure, tokenized link or QR code. Residents then use this link to self-register their household members, reducing manual data entry and administrative workload for officers.\r\n\r\nThe system provides administrators with real-time demographic insights, including priority population groups such as senior citizens, persons with disabilities (PWDs), and registered voters. These analytics support better decision-making, reporting, and community resource planning. The application also includes role-based access control, audit logging, and data export features to ensure transparency, accountability, and long-term data usability.",

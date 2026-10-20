@@ -205,7 +205,7 @@ export default function HeroFeature({
                   <span className="text-emerald-400">Focus:</span> Web &amp; automation
                 </span>
                 <span>
-                  <span className="text-emerald-400">Client work:</span> DoGoodie
+                  <span className="text-emerald-400">Now:</span> <span className="normal-case">iTip</span> (Kuwait)
                 </span>
               </div>
 
