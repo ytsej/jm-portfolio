@@ -1,34 +1,34 @@
 [
   {
     "id": "1",
-    "name": "Frontend Developer",
-    "avatar": "🎨",
-    "role": "UI Development",
-    "skills": ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
-    "description": "Building reliable web interfaces with modern technologies. Focus on responsive design and user experience."
+    "name": "Full-Stack Web Developer",
+    "avatar": "🌐",
+    "role": "Websites & APIs",
+    "skills": ["Next.js", "TypeScript", "JavaScript", "Node.js", "Vercel"],
+    "description": "Client websites and web apps, from UI to server routes, serverless functions, and integrations."
   },
   {
     "id": "2",
-    "name": "Full-Stack Developer",
+    "name": "Workflow & AI Automation",
     "avatar": "⚙️",
-    "role": "Backend & APIs",
-    "skills": ["PHP", "Python", "Java", "Firebase", "MySQL", "Supabase", "REST APIs", "Postman"],
-    "description": "Developing backend systems and integrating databases. Comfortable with API testing and server-side logic."
+    "role": "Zapier & n8n",
+    "skills": ["Zapier", "n8n", "OpenAI", "GoHighLevel", "Webhooks"],
+    "description": "Workflows that move data between Gmail, Sheets, Docs, Discord, and CRMs, with AI steps gated and verified."
   },
   {
     "id": "3",
-    "name": "Hardware Tech",
-    "avatar": "🖥️",
-    "role": "Systems & Assembly",
-    "skills": ["PC Assembly", "OS Installation", "Troubleshooting", "Hardware Knowledge"],
-    "description": "Hands-on with hardware setup, OS configuration, and system troubleshooting. Patient with hardware parts."
+    "name": "QA & Testing",
+    "avatar": "🧪",
+    "role": "Quality",
+    "skills": ["Manual testing", "Bug tracking", "Vitest", "Playwright", "Data validation"],
+    "description": "Manual and automated testing, bug tracking, and data validation. Currently coordinating QA for a payments pilot."
   },
   {
     "id": "4",
     "name": "Unity Game Dev",
     "avatar": "🎮",
     "role": "Game Development",
-    "skills": ["Unity", "C#", "Game Logic", "3D Environments", "Prototyping"],
-    "description": "Creating game prototypes and simulations. Experience with Unity development and interactive scenarios."
+    "skills": ["Unity", "C#", "Firebase"],
+    "description": "Built Unity scenes for the CARESIM caregiving simulation game, the mobile half of my capstone project."
   }
 ]
