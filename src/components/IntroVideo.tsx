@@ -1,64 +1,59 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
+import { useFocusTrap } from "@/src/lib/useFocusTrap";
 
 interface IntroVideoProps {
-  onVisibilityChange?: (isVisible: boolean) => void;
+  open: boolean;
+  onClose: () => void;
 }
 
-export default function IntroVideo({ onVisibilityChange }: IntroVideoProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isFading, setIsFading] = useState(false);
+// Optional intro, played from the footer's "Play intro" control. The site opens
+// straight on content; while the intro plays, focus stays inside it.
+export default function IntroVideo({ open, onClose }: IntroVideoProps) {
   const [videoError, setVideoError] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const [overlayEl, setOverlayEl] = useState<HTMLDivElement | null>(null);
+
+  useFocusTrap(overlayEl, open);
 
   useEffect(() => {
-    // Check if user has seen intro in this session
-    const hasSeenIntro = sessionStorage.getItem("hasSeenIntro");
-    if (!hasSeenIntro) {
-      setIsVisible(true);
-      onVisibilityChange?.(true);
-    }
-  }, [onVisibilityChange]);
+    if (open) setVideoError(false);
+  }, [open]);
 
-  const handleComplete = () => {
-    // Start fade-out animation
-    setIsFading(true);
-    
-    // Wait for fade animation, then hide completely
-    setTimeout(() => {
-      setIsVisible(false);
-      sessionStorage.setItem("hasSeenIntro", "true");
-      onVisibilityChange?.(false);
-    }, 800); // Match fade duration
-  };
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
 
   const handleVideoError = () => {
     setVideoError(true);
-    // If video fails to load, skip it after a short delay
-    setTimeout(() => {
-      handleComplete();
-    }, 1000);
   };
-
-  if (!isVisible) return null;
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {/* The exit animation does the fade-out */}
+      {open && (
         <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: isFading ? 0 : 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[90] bg-black flex items-center justify-center"
+          ref={setOverlayEl}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Intro video"
+          tabIndex={-1}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, pointerEvents: "none" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="fixed inset-0 z-[140] bg-black flex items-center justify-center focus:outline-none"
         >
           {/* Video Container - Small centered box */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: isFading ? 0.95 : 1, opacity: isFading ? 0 : 1 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="relative w-full max-w-2xl aspect-video mx-auto px-4"
           >
@@ -67,35 +62,26 @@ export default function IntroVideo({ onVisibilityChange }: IntroVideoProps) {
                 autoPlay
                 muted
                 playsInline
-                onEnded={handleComplete}
+                onEnded={onClose}
                 onError={handleVideoError}
                 className="w-full h-full object-contain rounded-lg shadow-2xl"
               >
                 <source src="/images/jm/intro.mp4" type="video/mp4" />
-                <source src="/images/jm/intro.MP4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             ) : (
               <div className="w-full h-full flex items-center justify-center text-white text-center p-8 bg-black/50 rounded-lg">
-                <div>
-                  <p className="text-xl mb-4">Video unavailable</p>
-                  <button
-                    onClick={handleComplete}
-                    className="px-6 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded uppercase font-display tracking-wider text-white transition-colors"
-                  >
-                    Continue
-                  </button>
-                </div>
+                <p className="text-xl">Video unavailable</p>
               </div>
             )}
 
             {/* Skip Button */}
             <button
-              onClick={handleComplete}
-              className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-6 py-3 bg-black/60 hover:bg-black/80 border border-white/20 rounded uppercase font-display tracking-wider text-white transition-all duration-200 backdrop-blur-sm"
-              aria-label="Skip intro"
+              type="button"
+              onClick={onClose}
+              className="absolute -bottom-14 left-1/2 -translate-x-1/2 gta-btn"
             >
-              Skip Intro
+              <kbd className="gta-key">Esc</kbd> Skip intro
             </button>
           </motion.div>
         </motion.div>

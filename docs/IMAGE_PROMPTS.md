@@ -102,8 +102,9 @@ The same young Filipino man leaning on a dark grey maxi-scooter on a hill overlo
 
 ## Font (opsyonal)
 
-Gumagamit ang site ng Pricedown para sa malalaking title kapag nandoon ang file. Kung wala, Bebas Neue ang lalabas.
+Bebas Neue ang gamit sa malalaking title. Kung gusto mo ng Pricedown:
 
 1. I-download ang Pricedown mula sa Typodermic Fonts (libre, may sariling license; basahin muna).
 2. I-convert sa `.woff2` (halimbawa gamit ang isang woff2 converter).
 3. I-save bilang `public/fonts/pricedown.woff2`.
+4. Ibalik ang `@font-face` para sa "Pricedown" sa `app/globals.css` at ilagay ito sa unahan ng `font-family` ng `.gta-title`. Huwag idagdag ang `@font-face` hangga't wala ang file, para walang 404.

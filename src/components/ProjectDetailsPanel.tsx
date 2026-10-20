@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import type { Project } from "@/src/data/portfolio";
+import { useFocusTrap } from "@/src/lib/useFocusTrap";
+import { CaseSummary } from "./GtaUi";
 
 interface ProjectDetailsPanelProps {
   project: Project | null;
@@ -17,20 +19,34 @@ export default function ProjectDetailsPanel({
   onClose,
 }: ProjectDetailsPanelProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [panelEl, setPanelEl] = useState<HTMLDivElement | null>(null);
+  const [lightboxEl, setLightboxEl] = useState<HTMLDivElement | null>(null);
+
+  // Focus moves into the panel (then the image viewer) and returns to the opener on close
+  useFocusTrap(panelEl, isOpen && Boolean(project));
+  useFocusTrap(lightboxEl, isOpen && lightboxIndex !== null);
 
   useEffect(() => {
     if (!isOpen) setLightboxIndex(null);
   }, [isOpen]);
 
   useEffect(() => {
+    const count = project?.images.length ?? 0;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== "Escape" || !isOpen) return;
+      if (!isOpen) return;
+      // Arrow keys page through the image viewer
+      if (lightboxIndex !== null && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+        const next = lightboxIndex + (e.key === "ArrowRight" ? 1 : -1);
+        if (next >= 0 && next < count) setLightboxIndex(next);
+        return;
+      }
+      if (e.key !== "Escape") return;
       if (lightboxIndex !== null) setLightboxIndex(null);
       else onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen, lightboxIndex, onClose]);
+  }, [isOpen, lightboxIndex, onClose, project]);
 
   if (!project) return null;
   
@@ -51,6 +67,8 @@ export default function ProjectDetailsPanel({
 
           {/* Panel */}
           <motion.div
+            ref={setPanelEl}
+            tabIndex={-1}
             role="dialog"
             aria-modal="true"
             aria-label={project.title}
@@ -58,7 +76,7 @@ export default function ProjectDetailsPanel({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 240 }}
-            className="fixed right-0 top-0 h-full w-full max-w-2xl bg-[#07090c]/95 backdrop-blur-md border-l border-white/10 z-[120] overflow-y-auto"
+            className="fixed right-0 top-0 h-full w-full max-w-2xl bg-[#07090c]/95 backdrop-blur-md border-l border-white/10 z-[120] overflow-y-auto focus:outline-none"
           >
             <div className="sticky top-0 z-10 flex items-center justify-between gap-3 bg-black/90 px-5 py-3">
               <span className="font-hud text-sm font-semibold uppercase tracking-[0.15em] text-white/80">Project brief</span>
@@ -69,7 +87,7 @@ export default function ProjectDetailsPanel({
             <div className="p-5 sm:p-8">
               {/* Header */}
               <div className="mb-6">
-                <h2 className="gta-title text-4xl sm:text-5xl leading-none mb-3">{project.title}</h2>
+                <h2 className="gta-title text-4xl sm:text-5xl leading-none mb-3 break-words">{project.title}</h2>
                 <p className="text-lg text-white/70 mb-1">{project.subtitle}</p>
                 <p className="font-hud text-sm font-semibold uppercase tracking-wider text-emerald-400">{project.role}</p>
               </div>
@@ -90,6 +108,13 @@ export default function ProjectDetailsPanel({
                 </div>
               )}
 
+              {/* Case summary first, technical details after */}
+              {project.caseStudy && (
+                <div className="mb-6">
+                  <CaseSummary caseStudy={project.caseStudy} />
+                </div>
+              )}
+
               {/* Image Gallery */}
               {hasImages && (
                 <div className="mb-6">
@@ -98,7 +123,9 @@ export default function ProjectDetailsPanel({
                     {project.images.map((img, index) => (
                       <button
                         key={index}
+                        type="button"
                         onClick={() => setLightboxIndex(index)}
+                        aria-label={`View image ${index + 1} of ${project.images.length}`}
                         className="relative aspect-video overflow-hidden bg-white/5 border border-white/10 hover:border-white transition-colors group"
                       >
                         <Image
@@ -116,7 +143,7 @@ export default function ProjectDetailsPanel({
 
               {/* Description */}
               <div className="mb-6">
-                <h3 className="gta-header mb-3">Description</h3>
+                <h3 className="gta-header mb-3">{project.caseStudy ? "Technical details" : "Description"}</h3>
                 <p className="text-white/85 leading-relaxed whitespace-pre-line">{project.description.replace(/\r/g, "")}</p>
               </div>
 
@@ -230,13 +257,19 @@ export default function ProjectDetailsPanel({
             {lightboxIndex !== null && hasImages && (
               <>
                 <motion.div
+                  ref={setLightboxEl}
+                  tabIndex={-1}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={`${project.title} image viewer`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setLightboxIndex(null)}
-                  className="fixed inset-0 bg-black/90 z-[130] flex items-center justify-center p-4"
+                  className="fixed inset-0 bg-black/90 z-[130] flex items-center justify-center p-4 focus:outline-none"
                 >
                   <button
+                    type="button"
                     onClick={() => setLightboxIndex(null)}
                     className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
                     aria-label="Close lightbox"
@@ -276,6 +309,7 @@ export default function ProjectDetailsPanel({
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
                       {lightboxIndex > 0 && (
                         <button
+                          type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             setLightboxIndex(lightboxIndex - 1);
@@ -290,6 +324,7 @@ export default function ProjectDetailsPanel({
                       </span>
                       {lightboxIndex < project.images.length - 1 && (
                         <button
+                          type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             setLightboxIndex(lightboxIndex + 1);
