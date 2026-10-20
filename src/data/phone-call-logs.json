@@ -1,34 +1,34 @@
 [
   {
     "id": "1",
-    "contact": "Frontend Tasks",
+    "contact": "iTip Kuwait",
     "type": "outgoing",
-    "status": "Completed",
-    "time": "Yesterday",
-    "description": "Built responsive UI components with React and Tailwind CSS"
+    "status": "In progress",
+    "time": "This week",
+    "description": "Payzah payment integration and fee calculation checks for the pilot launch"
   },
   {
     "id": "2",
-    "contact": "API Integration",
-    "type": "incoming",
+    "contact": "Automation Lab",
+    "type": "outgoing",
     "status": "Completed",
-    "time": "2 days ago",
-    "description": "Connected frontend to REST APIs using fetch and async/await"
+    "time": "Oct 2026",
+    "description": "Tested n8n lead routing, a CRM sync, and a retry and recovery queue"
   },
   {
     "id": "3",
-    "contact": "Hardware Setup",
-    "type": "outgoing",
+    "contact": "DoGoodie",
+    "type": "incoming",
     "status": "Completed",
-    "time": "3 days ago",
-    "description": "PC assembly and Windows 11 installation for client system"
+    "time": "Sep 2026",
+    "description": "Shipped the Ethical Capacity Lab and DoGoodie websites, plus Zapier workflows"
   },
   {
     "id": "4",
-    "contact": "Database Config",
+    "contact": "Inventi Asia",
     "type": "incoming",
     "status": "Completed",
-    "time": "Last week",
-    "description": "Configured Firebase and MySQL connections for project backend"
+    "time": "May 2026",
+    "description": "Project management internship: timelines, dependencies, and team coordination"
   }
 ]

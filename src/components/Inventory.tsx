@@ -1,35 +1,29 @@
 "use client";
 
 import { portfolioData } from "@/src/data/portfolio";
-import { cn } from "@/src/lib/cn";
+import { ListHeader, SectionHeading } from "./GtaUi";
 
 export default function Inventory() {
-  const { techStack } = portfolioData;
+  const { skillGroups } = portfolioData;
 
   return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="font-display text-5xl tracking-wider uppercase mb-2">
-          Stacks
-        </h1>
-        <p className="text-gray-400">Technology stack and tools</p>
-      </div>
+    <>
+      <SectionHeading title="Stacks" subtitle="Tools and technologies, grouped the same way as my resume." />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {techStack.map((tech, index) => (
-          <div
-            key={index}
-            className={cn(
-              "p-6 rounded-lg glass-panel glass-panel-hover text-center",
-              "transition-all duration-200 hover:scale-105"
-            )}
-          >
-            <div className="font-display text-xl tracking-wider uppercase">
-              {tech}
-            </div>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {skillGroups.map((group) => (
+          <section key={group.name} className="gta-panel">
+            <ListHeader count={group.items.length}>{group.name}</ListHeader>
+            <ul className="flex flex-wrap gap-1.5 p-4">
+              {group.items.map((item) => (
+                <li key={item} className="gta-chip text-sm">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
-    </div>
+    </>
   );
 }

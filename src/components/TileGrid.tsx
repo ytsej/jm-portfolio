@@ -13,10 +13,10 @@ interface Tile {
 }
 
 const tiles: Tile[] = [
-  { id: "missions", label: "PROJECTS", image: "/images/jm/project.png" },
-  { id: "stats", label: "STATS", image: "/images/jm/stat.png" },
-  { id: "inventory", label: "STACKS", image: "/images/jm/stack.png" },
-  { id: "crew", label: "ROLES", image: "/images/jm/role.png" },
+  { id: "missions", label: "PROJECTS", image: "/images/jm/gta/tile-projects.webp" },
+  { id: "automation", label: "AUTOMATION", image: "/images/jm/gta/tile-automation.webp" },
+  { id: "profile", label: "PROFILE", image: "/images/jm/gta/tile-profile.webp" },
+  { id: "crew", label: "ROLES", image: "/images/jm/gta/tile-roles.webp" },
 ];
 
 interface TileGridProps {
@@ -83,7 +83,7 @@ function GameTile({
       }
       whileTap={prefersReducedMotion ? {} : { scale: 0.98, opacity: 0.95 }}
       className={cn(
-        "relative w-full h-24 sm:h-28 lg:h-32 rounded-lg overflow-hidden glass-panel transition-all duration-300",
+        "relative w-full h-24 sm:h-28 lg:h-32 overflow-hidden glass-panel transition-all duration-300",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70",
         hovered === tile.id ? "shadow-[0_0_24px_rgba(52,211,153,0.45)]" : "shadow-[0_0_12px_rgba(0,0,0,0.45)]"
       )}
@@ -105,12 +105,13 @@ function GameTile({
             src={tile.image}
             alt={tile.label}
             fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
             className="object-cover"
             onError={onImageError}
           />
         </motion.div>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/40 to-purple-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/50 via-black to-black" />
       )}
 
       {/* Gradient + overlays */}
@@ -140,7 +141,7 @@ function GameTile({
       {/* Label */}
       <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 lg:p-4 z-10">
         <div className="flex items-center justify-between">
-          <h3 className="font-display text-sm sm:text-base lg:text-xl tracking-wider uppercase text-white drop-shadow-lg">
+          <h3 className="font-hud text-base sm:text-lg lg:text-xl font-semibold tracking-[0.1em] uppercase text-white drop-shadow-lg">
             {tile.label}
           </h3>
           <svg

@@ -1,139 +1,71 @@
-# JM Portfolio - GTA V Menu Inspired Portfolio
+# JM.EXE — John Mark Dela Cruz's portfolio
 
-An interactive portfolio website inspired by the Grand Theft Auto V Online menu design. Built with Next.js 15, React 19, TypeScript, and Tailwind CSS.
+Portfolio of John Mark Dela Cruz, software developer focused on web development and workflow & AI automation. The interface is styled after the GTA V pause menu.
 
-## Features
+Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, and Framer Motion.
 
-- **Cinematic Design**: Dark, high-contrast UI with glassmorphism effects
-- **Interactive Navigation**: Tab-based section switching with smooth transitions
-- **Project Showcase**: Featured project hero panel with carousel selection
-- **Multiple Sections**: Projects, Stats, Stacks (Tech Stack), Roles, Achievements, and Contact
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Keyboard Support**: ESC to return home, optional arrow key navigation
+Developed with AI-assisted tools (ChatGPT, Codex, Claude Code, and Claude) for code, copy, and image generation. Every change was reviewed, built, and checked in the browser before shipping.
 
-## Tech Stack
+## Sections
 
-- Next.js 15 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS
-- Framer Motion (for subtle animations)
+| Tab | What it shows |
+| --- | --- |
+| HOME | Hero slides, quick tiles, featured work carousel |
+| PROJECTS | Client & work projects, then academic & personal builds, with a details panel |
+| AUTOMATION | Featured Zapier and n8n workflow cards plus "View all", each with what was tested and its limits |
+| PROFILE | Headshot with a GTA-style character switch, about, How I Work, experience, education, resume |
+| STACKS | Skills grouped like the resume |
+| ROLES | Kinds of work, most relevant first |
+| ACHIEVEMENTS | Milestones, locked ones in progress |
+| CONTACT | Email, LinkedIn, GitHub, WhatsApp, and a Social Club group |
 
-## Getting Started
+Keyboard: `Q` / `E` switch tabs, `Enter` selects, `Esc` closes a panel or returns home.
 
-### Prerequisites
+## Getting started
 
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
-1. Install dependencies:
 ```bash
 npm install
+npm run dev   # http://localhost:3003
+npm run build && npm start
 ```
 
-2. Run the development server:
-```bash
-npm run dev
-```
+## Updating content
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+| What | Where |
+| --- | --- |
+| Profile, experience, skills, roles, achievements, projects | `src/data/portfolio.ts` |
+| Automation workflows | `src/data/automations.ts` |
+| Contact links | `src/components/Quit.tsx` |
+| Phone menu messages, contacts, call logs | `src/data/phone-*.json` |
+| Resume PDF | `public/images/jm/cv.pdf` (HTML source in `docs/cv/cv.html`) |
 
-## Project Structure
+Projects are split by `category` (`"client"` or `"academic"`). Entries in `src/data/projects.json` (written by `/admin/projects`) are only shown if their title isn't already in `portfolio.ts`.
 
-```
-├── app/
-│   ├── layout.tsx          # Root layout with fonts
-│   ├── page.tsx             # Main page with section routing
-│   └── globals.css          # Global styles and design system
-├── src/
-│   ├── components/          # React components
-│   │   ├── TopTabs.tsx      # Navigation tabs
-│   │   ├── HomeDashboard.tsx # Home section
-│   │   ├── HeroFeature.tsx  # Featured project hero
-│   │   ├── TileGrid.tsx     # Navigation tiles
-│   │   ├── ProjectCarousel.tsx # Project thumbnails
-│   │   ├── Projects.tsx     # Projects section
-│   │   ├── ProjectDetailsPanel.tsx # Project details drawer
-│   │   ├── Stats.tsx        # About & skills
-│   │   ├── Inventory.tsx    # Tech stack
-│   │   ├── Crew.tsx         # Roles
-│   │   ├── Achievements.tsx # Highlights
-│   │   ├── SaveGame.tsx     # CV downloads
-│   │   ├── Quit.tsx         # Contact
-│   │   └── SectionShell.tsx # Section wrapper
-│   ├── data/
-│   │   └── portfolio.ts     # Portfolio data
-│   └── lib/
-│       └── cn.ts            # Utility functions
-└── public/
-    └── images/              # Image assets
-        ├── hero/            # Hero background images
-        ├── tiles/           # Tile background images
-        └── projects/        # Project thumbnails
-```
+## Images
 
-## Adding Images
+- GTA V-style art: `public/images/jm/gta/` (hero slides, home tiles, profile portrait)
+- Project screenshots: `public/images/projects/<project>/`
+- Workflow cards: `public/images/automation/`
+- Link preview: `public/og.jpg` (1200 × 630)
 
-Place your images in the following directories:
+When replacing an image, save it as WebP under a **new filename** and update the path; reusing a filename can serve the old cached version. Prompts for generating the art are in `docs/IMAGE_PROMPTS.md`.
 
-- `public/images/hero/` - Hero background images (hero-1.jpg, hero-2.jpg)
-- `public/images/tiles/` - Tile background images (tile-projects.jpg, tile-stats.jpg, etc.)
-- `public/images/projects/` - Project thumbnails (caresim-1.jpg, project-2.jpg, etc.)
+## Fonts
 
-If images are missing, the app will gracefully fall back to gradient backgrounds.
+- Bebas Neue (display) and Inter (body) from Google Fonts
+- Barlow Semi Condensed for the HUD-style labels
+- Optional Pricedown title font: add `public/fonts/pricedown.woff2`; otherwise titles fall back to Bebas Neue
 
-## Customization
+## Environment variables
 
-### Update Portfolio Data
+Only needed for the phone gallery admin (`/admin/phone-gallery`):
 
-Edit `src/data/portfolio.ts` to update:
-- Profile information
-- Skills and percentages
-- Tech stack
-- Projects
-- Achievements
+- `BLOB_READ_WRITE_TOKEN` — Vercel Blob read/write token
+- `ADMIN_PASSWORD` — password for gallery uploads and deletes
 
-### Update Contact Information
-
-Edit `src/components/Quit.tsx` to update contact methods and links.
-
-### Update Resume/CV Links
-
-Edit `src/components/SaveGame.tsx` and place your PDF files in the `public/` directory.
-
-## Design System
-
-### Fonts
-- **Display**: Bebas Neue (headings, tabs, large titles)
-- **Body**: Inter (paragraphs, labels)
-
-### Colors
-- Background: Dark cinematic gradient with vignette
-- Text: Off-white primary, gray secondary
-- Accents: Muted cool blue/white highlights
-- Glass panels: `bg-white/5` with `backdrop-blur-md`
-
-### Typography
-- Uppercase tabs and labels
-- Letter spacing on headings
-- Large display headings for emphasis
-
-## Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## License
-
-This project is open source and available for personal use.
+The rest of the site works without them. See `DEPLOYMENT_GUIDE.md`.
 
 ## Notes
 
-- No copyrighted GTA assets are used
-- All fonts are from Google Fonts
-- Images should be original or properly licensed
-- The design is inspired by game menu aesthetics but is original
+- No copyrighted GTA V assets or logos are used; the art is original, generated in the style of the game's loading screens.
+- Automation demos run on fictional data and are labeled as such; client work is labeled separately.

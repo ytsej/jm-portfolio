@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>John Mark Dela Cruz — Resume</title>
+<style>
+  @page { size: A4; margin: 10mm 13mm 9mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, "Liberation Sans", Helvetica, sans-serif; font-size: 9pt; line-height: 1.27; color: #111; }
+  header { text-align: center; padding-bottom: 6px; border-bottom: 2px solid #111; margin-bottom: 2px; }
+  h1 { font-size: 19pt; letter-spacing: 0.5px; font-weight: 700; }
+  .headline { font-size: 11pt; font-weight: 700; margin-top: 2px; }
+  .contact { font-size: 9pt; color: #333; margin-top: 3px; }
+  .rule2 { border-top: 1px solid #111; margin-bottom: 7px; }
+  section { margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid #999; }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: 10.5pt; font-weight: 700; letter-spacing: 0.3px; margin-bottom: 4px; }
+  .row { display: flex; justify-content: space-between; gap: 12px; }
+  .org { font-weight: 700; }
+  .role { font-style: italic; }
+  .item { margin-bottom: 4px; }
+  ul { margin: 2px 0 0 16px; }
+  li { margin-bottom: 1px; }
+  .skills p { margin-bottom: 1px; }
+  .skills b { font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>JOHN MARK DELA CRUZ</h1>
+  <div class="headline">Software Developer | Workflow &amp; AI Automation</div>
+  <div class="contact">Bacoor, Cavite, Philippines | jmcruzada.delacruz@gmail.com | linkedin.com/in/johnmark-c-delacruz</div>
+  <div class="contact">WhatsApp +63 967 412 1386 | github.com/jjimuu | Portfolio: jm-exe.vercel.app</div>
+</header>
+<div class="rule2"></div>
+
+<section>
+  <h2>PROFESSIONAL SUMMARY</h2>
+  <p>Software developer who builds websites and automates business workflows. Built and launched two client websites, and Zapier and n8n workflows that triage email with OpenAI, generate weekly reports and sync CRM data. Tests the work, adds error handling so that a failed AI result is flagged to the team instead of failing silently, and uses AI coding tools spec-first with every result reviewed.</p>
+</section>
+
+<section>
+  <h2>WORK EXPERIENCE</h2>
+
+  <div class="item">
+    <div class="row"><span class="org">iTip Kuwait</span><span>Sep 2026 – Present</span></div>
+    <div class="row"><span class="role">Software Developer</span><span>Remote</span></div>
+    <ul>
+      <li>Improving iTip, a QR-code digital tipping platform for Kuwait with separate Admin, Merchant and Staff portals (TanStack Start, React, TypeScript, Supabase).</li>
+      <li>Integrating Payzah payments and verifying fee calculations.</li>
+      <li>Fixing bugs and coordinating QA testing for the pilot launch.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row"><span class="org">DoGoodie</span><span>Jul 2026 – Sep 2026</span></div>
+    <div class="row"><span class="role">Contract: web and AI automation work</span><span>Remote, U.S.</span></div>
+    <ul>
+      <li>Developed the Ethical Capacity Lab website independently with Next.js, a multi-page site now live at ethicalcapacitylab.org.</li>
+      <li>Built the DoGoodie website (dogoodiebuilders.com), a multi-page static site with a Vercel serverless API that validates challenge submissions and saves them to Google Sheets.</li>
+      <li>Automated Gmail triage in Zapier, where OpenAI classifies each business email and JavaScript validates the result, so that prioritized alerts reach the team's Discord and an invalid AI result is flagged for human review instead of failing silently.</li>
+      <li>Created a weekly KPI tracker in Google Sheets (Vercel and Meta Business Suite metrics) and a Zapier workflow, so that the weekly report is generated from a Google Docs template.</li>
+      <li>Optimized the site for search (page titles and descriptions, social-sharing tags, sitemap, robots.txt) and set up Google Analytics 4, so that the team can see how many visitors come and where from.</li>
+      <li>Implemented a Zapier workflow that creates Gmail drafts from a Google Sheet after approval and contact checks, recording thread IDs and status to help prevent duplicate drafts.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row"><span class="org">Inventi Asia</span><span>Feb 2026 – May 2026</span></div>
+    <div class="row"><span class="role">Project Management Intern</span><span>Makati, Philippines (hybrid)</span></div>
+    <ul>
+      <li>Supported task coordination between developers, QA and a business analyst for a property management platform, taking over repetitive tasks from senior team members.</li>
+      <li>Tracked timelines, dependencies and the work breakdown in ProjectLibre and Google Sheets.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row"><span class="org">Philippine Statistics Authority (PSA)</span><span>Sep – Dec 2024; Sep – Nov 2025</span></div>
+    <div class="row"><span class="role">Statistical Researcher (contract)</span><span>Bacoor, Philippines</span></div>
+    <ul>
+      <li>Encoded CBMS records from survey forms quickly and consistently, about 50 households a day (around 40 to 50 questions per person), and conducted household, agriculture and fisheries surveys.</li>
+      <li>Validated survey records for completeness and accuracy while protecting respondents' confidentiality.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>PROJECTS</h2>
+  <div class="item">
+    <div class="row"><span class="org">Workflow automation portfolio — 13 Zapier and n8n workflows</span><span>Portfolio demos, 2026</span></div>
+    <ul>
+      <li>Built authenticated n8n lead routing into GoHighLevel with an event ledger for replay and conflict handling, a CRM-to-table sync that preserves manual edits, and a retry and recovery queue; each verified with native test runs and independent readbacks.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="row"><span class="org">CareSim — simulation game and learning management system for caregiver NC II</span><span>BSIT capstone, team project</span></div>
+    <ul>
+      <li>One of the developers. Built the web learning management system and Unity scenes for the platform's Android simulation game.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>EDUCATION</h2>
+  <div class="row"><span class="org">Cavite State University — Imus Campus</span><span>2022 – 2026</span></div>
+  <div class="row"><span class="role">Bachelor of Science in Information Technology</span><span>Philippines</span></div>
+</section>
+
+<section class="skills">
+  <h2>SKILLS</h2>
+  <p><b>Websites:</b> HTML, CSS, JavaScript, TypeScript, React, Next.js, PHP, MySQL, Bootstrap, Tailwind CSS</p>
+  <p><b>Back end:</b> Node.js (Express), Vercel Functions, Firebase, Supabase, OpenAI API and Google Sheets API integrations</p>
+  <p><b>Automation:</b> Zapier (with JavaScript code steps), n8n, GoHighLevel API, webhooks</p>
+  <p><b>Quality assurance:</b> manual software testing, bug tracking, data validation, Vitest, Playwright</p>
+  <p><b>AI-assisted development:</b> Claude Code, Claude, Codex, ChatGPT; Orca (several coding agents on one project) and Hermes Agent (backup agent); specs and tests first, output reviewed</p>
+  <p><b>Tools:</b> Git and GitHub, Vercel, Google Docs, Google Sheets, Canva, ProjectLibre, Figma, Notion, Obsidian, Google Analytics 4</p>
+</section>
+</body>
+</html>

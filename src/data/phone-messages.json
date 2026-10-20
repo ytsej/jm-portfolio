@@ -6,17 +6,17 @@
     "messages": [
       {
         "from": "system",
-        "text": "Hardware & OS setup, frontend development, and backend APIs.",
+        "text": "Websites with Next.js, TypeScript, and plain HTML/CSS/JS, plus serverless APIs.",
         "time": "10:30 AM"
       },
       {
         "from": "me",
-        "text": "Comfortable with HTML, CSS, JavaScript, and modern frameworks like Next.js.",
+        "text": "I also build Zapier and n8n workflows that connect Gmail, Sheets, Docs, Discord, and CRMs.",
         "time": "10:31 AM"
       },
       {
         "from": "system",
-        "text": "Also experienced with databases: Firebase, MySQL, Supabase, SQLite.",
+        "text": "AI steps are gated and checked, so a bad result gets flagged instead of slipping through.",
         "time": "10:32 AM"
       }
     ]
@@ -28,39 +28,39 @@
     "messages": [
       {
         "from": "system",
-        "text": "Patient with hardware troubleshooting and OS installations.",
+        "text": "Spec first: inputs, outputs, and edge cases written down before building.",
         "time": "2:15 PM"
       },
       {
         "from": "me",
-        "text": "I focus on getting systems working reliably.",
+        "text": "I test the work and check the saved output separately before calling it done.",
         "time": "2:16 PM"
       },
       {
         "from": "system",
-        "text": "Whether it's building UIs or fixing PCs, I handle it hands-on.",
+        "text": "AI coding tools help me move faster, and I review every result.",
         "time": "2:17 PM"
       }
     ]
   },
   {
     "id": "3",
-    "contact": "Tools & Tech",
-    "avatar": "🔧",
+    "contact": "Current Mission",
+    "avatar": "🎯",
     "messages": [
       {
         "from": "system",
-        "text": "Postman for API testing, GitHub for version control.",
+        "text": "Now: Software Developer on iTip, a QR-code tipping platform for Kuwait.",
         "time": "4:20 PM"
       },
       {
         "from": "me",
-        "text": "Unity and C# for game dev projects.",
+        "text": "Integrating Payzah payments and coordinating QA for the pilot launch.",
         "time": "4:21 PM"
       },
       {
         "from": "system",
-        "text": "Figma for prototyping and UI design mockups.",
+        "text": "Open to full-time roles. Say hi from the CONTACT tab.",
         "time": "4:22 PM"
       }
     ]

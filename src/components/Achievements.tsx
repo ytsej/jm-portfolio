@@ -2,79 +2,58 @@
 
 import { portfolioData } from "@/src/data/portfolio";
 import { cn } from "@/src/lib/cn";
+import { SectionHeading } from "./GtaUi";
 
 export default function Achievements() {
   const { achievements } = portfolioData;
+  const unlocked = achievements.filter((a) => a.unlocked).length;
 
   return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="font-display text-5xl tracking-wider uppercase mb-2">
-          Achievements
-        </h1>
-        <p className="text-gray-400">Unlocked accomplishments</p>
-      </div>
+    <>
+      <SectionHeading
+        title="Achievements"
+        subtitle="Milestones so far. Locked ones are in progress."
+        right={
+          <span className="font-hud text-sm font-semibold uppercase tracking-wider text-white/70">
+            {unlocked} / {achievements.length} unlocked
+          </span>
+        }
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
         {achievements.map((achievement) => (
           <div
             key={achievement.id}
-            className={cn(
-              "p-6 rounded-lg glass-panel transition-all duration-200",
-              achievement.unlocked
-                ? "border-green-500/50 bg-green-500/5"
-                : "border-white/10 bg-white/5 opacity-50"
-            )}
+            className={cn("flex items-start gap-4 p-5", achievement.unlocked ? "bg-black/75" : "bg-black/50 opacity-60")}
           >
-            <div className="flex items-start gap-4">
-              <div
-                className={cn(
-                  "w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0",
-                  achievement.unlocked
-                    ? "bg-green-500/20 border border-green-500/50"
-                    : "bg-gray-500/20 border border-gray-500/50"
-                )}
-              >
-                {achievement.unlocked ? (
-                  <svg
-                    className="w-6 h-6 text-green-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="w-6 h-6 text-gray-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    />
-                  </svg>
-                )}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-display text-xl tracking-wider uppercase mb-2">
-                  {achievement.title}
-                </h3>
-                <p className="text-gray-400 text-sm">{achievement.description}</p>
-              </div>
+            <div
+              className={cn(
+                "flex h-11 w-11 flex-shrink-0 items-center justify-center",
+                achievement.unlocked ? "bg-emerald-400 text-black" : "bg-white/10 text-white/50"
+              )}
+            >
+              {achievement.unlocked ? (
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              )}
+            </div>
+            <div className="flex-1">
+              <h3 className="font-hud text-lg font-semibold uppercase tracking-wide">{achievement.title}</h3>
+              <p className="mt-1 text-sm text-white/70">{achievement.description}</p>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

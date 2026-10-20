@@ -1,63 +1,37 @@
 "use client";
 
+import { portfolioData } from "@/src/data/portfolio";
+import { SectionHeading } from "./GtaUi";
+
+// Rotating accent colors, like the character-switch wheel
+const accents = ["#65b4d4", "#72cc72", "#ffa357"];
+
 export default function Crew() {
-  const roles = [
-    {
-      title: "Frontend Developer",
-      description: "Building reliable web interfaces with HTML, CSS, JavaScript, and Next.js. Focus on clean, functional UI that works across devices.",
-      skills: ["HTML", "CSS", "JavaScript", "Next.js", "Responsive Design"],
-    },
-    {
-      title: "Full-Stack / API Support",
-      description: "Developing backend APIs and integrating databases. Comfortable with Firebase, MySQL, Supabase, and testing with Postman.",
-      skills: ["PHP", "Python", "Java", "Firebase", "MySQL", "Postman", "REST APIs"],
-    },
-    {
-      title: "Hardware & Systems Tech",
-      description: "Hands-on with PC assembly, OS installation, and troubleshooting. Patient with hardware parts and system configuration.",
-      skills: ["PC Assembly", "OS Installation", "Troubleshooting", "Hardware Knowledge"],
-    },
-    {
-      title: "Unity Game Dev",
-      description: "Creating game prototypes and simulations with Unity and C#. Experience with 3D environments and game logic.",
-      skills: ["Unity", "C#", "Game Logic", "Prototyping"],
-    },
-  ];
+  const { roles } = portfolioData;
 
   return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="font-display text-5xl tracking-wider uppercase mb-2">
-          Roles
-        </h1>
-        <p className="text-gray-400">Roles and responsibilities</p>
-      </div>
+    <>
+      <SectionHeading title="Roles" subtitle="The kinds of work I take on, most relevant first." />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {roles.map((role, index) => (
-          <div
-            key={index}
-            className="p-6 rounded-lg glass-panel glass-panel-hover transition-all duration-200 hover:scale-105"
+          <article
+            key={role.title}
+            className="gta-panel border-t-[3px] p-5 transition-colors duration-150 hover:bg-black/85"
+            style={{ borderTopColor: accents[index % accents.length] }}
           >
-            <h2 className="font-display text-2xl tracking-wider uppercase mb-3">
-              {role.title}
-            </h2>
-            <p className="text-gray-400 mb-4 leading-relaxed">
-              {role.description}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {role.skills.map((skill, skillIndex) => (
-                <span
-                  key={skillIndex}
-                  className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs"
-                >
+            <h2 className="font-display text-2xl tracking-wider uppercase leading-none">{role.title}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">{role.description}</p>
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {role.skills.map((skill) => (
+                <span key={skill} className="gta-chip">
                   {skill}
                 </span>
               ))}
             </div>
-          </div>
+          </article>
         ))}
       </div>
-    </div>
+    </>
   );
 }
