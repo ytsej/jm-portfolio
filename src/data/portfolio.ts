@@ -578,7 +578,7 @@ export const portfolioData: PortfolioData = {
       company: "Inventi Asia",
       role: "Project Management Intern",
       period: "Feb 2026 - May 2026",
-      location: "Makati, Philippines (hybrid)",
+      location: "Makati, Philippines",
       bullets: [
         "Supported task coordination between developers, QA, and a business analyst for a property management platform.",
         "Tracked timelines, dependencies, and the work breakdown in ProjectLibre and Google Sheets.",

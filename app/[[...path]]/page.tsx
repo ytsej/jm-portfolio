@@ -4,6 +4,7 @@ import PauseMenu from "@/src/components/PauseMenu";
 import { automations } from "@/src/data/automations";
 import { portfolioData } from "@/src/data/portfolio";
 import { automationPath, projectPath, sectionPath, sections } from "@/src/data/sections";
+import { faqs } from "@/src/data/faq";
 import { ownerName, siteName, siteUrl } from "@/src/data/site";
 
 // Every section and case study is prerendered; anything else is a 404
@@ -24,8 +25,19 @@ interface PageInfo {
   path: string;
   title: string;
   description: string;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown>[];
 }
+
+const crumbs = (items: { name: string; path: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [{ name: siteName, path: "/" }, ...items].map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: item.name,
+    item: `${siteUrl}${item.path === "/" ? "" : item.path}`,
+  })),
+});
 
 function describe(path: string[] = []): PageInfo | null {
   const [first, second, ...rest] = path;
@@ -47,15 +59,28 @@ function describe(path: string[] = []): PageInfo | null {
       path: sectionPath(section.id),
       title: `${section.title} | ${ownerName}`,
       description: section.description,
-      jsonLd:
-        section.id === "profile"
-          ? {
-              "@context": "https://schema.org",
-              "@type": "ProfilePage",
-              url: `${siteUrl}${sectionPath("profile")}`,
-              mainEntity: { "@id": `${siteUrl}/#person` },
-            }
-          : undefined,
+      jsonLd: [
+        crumbs([{ name: section.title, path: sectionPath(section.id) }]),
+        ...(section.id === "profile"
+          ? [
+              {
+                "@context": "https://schema.org",
+                "@type": "ProfilePage",
+                url: `${siteUrl}${sectionPath("profile")}`,
+                mainEntity: { "@id": `${siteUrl}/#person` },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqs.map((f) => ({
+                  "@type": "Question",
+                  name: f.question,
+                  acceptedAnswer: { "@type": "Answer", text: f.answer },
+                })),
+              },
+            ]
+          : []),
+      ],
     };
   }
 
@@ -66,6 +91,22 @@ function describe(path: string[] = []): PageInfo | null {
       path: projectPath(project.slug),
       title: `${project.title} | ${ownerName}`,
       description: project.shortDescription ?? project.description.split("\n")[0],
+      jsonLd: [
+        crumbs([
+          { name: "Projects", path: sectionPath("missions") },
+          { name: project.title, path: projectPath(project.slug) },
+        ]),
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.shortDescription ?? project.description.split("\n")[0],
+          url: `${siteUrl}${projectPath(project.slug)}`,
+          author: { "@id": `${siteUrl}/#person` },
+          keywords: project.tags.join(", "),
+          ...(project.links.live ? { sameAs: [project.links.live] } : {}),
+        },
+      ],
     };
   }
 
@@ -76,6 +117,21 @@ function describe(path: string[] = []): PageInfo | null {
       path: automationPath(item.id),
       title: `${item.title} | ${ownerName}`,
       description: `${item.tagline} ${item.label === "client" ? "Client work for DoGoodie." : "Portfolio demo on fictional data."}`,
+      jsonLd: [
+        crumbs([
+          { name: "Automation", path: sectionPath("automation") },
+          { name: item.title, path: automationPath(item.id) },
+        ]),
+        {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: item.title,
+          description: `${item.tagline} ${item.summary}`,
+          url: `${siteUrl}${automationPath(item.id)}`,
+          author: { "@id": `${siteUrl}/#person` },
+          keywords: [item.platform, ...item.tools].join(", "),
+        },
+      ],
     };
   }
 
@@ -112,9 +168,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <>
-      {page.jsonLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(page.jsonLd) }} />
-      )}
+      {page.jsonLd?.map((data, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+      ))}
       <PauseMenu />
     </>
   );

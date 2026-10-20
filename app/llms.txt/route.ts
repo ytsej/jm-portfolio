@@ -18,6 +18,7 @@ export function GET() {
   lines.push(`> ${profile.title}. Based in ${profile.location} (GMT+8). ${profile.availability}.`, "");
   lines.push(profile.summary, "");
 
+  lines.push(`Full text with every case summary: ${siteUrl}/llms-full.txt`, "");
   lines.push("## Projects", "");
   list(
     projects.map((p) => {
