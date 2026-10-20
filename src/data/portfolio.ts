@@ -453,7 +453,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Spec first",
       description:
-        "I write down the inputs, outputs, and edge cases before building, then use AI coding tools like Claude Code, Codex, and ChatGPT against that spec and review every result.",
+        "I write down the inputs, outputs, and edge cases before building, then use AI tools like Claude Code, Claude, Codex, and ChatGPT against that spec and review every result.",
     },
     {
       title: "Test the work",
@@ -546,7 +546,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "AI-assisted development",
-      items: ["Claude Code", "Codex", "ChatGPT", "Specs and tests first, output reviewed"],
+      items: ["Claude Code", "Claude", "Codex", "ChatGPT", "Specs and tests first, output reviewed"],
     },
     {
       name: "Tools",

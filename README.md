@@ -4,6 +4,8 @@ Portfolio of John Mark Dela Cruz, software developer focused on web development 
 
 Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, and Framer Motion.
 
+Developed with AI-assisted tools (ChatGPT, Codex, Claude Code, and Claude) for code, copy, and image generation. Every change was reviewed, built, and checked in the browser before shipping.
+
 ## Sections
 
 | Tab | What it shows |
