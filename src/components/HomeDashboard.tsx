@@ -49,6 +49,7 @@ export default function HomeDashboard({
               mode={heroMode}
               onModeChange={onHeroModeChange}
               onViewProject={handleViewProject}
+              onNavigate={onTileClick}
             />
           </div>
 
@@ -60,9 +61,10 @@ export default function HomeDashboard({
 
       {/* Bottom: Project Carousel */}
       <div className="w-full overflow-visible">
-        <h3 className="font-display text-xl sm:text-2xl tracking-wider uppercase mb-3 sm:mb-4 text-white">
-          CURRENT PROJECTS
-        </h3>
+        <div className="gta-header flex items-center justify-between">
+          <span>Featured work</span>
+          <span className="text-white/50">{projects.length}</span>
+        </div>
         <ProjectCarousel
           projects={projects}
           selectedProjectId={featuredProject?.id}

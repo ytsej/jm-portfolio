@@ -16,6 +16,7 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-bebas)"],
         body: ["var(--font-inter)"],
+        hud: ["var(--font-hud)", "var(--font-inter)", "sans-serif"],
       },
     },
   },

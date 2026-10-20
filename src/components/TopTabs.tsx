@@ -1,17 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/src/lib/cn";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { portfolioData } from "@/src/data/portfolio";
 
-export type TabId = 
-  | "new" 
-  | "missions" 
-  | "stats" 
-  | "inventory" 
-  | "crew" 
-  | "achievements" 
+export type TabId =
+  | "new"
+  | "missions"
+  | "automation"
+  | "profile"
+  | "inventory"
+  | "crew"
+  | "achievements"
   | "quit";
 
 interface Tab {
@@ -19,10 +21,11 @@ interface Tab {
   label: string;
 }
 
-const tabs: Tab[] = [
+export const tabs: Tab[] = [
   { id: "new", label: "HOME" },
   { id: "missions", label: "PROJECTS" },
-  { id: "stats", label: "STATS" },
+  { id: "automation", label: "AUTOMATION" },
+  { id: "profile", label: "PROFILE" },
   { id: "inventory", label: "STACKS" },
   { id: "crew", label: "ROLES" },
   { id: "achievements", label: "ACHIEVEMENTS" },
@@ -35,167 +38,97 @@ interface TopTabsProps {
 }
 
 export default function TopTabs({ activeTab, onTabChange }: TopTabsProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [clock, setClock] = useState("");
+  const tabRefs = useRef<Partial<Record<TabId, HTMLButtonElement | null>>>({});
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    show: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: 0.05 * i, duration: 0.25, ease: "easeOut" },
-    }),
-  };
+  // Clock renders client-side only to avoid a hydration mismatch
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const day = now.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+      const time = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+      setClock(`${day} ${time}`);
+    };
+    update();
+    const id = setInterval(update, 30000);
+    return () => clearInterval(id);
+  }, []);
 
-  const handleTabClick = (tabId: TabId) => {
-    onTabChange(tabId);
-    setMobileMenuOpen(false);
-  };
+  // Keep the active tab visible in the scrollable strip on small screens
+  useEffect(() => {
+    tabRefs.current[activeTab]?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }, [activeTab]);
 
   return (
-    <nav className="w-full border-b border-white/10 bg-gradient-to-r from-black/40 via-black/30 to-black/40 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-3 sm:py-4 relative">
-        <motion.div
-          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        />
-        
-        {/* Desktop/Tablet Navigation - Hidden on mobile */}
-        <div className="hidden lg:flex items-center gap-6 md:gap-8 relative">
-          {/* Logo */}
-          <motion.div
+    <header className="w-full pt-3 sm:pt-5">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        {/* Title row */}
+        <div className="flex items-end justify-between gap-4 pb-3">
+          <motion.button
+            type="button"
+            onClick={() => onTabChange("new")}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mr-4 flex-shrink-0"
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="flex items-center gap-2 sm:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            aria-label="Go to home"
           >
             <Image
               src="/images/jm/logo.png"
-              alt="JM.EXE Logo"
-              width={48}
-              height={48}
-              className="object-contain"
+              alt=""
+              width={44}
+              height={44}
+              className="h-8 w-8 sm:h-11 sm:w-11 object-contain"
             />
-          </motion.div>
+            <span className="gta-title text-3xl sm:text-5xl leading-none">JM.EXE</span>
+          </motion.button>
 
-          {tabs.map((tab, i) => (
-            <motion.button
-              key={tab.id}
-              custom={i}
-              variants={itemVariants}
-              initial="hidden"
-              animate="show"
-              onClick={() => onTabChange(tab.id)}
-              className={cn(
-                "relative font-display text-base md:text-lg tracking-wider uppercase transition-all duration-200 flex-shrink-0 px-2 py-1",
-                "hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
-                activeTab === tab.id
-                  ? "text-white drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]"
-                  : "text-gray-400 hover:text-gray-200"
-              )}
-            >
-              {tab.label}
-              <AnimatePresence>
-                {activeTab === tab.id && (
-                  <motion.span
-                    layoutId="tab-underline"
-                    className="absolute -bottom-1 left-0 right-0 mx-auto h-[3px] rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]"
-                    initial={{ opacity: 0, scaleX: 0.4 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    exit={{ opacity: 0, scaleX: 0.4 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 30 }}
-                  />
-                )}
-              </AnimatePresence>
-            </motion.button>
-          ))}
+          <div className="text-right font-hud uppercase leading-tight">
+            <div className="text-sm sm:text-lg font-semibold tracking-wide text-white drop-shadow">
+              {portfolioData.profile.name.replace(" C.", "")}
+            </div>
+            <div className="text-[11px] sm:text-sm font-medium tracking-wider text-white/70">
+              <span className="hidden sm:inline">{clock}</span>
+              <span className="hidden sm:inline mx-2 text-white/30">|</span>
+              <span className="text-emerald-400">{portfolioData.profile.availability}</span>
+            </div>
+          </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="lg:hidden flex items-center justify-between">
-          {/* Logo - Smaller on mobile */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex-shrink-0"
-          >
-            <Image
-              src="/images/jm/logo.png"
-              alt="JM.EXE Logo"
-              width={36}
-              height={36}
-              className="object-contain"
-            />
-          </motion.div>
-
-          {/* Hamburger Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-white hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400/50 rounded"
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {mobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="lg:hidden overflow-hidden"
-            >
-              <div className="pt-4 pb-2 space-y-1">
-                {tabs.map((tab, i) => (
-                  <motion.button
-                    key={tab.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.2 }}
-                    onClick={() => handleTabClick(tab.id)}
-                    className={cn(
-                      "w-full text-left px-4 py-3 rounded-lg font-display text-sm tracking-wider uppercase transition-all duration-200",
-                      "focus:outline-none focus:ring-2 focus:ring-emerald-400/50",
-                      activeTab === tab.id
-                        ? "bg-emerald-500/20 text-white border border-emerald-400/50"
-                        : "text-gray-400 hover:text-white hover:bg-white/5"
-                    )}
-                  >
-                    {tab.label}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Tab strip */}
+        <nav aria-label="Sections" className="relative">
+          <div className="flex gap-[2px] overflow-x-auto scrollbar-hide snap-x">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  ref={(el) => {
+                    tabRefs.current[tab.id] = el;
+                  }}
+                  type="button"
+                  onClick={() => onTabChange(tab.id)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "relative flex-1 min-w-[112px] snap-start h-10 sm:h-11 px-3 font-hud text-[13px] sm:text-[15px] font-semibold uppercase tracking-[0.08em] transition-colors duration-150",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400",
+                    isActive ? "bg-white text-black" : "bg-black/75 text-white/80 hover:bg-black/90 hover:text-white"
+                  )}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="tab-accent"
+                      className="absolute inset-x-0 top-0 h-[3px] bg-emerald-400"
+                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                    />
+                  )}
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }

@@ -28,14 +28,14 @@ export default function ProjectCarousel({
         {projects.map((project) => {
           const isSelected = selectedProjectId === project.id;
           const hasError = imageErrors[project.id] === true;
-          const imagePath = project.images?.[0] || "/images/projects/placeholder.jpg";
+          const imagePath = project.images?.[0];
 
           return (
             <button
               key={project.id}
               onClick={() => onProjectSelect(project)}
               className={cn(
-                "relative flex-shrink-0 w-48 h-28 sm:w-56 sm:h-36 rounded-lg overflow-hidden glass-panel transition-all duration-300 group snap-center",
+                "relative flex-shrink-0 w-48 h-28 sm:w-56 sm:h-36 overflow-hidden glass-panel transition-all duration-300 group snap-center",
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50",
                 "active:scale-95 lg:hover:scale-105",
                 isSelected
@@ -43,8 +43,8 @@ export default function ProjectCarousel({
                   : "lg:hover:ring-1 lg:hover:ring-white/30"
               )}
             >
-              {hasError ? (
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-800/50 to-purple-900/50" />
+              {hasError || !imagePath ? (
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/50 via-black to-black" />
               ) : (
                 <Image
                   src={imagePath}
@@ -61,14 +61,14 @@ export default function ProjectCarousel({
 
               {/* Hover preview */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                <span className="px-3 py-1 border border-emerald-400/60 rounded text-xs uppercase font-display tracking-wider text-white">
-                  View Project
+                <span className="bg-white px-3 py-1 font-hud text-xs font-semibold uppercase tracking-wider text-black">
+                  Select
                 </span>
               </div>
 
               {/* Title */}
               <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 z-10">
-                <h4 className="font-display text-xs sm:text-base tracking-wider uppercase text-white drop-shadow-lg truncate">
+                <h4 className="font-hud text-xs sm:text-sm font-semibold tracking-wider uppercase text-white drop-shadow-lg truncate">
                   {project.title}
                 </h4>
               </div>

@@ -1,75 +1,79 @@
 "use client";
 
+import { portfolioData } from "@/src/data/portfolio";
+import { ListHeader, SectionHeading } from "./GtaUi";
+
 export default function Quit() {
+  const { profile } = portfolioData;
+
   const contactMethods = [
     {
       label: "Email",
       value: "jmdc7737@gmail.com",
-      icon: "✉",
       link: "mailto:jmdc7737@gmail.com",
     },
     {
       label: "LinkedIn",
       value: "John Mark Dela Cruz",
-      icon: "💼",
       link: "https://www.linkedin.com/in/john-mark-dela-cruz-73696b3a6/",
     },
     {
       label: "GitHub",
       value: "github.com/jjimuu",
-      icon: "💻",
       link: "https://github.com/jjimuu",
     },
     {
       label: "Facebook",
       value: "facebook.com/destinefanboi",
-      icon: "📘",
       link: "https://www.facebook.com/destinefanboi",
     },
     {
       label: "Mobile",
       value: "09498422084",
-      icon: "📱",
       link: "tel:+639498422084",
     },
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="font-display text-5xl tracking-wider uppercase mb-2">
-          Contact
-        </h1>
-        <p className="text-gray-400">Get in touch</p>
-      </div>
+    <>
+      <SectionHeading
+        title="Contact"
+        subtitle={`${profile.availability}. Reach out about roles, freelance automation work, or collaborations.`}
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {contactMethods.map((method, index) => (
-          <a
-            key={index}
-            href={method.link}
-            target={method.link.startsWith("http") ? "_blank" : undefined}
-            rel={method.link.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="p-6 rounded-lg glass-panel glass-panel-hover block transition-all duration-200 hover:scale-105"
-          >
-            <div className="flex items-center gap-4 mb-3">
-              <span className="text-3xl">{method.icon}</span>
-              <div>
-                <h3 className="font-display text-xl tracking-wider uppercase">
-                  {method.label}
-                </h3>
-                <p className="text-gray-400 text-sm">{method.value}</p>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-4 lg:gap-6 items-start">
+        <div className="flex flex-col gap-[2px]">
+          <ListHeader count={contactMethods.length}>Contacts</ListHeader>
+          {contactMethods.map((method) => (
+            <a
+              key={method.label}
+              href={method.link}
+              target={method.link.startsWith("http") ? "_blank" : undefined}
+              rel={method.link.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="gta-row group focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-400"
+            >
+              <span>{method.label}</span>
+              <span className="truncate font-body text-sm normal-case tracking-normal text-white/70 group-hover:text-inherit">
+                {method.value}
+              </span>
+            </a>
+          ))}
+        </div>
 
-      <div className="mt-8 p-6 rounded-lg glass-panel">
-        <p className="text-gray-300 leading-relaxed">
-          Feel free to reach out for collaboration opportunities, questions, or just to say hello!
-        </p>
+        <section className="gta-panel">
+          <ListHeader>Resume</ListHeader>
+          <div className="space-y-4 p-5">
+            <p className="text-sm leading-relaxed text-white/80">
+              {profile.name} · {profile.title}
+              <br />
+              {profile.location}
+            </p>
+            <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="gta-btn gta-btn-primary w-full">
+              View resume (PDF)
+            </a>
+          </div>
+        </section>
       </div>
-    </div>
+    </>
   );
 }
