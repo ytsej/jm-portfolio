@@ -60,6 +60,7 @@ const byLabel: Record<string, LabelMatch> = {
   obsidian: { icon: "obsidian" },
   projectlibre: { icon: "chart-gantt", color: "#5aa0e0" },
   postman: { icon: "postman" },
+  replit: { icon: "replit" },
   "google analytics 4": { icon: "googleanalytics" },
   "task breakdown": { icon: "list-checks" },
   // Also worked with
