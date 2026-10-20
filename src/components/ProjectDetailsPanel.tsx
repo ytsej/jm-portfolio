@@ -74,12 +74,21 @@ export default function ProjectDetailsPanel({
                 <p className="font-hud text-sm font-semibold uppercase tracking-wider text-emerald-400">{project.role}</p>
               </div>
 
-              {/* Status Badge */}
-              <div className="mb-6">
-                <span className="inline-block bg-white px-3 py-1 font-hud text-xs font-bold uppercase tracking-wider text-black">
-                  {project.status}
-                </span>
-              </div>
+              {/* Status and highlight badges */}
+              {(project.status || project.highlight) && (
+                <div className="mb-6 flex flex-wrap gap-2">
+                  {project.highlight && (
+                    <span className="inline-block bg-emerald-400 px-3 py-1 font-hud text-xs font-bold uppercase tracking-wider text-black">
+                      {project.highlight}
+                    </span>
+                  )}
+                  {project.status && (
+                    <span className="inline-block bg-white px-3 py-1 font-hud text-xs font-bold uppercase tracking-wider text-black">
+                      {project.status}
+                    </span>
+                  )}
+                </div>
+              )}
 
               {/* Image Gallery */}
               {hasImages && (

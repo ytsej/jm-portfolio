@@ -75,12 +75,12 @@ export default function TopTabs({ activeTab, onTabChange }: TopTabsProps) {
           >
             <Image
               src="/images/jm/logo.png"
-              alt=""
-              width={44}
-              height={44}
-              className="h-8 w-8 sm:h-11 sm:w-11 object-contain"
+              alt="JM.EXE"
+              width={64}
+              height={64}
+              className="h-11 w-11 sm:h-16 sm:w-16 object-contain"
+              priority
             />
-            <span className="gta-title text-3xl sm:text-5xl leading-none">JM.EXE</span>
           </motion.button>
 
           <div className="text-right font-hud uppercase leading-tight">

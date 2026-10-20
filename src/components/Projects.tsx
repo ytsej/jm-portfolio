@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/src/lib/cn";
 import ProjectDetailsPanel from "./ProjectDetailsPanel";
-import { ListHeader, SectionHeading, StatusBadge } from "./GtaUi";
+import { HighlightBadge, ListHeader, SectionHeading, StatusBadge } from "./GtaUi";
 import type { Project } from "@/src/data/portfolio";
 
 interface ProjectsProps {
@@ -55,7 +55,10 @@ export default function Projects({ projects }: ProjectsProps) {
           )}
         >
           <span className="min-w-0 truncate">{project.title}</span>
-          <StatusBadge status={project.status} inverted={isActive} />
+          <span className="flex flex-shrink-0 items-center gap-2">
+            {project.highlight && <HighlightBadge label={project.highlight} />}
+            <StatusBadge status={project.status} inverted={isActive} />
+          </span>
         </button>
       );
     });
@@ -69,13 +72,19 @@ export default function Projects({ projects }: ProjectsProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-4 lg:gap-6 items-start">
         {/* Project list */}
-        <div className="flex flex-col gap-[2px]">
-          <ListHeader count={clientProjects.length}>Client &amp; work</ListHeader>
-          {renderRows(clientProjects)}
-          <ListHeader count={otherProjects.length} className="mt-3">
-            Academic &amp; personal
-          </ListHeader>
-          {renderRows(otherProjects)}
+        <div className="flex flex-col gap-6 sm:gap-8">
+          <section className="flex flex-col gap-[2px]">
+            <ListHeader count={clientProjects.length} className="border-l-4 border-emerald-400">
+              Client &amp; work
+            </ListHeader>
+            {renderRows(clientProjects)}
+          </section>
+          <section className="flex flex-col gap-[2px]">
+            <ListHeader count={otherProjects.length} className="border-l-4 border-sky-400">
+              Academic &amp; personal
+            </ListHeader>
+            {renderRows(otherProjects)}
+          </section>
         </div>
 
         {/* Preview */}
@@ -110,6 +119,11 @@ export default function Projects({ projects }: ProjectsProps) {
                 </div>
                 <div className="p-5 space-y-4">
                   <div>
+                    {selected.highlight && (
+                      <div className="mb-2">
+                        <HighlightBadge label={selected.highlight} />
+                      </div>
+                    )}
                     <h2 className="font-display text-3xl tracking-wider uppercase leading-none">{selected.title}</h2>
                     <p className="mt-2 font-hud text-sm uppercase tracking-wider text-emerald-400">{selected.role}</p>
                   </div>

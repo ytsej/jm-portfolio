@@ -6,6 +6,8 @@ export interface Project {
   status: string;
   // "client" = live or paid work, "academic" = school and personal builds
   category?: "client" | "academic";
+  // Short label shown next to the title, e.g. "Capstone"
+  highlight?: string;
   shortDescription?: string;
   description: string;
   bullets: string[];
@@ -95,6 +97,32 @@ export interface PortfolioData {
 
 const staticProjects: Project[] = [
   {
+    id: "digital-tipping-platform",
+    title: "iTip — Digital Tipping Platform",
+    subtitle: "Web Platform / Payments (Kuwait)",
+    role: "Software Developer",
+    status: "Ongoing",
+    category: "client",
+    shortDescription:
+      "iTip is a QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. Pilot launch in progress.",
+    description:
+      "iTip is a digital tipping platform for Kuwait that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI am improving the existing application: integrating Payzah payments, verifying fee calculations, fixing bugs, and coordinating QA testing for the pilot launch. The platform is not public yet, so the screenshots show its marketing pages only, with no merchant or customer data.",
+    bullets: [
+      "Payzah payment gateway integration",
+      "Fee calculation verification",
+      "Bug fixes in the existing application",
+      "QA test coordination for the pilot launch",
+    ],
+    links: {},
+    tags: ["TanStack Start", "React", "TypeScript", "Supabase", "Tailwind CSS", "Payzah", "QA Testing"],
+    images: [
+      "/images/projects/itip/img-001.webp",
+      "/images/projects/itip/img-002.webp",
+      "/images/projects/itip/img-003.webp",
+      "/images/projects/itip/img-004.webp",
+    ],
+  },
+  {
     id: "ethical-capacity-lab-website",
     title: "Ethical Capacity Lab Website",
     subtitle: "Client Website / Next.js",
@@ -155,78 +183,15 @@ const staticProjects: Project[] = [
     ],
   },
   {
-    id: "digital-tipping-platform",
-    title: "iTip — Digital Tipping Platform",
-    subtitle: "Web Platform / Payments (Kuwait)",
-    role: "Software Developer",
-    status: "Ongoing",
-    category: "client",
-    shortDescription:
-      "iTip is a QR-code tipping platform for service staff in Kuwait, with separate Admin, Merchant, and Staff portals. Pilot launch in progress.",
-    description:
-      "iTip is a digital tipping platform for Kuwait that lets guests tip service staff through QR codes, with separate Admin, Merchant, and Staff portals.\n\nI am improving the existing application: integrating Payzah payments, verifying fee calculations, fixing bugs, and coordinating QA testing for the pilot launch. The platform is not public yet, so the screenshots show its marketing pages only, with no merchant or customer data.",
-    bullets: [
-      "Payzah payment gateway integration",
-      "Fee calculation verification",
-      "Bug fixes in the existing application",
-      "QA test coordination for the pilot launch",
-    ],
-    links: {},
-    tags: ["TanStack Start", "React", "TypeScript", "Supabase", "Tailwind CSS", "Payzah", "QA Testing"],
-    images: [
-      "/images/projects/itip/img-001.webp",
-      "/images/projects/itip/img-002.webp",
-      "/images/projects/itip/img-003.webp",
-      "/images/projects/itip/img-004.webp",
-    ],
-  },
-  {
-    id: "hoa-profiling-system-(multi-tenant-edition)-1770309399098",
-    title: "HOA Profiling System (Multi-Tenant Edition)",
-    subtitle: "Web App / Management System",
-    role: "Full-Stack Developer",
-    status: "In Progress",
-    category: "academic",
-    shortDescription: "A secure, multi-tenant web application designed to digitize resident profiling and household management for Homeowners Associations using an efficient 'Invite & Fill' workflow.",
-    description: "The HOA Profiling System is a modern, mobile-responsive platform built to replace traditional paper-based resident record-keeping used by Homeowners Associations (HOAs). The system is designed with a multi-tenant architecture, allowing multiple independent HOAs to operate within a shared infrastructure while maintaining strict data isolation and security.\r\n\r\nThe platform follows a streamlined two-step 'Invite & Fill' workflow. HOA officers initiate household registration by completing an initial profiling form, which automatically generates a secure, tokenized link or QR code. Residents then use this link to self-register their household members, reducing manual data entry and administrative workload for officers.\r\n\r\nThe system provides administrators with real-time demographic insights, including priority population groups such as senior citizens, persons with disabilities (PWDs), and registered voters. These analytics support better decision-making, reporting, and community resource planning. The application also includes role-based access control, audit logging, and data export features to ensure transparency, accountability, and long-term data usability.",
-    bullets: [
-      "Multi-tenant architecture with strict data isolation per HOA",
-      "Two-step 'Invite & Fill' household registration workflow",
-      "Secure, tokenized links and QR codes for resident self-onboarding",
-      "Role-based access control (Owners, Admins, Officers)",
-      "Real-time demographic analytics dashboard (Seniors, PWDs, Voters)",
-      "Comprehensive audit logs for create, update, and delete actions",
-      "Excel export and system data backup tools",
-      "Mobile-first interface optimized for field profiling",
-    ],
-    links: {},
-    tags: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "PostgreSQL",
-      "Prisma ORM",
-      "NextAuth.js",
-      "Zod",
-      "ExcelJS",
-      "XLSX",
-      "JWT",
-      "bcrypt.js",
-    ],
-    images: [
-      "/images/projects/hoa-profiling-system-(multi-tenant-edition)-1770309399098/img-001.png",
-    ],
-  },
-  {
     id: "caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444",
-    title: "CARESIM – Caregiving Education Platform (Web LMS & Android Simulation Game)",
-    subtitle: "System / Web App / Mobile App",
+    title: "CARESIM – Caregiving Education Platform",
+    subtitle: "BSIT Capstone Project / Web LMS & Android Simulation Game",
     role: "Frontend Developer (Web LMS) / Unity Scene Developer (Mobile Game)",
     status: "Completed",
     category: "academic",
-    shortDescription: "An integrated caregiving education platform combining a web-based Learning Management System and an Android simulation game to support interactive and structured caregiving training.",
-    description: "CARESIM is a two-part caregiving education platform developed as an academic capstone project, consisting of a web-based Learning Management System (LMS) and a companion Android simulation game. The system was designed to enhance caregiving education by combining structured online learning with interactive, simulation-based practice.\r\n\r\nThe CARESIM Web LMS serves as the central learning hub, providing caregiving students with access to learning modules, quizzes, and performance tracking. It allows administrators and instructors to manage content, validate user inputs, and monitor student progress through assessments and activities. The LMS complements the mobile game by reinforcing theoretical knowledge alongside practical simulation.\r\n\r\nThe CARESIM Android application focuses on interactive caregiving scenarios built in Unity. The game presents step-by-step caregiving tasks in a guided environment, emphasizing procedural understanding rather than competitive gameplay. Firebase is used to store user authentication data and track basic progress across sessions. Together, the Web LMS and mobile game demonstrate how web and game-based systems can work together to support accessible and interactive healthcare education.",
+    highlight: "Capstone",
+    shortDescription: "Our BSIT capstone project: a caregiving education platform that pairs a web Learning Management System with an Android simulation game for interactive, structured caregiving training.",
+    description: "CARESIM is our BSIT capstone project: a two-part caregiving education platform, consisting of a web-based Learning Management System (LMS) and a companion Android simulation game. The system was designed to enhance caregiving education by combining structured online learning with interactive, simulation-based practice.\r\n\r\nThe CARESIM Web LMS serves as the central learning hub, providing caregiving students with access to learning modules, quizzes, and performance tracking. It allows administrators and instructors to manage content, validate user inputs, and monitor student progress through assessments and activities. The LMS complements the mobile game by reinforcing theoretical knowledge alongside practical simulation.\r\n\r\nThe CARESIM Android application focuses on interactive caregiving scenarios built in Unity. The game presents step-by-step caregiving tasks in a guided environment, emphasizing procedural understanding rather than competitive gameplay. Firebase is used to store user authentication data and track basic progress across sessions. Together, the Web LMS and mobile game demonstrate how web and game-based systems can work together to support accessible and interactive healthcare education.",
     bullets: [
       "Web-based learning modules for caregiving topics",
       "Quiz and assessment management with field validations",
@@ -274,6 +239,44 @@ const staticProjects: Project[] = [
       "/images/projects/caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444/img-018.png",
       "/images/projects/caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444/img-019.png",
       "/images/projects/caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444/img-020.png",
+    ],
+  },
+  {
+    id: "hoa-profiling-system-(multi-tenant-edition)-1770309399098",
+    title: "HOA Profiling System (Multi-Tenant Edition)",
+    subtitle: "Web App / Management System",
+    role: "Full-Stack Developer",
+    status: "",
+    category: "academic",
+    shortDescription: "A secure, multi-tenant web application designed to digitize resident profiling and household management for Homeowners Associations using an efficient 'Invite & Fill' workflow.",
+    description: "The HOA Profiling System is a modern, mobile-responsive platform built to replace traditional paper-based resident record-keeping used by Homeowners Associations (HOAs). The system is designed with a multi-tenant architecture, allowing multiple independent HOAs to operate within a shared infrastructure while maintaining strict data isolation and security.\r\n\r\nThe platform follows a streamlined two-step 'Invite & Fill' workflow. HOA officers initiate household registration by completing an initial profiling form, which automatically generates a secure, tokenized link or QR code. Residents then use this link to self-register their household members, reducing manual data entry and administrative workload for officers.\r\n\r\nThe system provides administrators with real-time demographic insights, including priority population groups such as senior citizens, persons with disabilities (PWDs), and registered voters. These analytics support better decision-making, reporting, and community resource planning. The application also includes role-based access control, audit logging, and data export features to ensure transparency, accountability, and long-term data usability.",
+    bullets: [
+      "Multi-tenant architecture with strict data isolation per HOA",
+      "Two-step 'Invite & Fill' household registration workflow",
+      "Secure, tokenized links and QR codes for resident self-onboarding",
+      "Role-based access control (Owners, Admins, Officers)",
+      "Real-time demographic analytics dashboard (Seniors, PWDs, Voters)",
+      "Comprehensive audit logs for create, update, and delete actions",
+      "Excel export and system data backup tools",
+      "Mobile-first interface optimized for field profiling",
+    ],
+    links: {},
+    tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Prisma ORM",
+      "NextAuth.js",
+      "Zod",
+      "ExcelJS",
+      "XLSX",
+      "JWT",
+      "bcrypt.js",
+    ],
+    images: [
+      "/images/projects/hoa-profiling-system-(multi-tenant-edition)-1770309399098/img-001.png",
     ],
   },
   {
@@ -431,10 +434,11 @@ const staticProjects: Project[] = [
 ];
 
 // projects.json is the admin staging file. Skip entries already pasted into
-// staticProjects (matched by title) so they don't show up twice.
+// staticProjects (matched by id or title) so they don't show up twice.
+const knownIds = new Set(staticProjects.map((p) => p.id));
 const knownTitles = new Set(staticProjects.map((p) => p.title.toLowerCase()));
 const extraProjects = dynamicProjects
-  .filter((p) => !knownTitles.has(p.title.toLowerCase()))
+  .filter((p) => !knownIds.has(p.id) && !knownTitles.has(p.title.toLowerCase()))
   .map((p) => ({ ...p, category: p.category ?? "academic" }));
 
 export const portfolioData: PortfolioData = {

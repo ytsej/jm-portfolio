@@ -37,6 +37,7 @@ export function LabelBadge({ label }: { label: "client" | "demo" }) {
 }
 
 export function StatusBadge({ status, inverted }: { status: string; inverted?: boolean }) {
+  if (!status) return null;
   const isLive = /live|ongoing|in progress/i.test(status);
   return (
     <span
@@ -47,6 +48,14 @@ export function StatusBadge({ status, inverted }: { status: string; inverted?: b
     >
       {isLive && <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />}
       {status}
+    </span>
+  );
+}
+
+export function HighlightBadge({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center bg-emerald-400 px-1.5 py-0.5 font-hud text-[11px] font-bold uppercase tracking-wider text-black">
+      {label}
     </span>
   );
 }
