@@ -620,6 +620,10 @@ function GalleryScreen({
   onSelectImage: (img: string) => void;
   onBack: () => void;
 }) {
+  // A listed photo whose file is missing is hidden instead of showing a broken icon
+  const [failed, setFailed] = useState<Set<string>>(new Set());
+  const visible = images.filter((img) => !failed.has(img));
+
   if (selectedImage) {
     return (
       <motion.div
@@ -647,19 +651,25 @@ function GalleryScreen({
         <h3 className="font-display text-lg uppercase text-white">Gallery</h3>
         <button onClick={onBack} className="text-gray-400 hover:text-white">✕</button>
       </div>
-      {images.length === 0 ? (
+      {visible.length === 0 ? (
         <div className="flex items-center justify-center h-32 text-gray-500 text-sm">
           No images yet
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-2">
-          {images.map((img, i) => (
+          {visible.map((img, i) => (
             <button
-              key={i}
+              key={img}
               onClick={() => onSelectImage(img)}
               className="aspect-square rounded-lg overflow-hidden bg-white/5 border border-white/10 hover:border-emerald-400/50 transition-colors relative"
             >
-              <Image src={img} alt={`Gallery ${i + 1}`} fill className="object-cover" />
+              <Image
+                src={img}
+                alt={`Gallery ${i + 1}`}
+                fill
+                className="object-cover"
+                onError={() => setFailed((prev) => new Set(prev).add(img))}
+              />
             </button>
           ))}
         </div>
