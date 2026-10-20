@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type PointerEvent } from "react";
-import { cn } from "@/src/lib/cn";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { portfolioData } from "@/src/data/portfolio";
 import { ListHeader, SectionHeading } from "./GtaUi";
 import type { TabId } from "./TopTabs";
@@ -132,70 +132,60 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
   );
 }
 
-// Real photo by default; when a GTA portrait exists, a PHOTO | GTA switch
-// toggles it, and hovering with a mouse previews it.
+// Real photo by default. When a GTA portrait exists, a round thumbnail of the
+// other version sits in the corner, like the GTA V character switch.
 function ProfilePhoto({ name, title, photo, photoGta }: { name: string; title: string; photo: string; photoGta?: string }) {
-  const [style, setStyle] = useState<"photo" | "gta">("photo");
-  const [hovering, setHovering] = useState(false);
-  const showGta = Boolean(photoGta) && (style === "gta" || hovering);
+  const [showGta, setShowGta] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
-  const onPointerEnter = (e: PointerEvent) => {
-    if (photoGta && e.pointerType === "mouse") setHovering(true);
-  };
+  const current = showGta && photoGta ? photoGta : photo;
+  const other = showGta ? photo : photoGta;
 
   return (
-    <div
-      className="relative aspect-square overflow-hidden bg-black"
-      onPointerEnter={onPointerEnter}
-      onPointerLeave={() => setHovering(false)}
-    >
-      <Image
-        src={photo}
-        alt={name}
-        fill
-        sizes="(min-width: 1024px) 400px, 100vw"
-        className={cn("object-cover object-top transition-opacity duration-300", showGta ? "opacity-0" : "opacity-100")}
-        priority
-      />
-      {photoGta && (
-        <Image
-          src={photoGta}
-          alt={`${name}, GTA V-style portrait`}
-          fill
-          sizes="(min-width: 1024px) 400px, 100vw"
-          className={cn("object-cover object-top transition-opacity duration-300", showGta ? "opacity-100" : "opacity-0")}
-        />
-      )}
+    <div className="relative aspect-square overflow-hidden bg-black">
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={current}
+          className="absolute inset-0"
+          initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 1.08, filter: "blur(6px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+          <Image
+            src={current}
+            alt={current === photo ? name : `${name}, GTA V-style portrait`}
+            fill
+            sizes="(min-width: 1024px) 400px, 100vw"
+            className="object-cover object-top"
+            priority={current === photo}
+          />
+        </motion.div>
+      </AnimatePresence>
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/70 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-5">
         <h2 className="font-display text-3xl sm:text-4xl tracking-wider uppercase leading-none">{name}</h2>
         <p className="mt-2 font-hud text-sm font-semibold uppercase tracking-wider text-emerald-400">{title}</p>
       </div>
 
-      {photoGta && (
-        <div
-          role="group"
-          aria-label="Portrait style"
-          className="absolute left-3 top-3 inline-flex bg-black/75 p-0.5 font-hud text-xs font-semibold uppercase tracking-wider"
+      {other && (
+        <button
+          type="button"
+          onClick={() => setShowGta((v) => !v)}
+          aria-label={showGta ? "Switch to photo" : "Switch to GTA portrait"}
+          title={showGta ? "Switch to photo" : "Switch to GTA portrait"}
+          className="group absolute right-3 top-3 h-14 w-14 sm:h-16 sm:w-16 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
-          {(["photo", "gta"] as const).map((option) => (
-            <button
-              key={option}
-              type="button"
-              aria-pressed={style === option}
-              onClick={() => {
-                setStyle(option);
-                setHovering(false);
-              }}
-              className={cn(
-                "px-3 py-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400",
-                style === option ? "bg-white text-black" : "text-white/70 hover:text-white"
-              )}
-            >
-              {option === "photo" ? "Photo" : "GTA"}
-            </button>
-          ))}
-        </div>
+          <span className="relative block h-full w-full overflow-hidden rounded-full border-2 border-white shadow-[0_0_0_3px_rgba(0,0,0,0.6),0_6px_18px_rgba(0,0,0,0.6)] transition-transform duration-200 group-hover:scale-110 group-hover:border-emerald-400">
+            <Image src={other} alt="" fill sizes="64px" className="object-cover object-top" />
+          </span>
+          {/* Swap badge */}
+          <span className="absolute -bottom-1 -left-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400 text-black shadow">
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h5M20 20v-5h-5M5.6 15a7 7 0 0011.9 2.2M18.4 9A7 7 0 006.5 6.8" />
+            </svg>
+          </span>
+        </button>
       )}
     </div>
   );
