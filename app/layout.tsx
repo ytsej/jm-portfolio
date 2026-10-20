@@ -73,7 +73,7 @@ const jsonLd = {
       name: ownerName,
       alternateName: portfolioData.profile.name,
       jobTitle: "Software Developer",
-      description: portfolioData.profile.summary,
+      description: portfolioData.profile.summary.replace(/\n+/g, " "),
       url: siteUrl,
       image: `${siteUrl}${portfolioData.profile.photo}`,
       email: contactMethods.find((c) => c.label === "Email")?.link,

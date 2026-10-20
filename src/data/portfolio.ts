@@ -115,7 +115,7 @@ const staticProjects: Project[] = [
     slug: "itip",
     title: "iTip: Digital Tipping Platform",
     subtitle: "Web Platform / Payments (Kuwait)",
-    role: "Full-Stack Developer",
+    role: "Full-Stack Developer (Part-time)",
     status: "Ongoing",
     category: "client",
     shortDescription:
@@ -516,8 +516,9 @@ export const portfolioData: PortfolioData = {
     title: "Software Developer | Workflow & AI Automation",
     location: "Bacoor, Cavite, Philippines",
     availability: "Open to full-time roles",
+    // Paragraphs are separated by a blank line (\n\n)
     summary:
-      "Software developer who builds websites and automates business workflows. For a client, I built and launched two websites with Next.js and serverless APIs, plus Zapier workflows that triage email with AI and generate weekly reports. My n8n demos show lead routing and CRM sync with replay and failure checks. I test my work, design it so a failed AI result is flagged to the team instead of failing silently, and use AI coding tools spec-first with every result reviewed.",
+      "A software developer focused on workflow and AI automation, from Cavite, Philippines, and a lifelong gamer, which is where this site's GTA look comes from. I build websites and automate the repetitive tasks behind them, like moving data between tools, sorting inquiries, and putting together reports.\n\nWorks spec-first: I write down what should happen, build it, then test it and check the result myself. I'd rather flag a problem early than let it fail quietly.\n\nCurrently a part-time full-stack developer on iTip, a tipping platform in Kuwait, and open to full-time roles.",
     resumeUrl: "/images/jm/cv.pdf",
     photo: "/images/jm/profile.webp",
     photoGta: "/images/jm/gta/profile-gta.webp",
@@ -552,7 +553,7 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       company: "iTip (Kuwait)",
-      role: "Full-Stack Developer",
+      role: "Full-Stack Developer (Part-time)",
       period: "Sep 2026 - Present",
       location: "Remote",
       bullets: [
