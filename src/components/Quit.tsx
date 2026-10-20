@@ -23,9 +23,9 @@ export default function Quit() {
       link: "https://github.com/jjimuu",
     },
     {
-      label: "Mobile",
-      value: "09498422084",
-      link: "tel:+639498422084",
+      label: "WhatsApp",
+      value: "+63 949 842 2084",
+      link: "https://wa.me/639498422084",
     },
   ];
 

@@ -237,12 +237,14 @@ export default function PhoneMenu() {
                     </span>
                   </a>
                   <a
-                    href="tel:+639498422084"
+                    href="https://wa.me/639498422084"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl transition-colors"
                   >
                     <PhoneIcon className="w-4 h-4 text-emerald-400" />
                     <span className="text-xs font-display uppercase tracking-wider text-white">
-                      Call
+                      WhatsApp
                     </span>
                   </a>
                 </div>
