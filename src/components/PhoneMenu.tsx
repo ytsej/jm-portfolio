@@ -226,7 +226,7 @@ export default function PhoneMenu() {
                 {/* Bottom Controls */}
                 <div className="px-4 pb-4 flex items-center justify-between gap-3 flex-shrink-0 bg-black/50 border-t border-white/10">
                   <a
-                    href="mailto:jmdc7737@gmail.com"
+                    href="mailto:jmcruzada.delacruz@gmail.com"
                     className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/50 rounded-xl transition-colors"
                   >
                     <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

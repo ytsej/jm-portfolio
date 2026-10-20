@@ -9,13 +9,13 @@ export default function Quit() {
   const contactMethods = [
     {
       label: "Email",
-      value: "jmdc7737@gmail.com",
-      link: "mailto:jmdc7737@gmail.com",
+      value: "jmcruzada.delacruz@gmail.com",
+      link: "mailto:jmcruzada.delacruz@gmail.com",
     },
     {
       label: "LinkedIn",
-      value: "John Mark Dela Cruz",
-      link: "https://www.linkedin.com/in/john-mark-dela-cruz-73696b3a6/",
+      value: "linkedin.com/in/johnmark-c-delacruz",
+      link: "https://www.linkedin.com/in/johnmark-c-delacruz",
     },
     {
       label: "GitHub",
