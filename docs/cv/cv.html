@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>John Mark Dela Cruz — Resume</title>
+<title>John Mark Dela Cruz Resume</title>
 <style>
   @page { size: A4; margin: 10mm 13mm 9mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,6 +22,8 @@
   ul { margin: 2px 0 0 16px; }
   li { margin-bottom: 1px; }
   .skills p { margin-bottom: 1px; }
+  ul.projects { margin-left: 16px; }
+  ul.projects li { margin-bottom: 2px; }
   .skills b { font-weight: 700; }
 </style>
 </head>
@@ -36,15 +38,15 @@
 
 <section>
   <h2>PROFESSIONAL SUMMARY</h2>
-  <p>Software developer who builds websites and automates business workflows. Built and launched two client websites, and Zapier and n8n workflows that triage email with OpenAI, generate weekly reports and sync CRM data. Tests the work, adds error handling so that a failed AI result is flagged to the team instead of failing silently, and uses AI coding tools spec-first with every result reviewed.</p>
+  <p>Software developer who builds websites and automates business workflows. Shipped two client websites and Zapier workflows that triage email with OpenAI and generate weekly reports, and now works on payments for a tipping platform in Kuwait. Tests the work, flags failed AI results instead of failing silently, and ships faster with Claude Code and Codex, reviewing every change.</p>
 </section>
 
 <section>
   <h2>WORK EXPERIENCE</h2>
 
   <div class="item">
-    <div class="row"><span class="org">iTip Kuwait</span><span>Sep 2026 – Present</span></div>
-    <div class="row"><span class="role">Software Developer</span><span>Remote</span></div>
+    <div class="row"><span class="org">iTip Kuwait</span><span>Sep 2026 - Present</span></div>
+    <div class="row"><span class="role">Full-Stack Developer</span><span>Remote</span></div>
     <ul>
       <li>Improving iTip, a QR-code digital tipping platform for Kuwait with separate Admin, Merchant and Staff portals (TanStack Start, React, TypeScript, Supabase).</li>
       <li>Integrating Payzah payments and verifying fee calculations.</li>
@@ -53,20 +55,19 @@
   </div>
 
   <div class="item">
-    <div class="row"><span class="org">DoGoodie</span><span>Jul 2026 – Sep 2026</span></div>
-    <div class="row"><span class="role">Contract: web and AI automation work</span><span>Remote, U.S.</span></div>
+    <div class="row"><span class="org">DoGoodie</span><span>Jul 2026 - Sep 2026</span></div>
+    <div class="row"><span class="role">Web Developer and Automation Developer (Contract)</span><span>Remote</span></div>
     <ul>
-      <li>Developed the Ethical Capacity Lab website independently with Next.js, a multi-page site now live at ethicalcapacitylab.org.</li>
-      <li>Built the DoGoodie website (dogoodiebuilders.com), a multi-page static site with a Vercel serverless API that validates challenge submissions and saves them to Google Sheets.</li>
-      <li>Automated Gmail triage in Zapier, where OpenAI classifies each business email and JavaScript validates the result, so that prioritized alerts reach the team's Discord and an invalid AI result is flagged for human review instead of failing silently.</li>
-      <li>Created a weekly KPI tracker in Google Sheets (Vercel and Meta Business Suite metrics) and a Zapier workflow, so that the weekly report is generated from a Google Docs template.</li>
-      <li>Optimized the site for search (page titles and descriptions, social-sharing tags, sitemap, robots.txt) and set up Google Analytics 4, so that the team can see how many visitors come and where from.</li>
-      <li>Implemented a Zapier workflow that creates Gmail drafts from a Google Sheet after approval and contact checks, recording thread IDs and status to help prevent duplicate drafts.</li>
+      <li>Built the Ethical Capacity Lab website independently and the DoGoodie website, both now live (see Projects).</li>
+      <li>Automated Gmail triage in Zapier: OpenAI classifies each business email and JavaScript validates the result, so prioritized alerts reach the team's Discord and an invalid AI result goes to human review instead of failing silently.</li>
+      <li>Built a weekly KPI tracker in Google Sheets (Vercel and Meta Business Suite metrics) with a Zapier workflow that generates the report from a Google Docs template.</li>
+      <li>Set up search basics (page titles and descriptions, social-sharing tags, sitemap, robots.txt) and Google Analytics 4.</li>
+      <li>Built a Zapier workflow that creates Gmail drafts from a Google Sheet after approval and contact checks, tracking thread IDs to help prevent duplicate drafts.</li>
     </ul>
   </div>
 
   <div class="item">
-    <div class="row"><span class="org">Inventi Asia</span><span>Feb 2026 – May 2026</span></div>
+    <div class="row"><span class="org">Inventi Asia</span><span>Feb 2026 - May 2026</span></div>
     <div class="row"><span class="role">Project Management Intern</span><span>Makati, Philippines (hybrid)</span></div>
     <ul>
       <li>Supported task coordination between developers, QA and a business analyst for a property management platform, taking over repetitive tasks from senior team members.</li>
@@ -75,7 +76,7 @@
   </div>
 
   <div class="item">
-    <div class="row"><span class="org">Philippine Statistics Authority (PSA)</span><span>Sep – Dec 2024; Sep – Nov 2025</span></div>
+    <div class="row"><span class="org">Philippine Statistics Authority (PSA)</span><span>Sep - Dec 2024; Sep - Nov 2025</span></div>
     <div class="row"><span class="role">Statistical Researcher (contract)</span><span>Bacoor, Philippines</span></div>
     <ul>
       <li>Encoded CBMS records from survey forms quickly and consistently, about 50 households a day (around 40 to 50 questions per person), and conducted household, agriculture and fisheries surveys.</li>
@@ -86,23 +87,19 @@
 
 <section>
   <h2>PROJECTS</h2>
-  <div class="item">
-    <div class="row"><span class="org">Workflow automation portfolio — 13 Zapier and n8n workflows</span><span>Portfolio demos, 2026</span></div>
-    <ul>
-      <li>Built authenticated n8n lead routing into GoHighLevel with an event ledger for replay and conflict handling, a CRM-to-table sync that preserves manual edits, and a retry and recovery queue; each verified with native test runs and independent readbacks.</li>
-    </ul>
-  </div>
-  <div class="item">
-    <div class="row"><span class="org">CareSim — simulation game and learning management system for caregiver NC II</span><span>BSIT capstone, team project</span></div>
-    <ul>
-      <li>One of the developers. Built the web learning management system and Unity scenes for the platform's Android simulation game.</li>
-    </ul>
-  </div>
+  <ul class="projects">
+    <li><b>iTip:</b> QR-code tipping platform for Kuwait with Admin, Merchant and Staff portals (TanStack Start, React, Supabase).</li>
+    <li><b>Ethical Capacity Lab:</b> Next.js site with server-side form validation and accessibility tests. Live at ethicalcapacitylab.org.</li>
+    <li><b>DoGoodie:</b> Static site with a serverless API that saves challenge submissions to Google Sheets. Live at dogoodiebuilders.com.</li>
+    <li><b>Email Inquiry Classifier:</b> Zapier workflow where OpenAI classifies business emails and alerts the team on Discord.</li>
+    <li><b>Weekly KPI Report Automation:</b> Zapier workflow that turns a Google Sheets KPI row into a Google Docs report.</li>
+    <li><b>CARESIM:</b> BSIT capstone (team project). Built the web LMS and Unity scenes for a caregiver NC II simulation game.</li>
+  </ul>
 </section>
 
 <section>
   <h2>EDUCATION</h2>
-  <div class="row"><span class="org">Cavite State University — Imus Campus</span><span>2022 – 2026</span></div>
+  <div class="row"><span class="org">Cavite State University - Imus Campus</span><span>2022 - 2026</span></div>
   <div class="row"><span class="role">Bachelor of Science in Information Technology</span><span>Philippines</span></div>
 </section>
 
