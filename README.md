@@ -1,4 +1,4 @@
-# JM.EXE — John Mark Dela Cruz's portfolio
+# JM.EXE: John Mark Dela Cruz's portfolio
 
 Portfolio of John Mark Dela Cruz, software developer focused on web development and workflow & AI automation. The interface is styled after the GTA V pause menu.
 
@@ -60,8 +60,8 @@ When replacing an image, save it as WebP under a **new filename** and update the
 
 Only needed for the phone gallery admin (`/admin/phone-gallery`):
 
-- `BLOB_READ_WRITE_TOKEN` — Vercel Blob read/write token
-- `ADMIN_PASSWORD` — password for gallery uploads and deletes
+- `BLOB_READ_WRITE_TOKEN`: Vercel Blob read/write token
+- `ADMIN_PASSWORD`: password for gallery uploads and deletes
 
 The rest of the site works without them. See `DEPLOYMENT_GUIDE.md`.
 

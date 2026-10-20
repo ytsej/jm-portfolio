@@ -98,9 +98,9 @@ export interface PortfolioData {
 const staticProjects: Project[] = [
   {
     id: "digital-tipping-platform",
-    title: "iTip — Digital Tipping Platform",
+    title: "iTip: Digital Tipping Platform",
     subtitle: "Web Platform / Payments (Kuwait)",
-    role: "Software Developer",
+    role: "Full-Stack Developer",
     status: "Ongoing",
     category: "client",
     shortDescription:
@@ -184,7 +184,7 @@ const staticProjects: Project[] = [
   },
   {
     id: "caresim-–-caregiving-education-platform-(web-lms-&-android-simulation-game)-1770309058444",
-    title: "CARESIM – Caregiving Education Platform",
+    title: "CARESIM: Caregiving Education Platform",
     subtitle: "BSIT Capstone Project / Web LMS & Android Simulation Game",
     role: "Frontend Developer (Web LMS) / Unity Scene Developer (Mobile Game)",
     status: "Completed",
@@ -286,7 +286,7 @@ const staticProjects: Project[] = [
     role: "Frontend Developer & UI/UX Designer",
     status: "Completed",
     category: "academic",
-    shortDescription: "A web-based Alumni Management System for Cavite State University – Imus Campus that centralizes alumni records, supports engagement through jobs and events, and provides administrators with structured data management and reporting tools.",
+    shortDescription: "A web-based Alumni Management System for Cavite State University - Imus Campus that centralizes alumni records, supports engagement through jobs and events, and provides administrators with structured data management and reporting tools.",
     description: "The CvSU Imus Alumni Management System is a comprehensive web platform built to support long-term alumni engagement and institutional data management. The system allows alumni to register, manage their profiles, apply for job postings, and stay informed through events and announcements, while administrators manage records, approvals, and reports through a dedicated dashboard.\r\n\r\nI handled the UI/UX design and frontend development, starting with wireframes and layouts in Figma and translating them into responsive, user-friendly interfaces. The focus was on usability, consistency, and accessibility across both alumni and admin modules, while ensuring smooth interaction with backend authentication, approval workflows, and data-driven features.",
     bullets: [
       "Responsive alumni registration and profile management interfaces",
@@ -483,8 +483,8 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       company: "iTip (Kuwait)",
-      role: "Software Developer",
-      period: "Sep 2026 – Present",
+      role: "Full-Stack Developer",
+      period: "Sep 2026 - Present",
       location: "Remote",
       bullets: [
         "Improving iTip, an existing QR-code tipping platform with Admin, Merchant, and Staff portals.",
@@ -494,9 +494,9 @@ export const portfolioData: PortfolioData = {
     },
     {
       company: "DoGoodie",
-      role: "Web & AI Automation Developer (Contract)",
-      period: "Jul 2026 – Sep 2026",
-      location: "Remote, U.S.",
+      role: "Web Developer and Automation Developer (Contract)",
+      period: "Jul 2026 - Sep 2026",
+      location: "Remote",
       bullets: [
         "Built the Ethical Capacity Lab website with Next.js, now live at ethicalcapacitylab.org.",
         "Built the DoGoodie website and its challenge-intake API, live at dogoodiebuilders.com.",
@@ -508,7 +508,7 @@ export const portfolioData: PortfolioData = {
     {
       company: "Inventi Asia",
       role: "Project Management Intern",
-      period: "Feb 2026 – May 2026",
+      period: "Feb 2026 - May 2026",
       location: "Makati, Philippines (hybrid)",
       bullets: [
         "Supported task coordination between developers, QA, and a business analyst for a property management platform.",
@@ -518,7 +518,7 @@ export const portfolioData: PortfolioData = {
     {
       company: "Philippine Statistics Authority (PSA)",
       role: "Statistical Researcher (Contract)",
-      period: "Sep – Dec 2024; Sep – Nov 2025",
+      period: "Sep - Dec 2024; Sep - Nov 2025",
       location: "Bacoor, Philippines",
       bullets: [
         "Encoded CBMS records from survey forms, about 50 households a day, and conducted household, agriculture, and fisheries surveys.",
@@ -527,9 +527,9 @@ export const portfolioData: PortfolioData = {
     },
   ],
   education: {
-    school: "Cavite State University — Imus Campus",
+    school: "Cavite State University - Imus Campus",
     degree: "Bachelor of Science in Information Technology",
-    period: "2022 – 2026",
+    period: "2022 - 2026",
   },
   skillGroups: [
     {
@@ -615,7 +615,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "psa-field-research",
       title: "PSA Field Research",
-      description: "Field data collection and validation for the Philippine Statistics Authority (Sep–Dec 2024, Sep–Nov 2025).",
+      description: "Field data collection and validation for the Philippine Statistics Authority (Sep-Dec 2024, Sep-Nov 2025).",
       unlocked: true,
     },
     {

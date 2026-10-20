@@ -45,7 +45,7 @@ export const automations: Automation[] = [
       "Scoped, read-only sync of GoHighLevel opportunities into an n8n mirror table. Each record is inserted, updated, left unchanged, or flagged for review when a sync would overwrite a manual edit. Every write is checked against the returned row, not just the node finishing.",
     tools: ["n8n", "HTTP Request", "Wait", "n8n Data Tables", "GoHighLevel API (read-only)"],
     evidence:
-      "16–17 Oct 2026: initial insert of 3 rows, an unchanged rerun, 1 same-ID update, 1 preserved manual edit, and invalid auth with zero writes, each checked with independent CSV audits. 81 passing local tests.",
+      "16-17 Oct 2026: initial insert of 3 rows, an unchanged rerun, 1 same-ID update, 1 preserved manual edit, and invalid auth with zero writes, each checked with independent CSV audits. 81 passing local tests.",
     scope:
       "Manual, sequential, one-way sync of three fictional records. No two-way sync, concurrency, or rollback guarantees, and real API throttling was not observed.",
   },
