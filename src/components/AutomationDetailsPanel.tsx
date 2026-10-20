@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CaseSummary, LabelBadge } from "./GtaUi";
-import { GoHighLevelBadge, TechChip } from "./TechIcon";
+import { GoHighLevelBadge, PlatformLabel, TechChip } from "./TechIcon";
 import { usesGoHighLevel, type Automation } from "@/src/data/automations";
 import { useFocusTrap } from "@/src/lib/useFocusTrap";
 
@@ -66,8 +66,8 @@ export default function AutomationDetailsPanel({ item, isOpen, onClose }: Automa
           >
             <div className="sticky top-0 z-10 flex items-center justify-between gap-3 bg-black/90 px-5 py-3">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
-                  {item.platform}
+                <span className="inline-flex items-center bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
+                  <PlatformLabel platform={item.platform} />
                 </span>
                 {usesGoHighLevel(item) && <GoHighLevelBadge />}
                 <LabelBadge label={item.label} />

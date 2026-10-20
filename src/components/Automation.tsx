@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AutomationDetailsPanel from "./AutomationDetailsPanel";
 import { LabelBadge, ListHeader, SectionHeading } from "./GtaUi";
 import { automationIntro, automations, usesGoHighLevel, type Automation as AutomationItem } from "@/src/data/automations";
-import { GoHighLevelBadge, HighLevelMark } from "./TechIcon";
+import { GoHighLevelBadge, HighLevelMark, PlatformLabel } from "./TechIcon";
 import { automationPath } from "@/src/data/sections";
 import { handleInternalClick } from "@/src/lib/nav";
 
@@ -68,8 +68,8 @@ export default function Automation({ caseSlug, onOpenCase, onCloseCase }: Automa
             </div>
             <div className="flex flex-1 flex-col gap-2 bg-black/80 px-4 py-3">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
-                  {item.platform}
+                <span className="inline-flex items-center bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
+                  <PlatformLabel platform={item.platform} />
                 </span>
                 {usesGoHighLevel(item) && <GoHighLevelBadge />}
                 <LabelBadge label={item.label} />
@@ -128,7 +128,7 @@ export default function Automation({ caseSlug, onOpenCase, onCloseCase }: Automa
                   </span>
                   <span className="flex flex-shrink-0 flex-col items-end gap-1">
                     <span className="flex items-center gap-1.5 text-xs text-white/70 group-hover:text-inherit">
-                      {item.platform}
+                      <PlatformLabel platform={item.platform} />
                       {usesGoHighLevel(item) && (
                         <>
                           <span aria-hidden>+</span>

@@ -183,6 +183,22 @@ export function LabelIcon({ label, className }: { label: string; className?: str
   return <TechIcon name={match.icon} color={match.color} className={className} />;
 }
 
+// Platform name with the logo of each tool in it ("n8n + Node.js" gets both)
+export function PlatformLabel({ platform }: { platform: string }) {
+  const parts = platform.split(" + ");
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      {parts.map((part, i) => (
+        <span key={part} className="inline-flex items-center gap-1.5">
+          {i > 0 && <span aria-hidden>+</span>}
+          <LabelIcon label={part} className="h-3.5 w-3.5 flex-shrink-0" />
+          {part}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 // Shown next to the platform badge on workflows that call the GoHighLevel API
 export function GoHighLevelBadge() {
   return (
