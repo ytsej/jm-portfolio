@@ -623,7 +623,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       name: "Tools",
-      items: ["Git and GitHub", "Vercel", "Google Workspace", "Figma", "Canva", "Notion", "Obsidian", "ProjectLibre", "Postman", "Google Analytics 4"],
+      items: ["Git and GitHub", "Vercel", "Google Workspace", "Figma", "Canva", "Notion", "Obsidian", "ProjectLibre", "Postman", "Replit", "Google Analytics 4"],
     },
     {
       name: "Also worked with",
