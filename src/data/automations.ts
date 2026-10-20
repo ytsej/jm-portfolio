@@ -16,6 +16,8 @@ export interface Automation {
   caseStudy?: CaseStudy;
 }
 
+export const usesGoHighLevel = (item: Automation) => item.tools.some((tool) => /gohighlevel/i.test(tool));
+
 export const automationIntro =
   "13 workflows across Zapier and n8n, shown as 12 cards. Two were built for DoGoodie; the rest are portfolio demos run on fictional data. Each one lists what was actually tested and where its limits are.";
 
