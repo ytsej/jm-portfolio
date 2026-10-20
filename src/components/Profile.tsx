@@ -47,7 +47,11 @@ export default function Profile({ onTabChange }: { onTabChange: (tab: TabId) => 
           {/* Bio */}
           <section className="gta-panel">
             <ListHeader>About</ListHeader>
-            <p className="p-5 leading-relaxed text-white/85">{profile.summary}</p>
+            <div className="space-y-3 p-5 leading-relaxed text-white/85">
+              {profile.summary.split("\n\n").map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </section>
 
           {/* How I work */}

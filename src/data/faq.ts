@@ -20,7 +20,7 @@ export const faqs: Faq[] = [
   {
     question: "What client work has he delivered?",
     answer:
-      "On one DoGoodie contract he built two live websites, dogoodiebuilders.com and ethicalcapacitylab.org, plus two Zapier automations: an AI email inquiry classifier and a weekly KPI report. He is now a full-stack developer on iTip, a tipping platform in Kuwait, where the Payzah payment integration is still in progress.",
+      "On one DoGoodie contract he built two live websites, dogoodiebuilders.com and ethicalcapacitylab.org, plus two Zapier automations: an AI email inquiry classifier and a weekly KPI report. He is now a part-time full-stack developer on iTip, a tipping platform in Kuwait, where the Payzah payment integration is still in progress.",
   },
   {
     question: "Which tools and technologies does he use?",
