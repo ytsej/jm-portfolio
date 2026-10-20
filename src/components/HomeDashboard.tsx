@@ -14,7 +14,7 @@ interface HomeDashboardProps {
 export default function HomeDashboard({ onNavigate, onOpenCase }: HomeDashboardProps) {
   return (
     <div className="space-y-8 sm:space-y-10">
-      <HeroFeature onNavigate={onNavigate} />
+      <HeroFeature />
       <FeaturedWork onOpenCase={onOpenCase} />
       <TileGrid onTileClick={onNavigate} />
     </div>

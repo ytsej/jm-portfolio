@@ -10,7 +10,7 @@ Developed with AI-assisted tools (ChatGPT, Codex, Claude Code, and Claude) for c
 
 | Tab (URL) | What it shows |
 | --- | --- |
-| HOME (`/`) | Name, role, value statement, and quick facts with Resume and Contact links; three featured cases plus the ongoing iTip role; Explore tiles |
+| HOME (`/`) | Name, role, value statement, and quick facts; three featured cases plus the ongoing iTip role; Explore tiles |
 | PROJECTS (`/projects`) | Client & work projects, then academic & personal builds, with a brief that opens at `/projects/<slug>` |
 | AUTOMATION (`/automation`) | Featured Zapier and n8n workflow cards plus "View all", each opening at `/automation/<id>` |
 | PROFILE (`/profile`) | Headshot with a GTA-style character switch, about, How I Work, experience, education, resume |

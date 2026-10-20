@@ -4,13 +4,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { portfolioData } from "@/src/data/portfolio";
-import { sectionPath, type TabId } from "@/src/data/sections";
-import { handleInternalClick } from "@/src/lib/nav";
 
 const slides = ["/images/jm/gta/hero-1.webp", "/images/jm/gta/hero-2.webp", "/images/jm/gta/hero-3.webp"];
 
-// First screen: who I am, what I do, and quick facts with resume and contact links
-export default function HeroFeature({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
+// First screen: who I am, what I do, and quick facts
+export default function HeroFeature() {
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -133,31 +131,6 @@ export default function HeroFeature({ onNavigate }: { onNavigate: (tab: TabId) =
           <div>
             <dt className="inline text-emerald-400">Timezone: </dt>
             <dd className="inline">GMT+8</dd>
-          </div>
-          <div>
-            <dt className="inline text-emerald-400">Resume: </dt>
-            <dd className="inline">
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4 hover:text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-              >
-                View PDF ↗
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt className="inline text-emerald-400">Contact: </dt>
-            <dd className="inline">
-              <a
-                href={sectionPath("quit")}
-                onClick={(e) => handleInternalClick(e, () => onNavigate("quit"))}
-                className="underline underline-offset-4 hover:text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-              >
-                Email, LinkedIn, WhatsApp
-              </a>
-            </dd>
           </div>
         </dl>
       </div>
