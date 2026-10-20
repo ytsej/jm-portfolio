@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CaseSummary, LabelBadge } from "./GtaUi";
-import { TechChip } from "./TechIcon";
-import type { Automation } from "@/src/data/automations";
+import { GoHighLevelBadge, TechChip } from "./TechIcon";
+import { usesGoHighLevel, type Automation } from "@/src/data/automations";
 import { useFocusTrap } from "@/src/lib/useFocusTrap";
 
 interface AutomationDetailsPanelProps {
@@ -69,6 +69,7 @@ export default function AutomationDetailsPanel({ item, isOpen, onClose }: Automa
                 <span className="bg-white px-1.5 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
                   {item.platform}
                 </span>
+                {usesGoHighLevel(item) && <GoHighLevelBadge />}
                 <LabelBadge label={item.label} />
               </div>
               <button type="button" onClick={onClose} className="gta-btn px-3 py-1" aria-label="Close">

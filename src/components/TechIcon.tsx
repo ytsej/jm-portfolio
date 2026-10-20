@@ -2,7 +2,10 @@ import { iconData, type IconName } from "@/src/data/icon-data";
 
 // Labels as they appear in portfolio data (lowercased) -> icon. Line icons
 // cover things that aren't brands; an optional color tints them.
-const byLabel: Record<string, { icon: IconName; color?: string }> = {
+// HighLevel isn't in Simple Icons, so it has its own traced mark (see below)
+type LabelMatch = { icon: IconName; color?: string } | { mark: "highlevel" };
+
+const byLabel: Record<string, LabelMatch> = {
   // Websites
   html: { icon: "html5" },
   css: { icon: "css3" },
@@ -29,8 +32,8 @@ const byLabel: Record<string, { icon: IconName; color?: string }> = {
   "zapier (with javascript code steps)": { icon: "zapier" },
   zapier: { icon: "zapier" },
   n8n: { icon: "n8n" },
-  "gohighlevel api": { icon: "target", color: "#188bf6" },
-  gohighlevel: { icon: "target", color: "#188bf6" },
+  "gohighlevel api": { mark: "highlevel" },
+  gohighlevel: { mark: "highlevel" },
   webhooks: { icon: "webhook", color: "#c73a63" },
   gmail: { icon: "gmail" },
   discord: { icon: "discord" },
@@ -110,7 +113,7 @@ const byLabel: Record<string, { icon: IconName; color?: string }> = {
   wait: { icon: "hourglass", color: "#ea4b71" },
   "error trigger": { icon: "triangle-alert", color: "#ea4b71" },
   code: { icon: "code", color: "#ea4b71" },
-  "gohighlevel api (read-only)": { icon: "target", color: "#188bf6" },
+  "gohighlevel api (read-only)": { mark: "highlevel" },
   "api key auth": { icon: "key-round" },
   // Contact
   email: { icon: "mail" },
@@ -158,10 +161,36 @@ export function TechIcon({ name, color, className }: { name: IconName; color?: s
   );
 }
 
+// HighLevel mark, traced from the official logo (three rising arrows) without
+// its navy tile, so it sits on the dark panels like the other logos
+export function HighLevelMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="84 84 344 344" className={className} aria-hidden focusable="false">
+      <path d="M160 93L228 166H182V418H140V166H92Z" fill="#fec401" />
+      <path d="M257 197L326 270H280V418H232V270H188Z" fill="#2996fb" />
+      <path d="M351 93L420 166H372V418H330V166H282Z" fill="#4acf28" />
+      {/* Folds under each arrowhead */}
+      <path d="M148 166H182V200Z M244 270H280V306Z M338 166H372V200Z" fill="#000" fillOpacity={0.15} />
+    </svg>
+  );
+}
+
 // Icon for a label from the data files, or nothing if there isn't one
 export function LabelIcon({ label, className }: { label: string; className?: string }) {
   const match = byLabel[label.toLowerCase()];
-  return match ? <TechIcon name={match.icon} color={match.color} className={className} /> : null;
+  if (!match) return null;
+  if ("mark" in match) return <HighLevelMark className={className} />;
+  return <TechIcon name={match.icon} color={match.color} className={className} />;
+}
+
+// Shown next to the platform badge on workflows that call the GoHighLevel API
+export function GoHighLevelBadge() {
+  return (
+    <span className="inline-flex items-center gap-1.5 border border-white/25 bg-black/60 px-1.5 py-0.5 font-hud text-xs font-semibold uppercase tracking-wider text-white/90">
+      <HighLevelMark className="h-3.5 w-3.5" />
+      GoHighLevel
+    </span>
+  );
 }
 
 // Logo plus name, used for skills, project tags, and workflow tools.
