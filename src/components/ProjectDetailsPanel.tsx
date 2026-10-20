@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { Project } from "@/src/data/portfolio";
 import { useFocusTrap } from "@/src/lib/useFocusTrap";
 import { CaseSummary, isOngoingStatus } from "./GtaUi";
+import { TechChip } from "./TechIcon";
 
 interface ProjectDetailsPanelProps {
   project: Project | null;
@@ -171,13 +172,8 @@ export default function ProjectDetailsPanel({
                 <div className="mb-6">
                   <h3 className="gta-header mb-3">Technologies</h3>
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="gta-chip text-sm"
-                      >
-                        {tag}
-                      </span>
+                    {project.tags.map((tag) => (
+                      <TechChip key={tag} label={tag} large />
                     ))}
                   </div>
                 </div>

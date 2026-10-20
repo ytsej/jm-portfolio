@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CaseSummary, LabelBadge } from "./GtaUi";
+import { TechChip } from "./TechIcon";
 import type { Automation } from "@/src/data/automations";
 import { useFocusTrap } from "@/src/lib/useFocusTrap";
 
@@ -111,9 +112,7 @@ export default function AutomationDetailsPanel({ item, isOpen, onClose }: Automa
                 <h3 className="gta-header">Tools</h3>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {item.tools.map((tool) => (
-                    <span key={tool} className="gta-chip">
-                      {tool}
-                    </span>
+                    <TechChip key={tool} label={tool} large />
                   ))}
                 </div>
               </section>

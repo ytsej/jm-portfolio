@@ -69,6 +69,49 @@ const byLabel: Record<string, { icon: IconName; color?: string }> = {
   "os installation": { icon: "hard-drive" },
   "hardware troubleshooting": { icon: "wrench" },
   troubleshooting: { icon: "wrench" },
+  // Project tags
+  "tanstack start": { icon: "layers", color: "#e4b44c" },
+  payzah: { icon: "credit-card" },
+  "qa testing": { icon: "clipboard-check" },
+  formspree: { icon: "formspree" },
+  "axe-core": { icon: "accessibility", color: "#7c5cff" },
+  firestore: { icon: "firebase" },
+  "firebase authentication": { icon: "firebase" },
+  "firebase realtime database": { icon: "firebase" },
+  postgresql: { icon: "postgresql" },
+  "prisma orm": { icon: "prisma" },
+  "nextauth.js": { icon: "key-round", color: "#9b5de5" },
+  zod: { icon: "zod" },
+  exceljs: { icon: "file-spreadsheet", color: "#21a366" },
+  xlsx: { icon: "file-spreadsheet", color: "#21a366" },
+  jwt: { icon: "jsonwebtokens" },
+  "bcrypt.js": { icon: "lock" },
+  jquery: { icon: "jquery" },
+  "react router": { icon: "reactrouter" },
+  "styled components": { icon: "styledcomponents" },
+  gsap: { icon: "greensock" },
+  "framer motion": { icon: "framer" },
+  "three.js": { icon: "threedotjs" },
+  "locomotive scroll": { icon: "mouse" },
+  swiper: { icon: "swiper" },
+  "react icons": { icon: "react" },
+  // Automation tools: Zapier built-ins in Zapier orange, n8n nodes in n8n pink
+  "chatgpt (openai)": { icon: "openai" },
+  "code by zapier": { icon: "code", color: "#ff4f00" },
+  "formatter by zapier": { icon: "type", color: "#ff4f00" },
+  "filter by zapier": { icon: "filter", color: "#ff4f00" },
+  "ai by zapier": { icon: "sparkles", color: "#ff4f00" },
+  "paths by zapier": { icon: "split", color: "#ff4f00" },
+  "schedule by zapier": { icon: "clock", color: "#ff4f00" },
+  "zapier tables": { icon: "table", color: "#ff4f00" },
+  "webhook (header auth)": { icon: "webhook", color: "#ea4b71" },
+  "n8n data tables": { icon: "database", color: "#ea4b71" },
+  "http request": { icon: "globe", color: "#ea4b71" },
+  wait: { icon: "hourglass", color: "#ea4b71" },
+  "error trigger": { icon: "triangle-alert", color: "#ea4b71" },
+  code: { icon: "code", color: "#ea4b71" },
+  "gohighlevel api (read-only)": { icon: "target", color: "#188bf6" },
+  "api key auth": { icon: "key-round" },
   // Contact
   email: { icon: "mail" },
   linkedin: { icon: "linkedin" },
@@ -119,4 +162,15 @@ export function TechIcon({ name, color, className }: { name: IconName; color?: s
 export function LabelIcon({ label, className }: { label: string; className?: string }) {
   const match = byLabel[label.toLowerCase()];
   return match ? <TechIcon name={match.icon} color={match.color} className={className} /> : null;
+}
+
+// Logo plus name, used for skills, project tags, and workflow tools.
+// Not every logo is recognizable, and recruiters scan the text.
+export function TechChip({ label, large }: { label: string; large?: boolean }) {
+  return (
+    <span className={`gta-chip gap-1.5 py-1 text-emerald-400 ${large ? "text-sm" : ""}`}>
+      <LabelIcon label={label} className={`${large ? "h-4 w-4" : "h-3.5 w-3.5"} flex-shrink-0`} />
+      <span className="text-white/85">{label}</span>
+    </span>
+  );
 }

@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/src/lib/cn";
 import ProjectDetailsPanel from "./ProjectDetailsPanel";
 import { HighlightBadge, ListHeader, SectionHeading, StatusBadge } from "./GtaUi";
+import { TechChip } from "./TechIcon";
 import type { Project } from "@/src/data/portfolio";
 import { projectPath } from "@/src/data/sections";
 import { handleInternalClick } from "@/src/lib/nav";
@@ -139,9 +140,7 @@ export default function Projects({ projects, caseSlug, onOpenCase, onCloseCase }
                   {selected.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {selected.tags.slice(0, 8).map((tag) => (
-                        <span key={tag} className="gta-chip">
-                          {tag}
-                        </span>
+                        <TechChip key={tag} label={tag} />
                       ))}
                     </div>
                   )}
