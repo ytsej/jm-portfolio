@@ -28,7 +28,7 @@ export function ListHeader({ children, count, className }: { children: ReactNode
 export function LabelBadge({ label }: { label: "client" | "demo" }) {
   return label === "client" ? (
     <span className="inline-flex items-center bg-emerald-400 px-2 py-0.5 font-hud text-xs font-bold uppercase tracking-wider text-black">
-      Client work · DoGoodie
+      Client work
     </span>
   ) : (
     <span className="inline-flex items-center border border-white/30 bg-black/60 px-2 py-0.5 font-hud text-xs font-semibold uppercase tracking-wider text-white/85">
