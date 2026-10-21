@@ -66,12 +66,7 @@ export default function Quit() {
 
         <section className="gta-panel">
           <ListHeader>Resume</ListHeader>
-          <div className="space-y-4 p-5">
-            <p className="text-sm leading-relaxed text-white/80">
-              {profile.name} · {profile.title}
-              <br />
-              {profile.location}
-            </p>
+          <div className="p-5">
             <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="gta-btn gta-btn-primary w-full">
               View resume (PDF)
             </a>
