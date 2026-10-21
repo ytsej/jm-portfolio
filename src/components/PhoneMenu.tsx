@@ -563,7 +563,7 @@ function WorkflowsScreen({
               <span className="flex-shrink-0 text-[10px] uppercase tracking-wider text-emerald-400">{item.platform}</span>
             </span>
             <span className="mt-0.5 block text-xs text-gray-400 truncate">
-              {item.label === "client" ? "Client work · DoGoodie" : "Portfolio demo"}
+              {item.label === "client" ? "Client work" : "Portfolio demo"}
             </span>
           </button>
         ))}
