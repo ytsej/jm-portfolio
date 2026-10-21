@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
+import { cn } from "@/src/lib/cn";
 import { automations } from "@/src/data/automations";
 import { portfolioData } from "@/src/data/portfolio";
 import { automationPath, projectPath } from "@/src/data/sections";
@@ -19,21 +22,8 @@ interface CaseCard {
 
 const automationImage = (id: string) => automations.find((a) => a.id === id)?.image ?? "";
 
-// Three differentiated examples: client websites, a client automation, an engineering demo
+// The other two examples; the client websites card rotates between two sites (below)
 const cases: CaseCard[] = [
-  {
-    kind: "Client websites",
-    label: "client",
-    title: "DoGoodie and Ethical Capacity Lab",
-    summary:
-      "One DoGoodie contract, two live websites: a community launch site with a secure challenge-intake API, and a Next.js front door for the parent organization.",
-    result: "Both live at dogoodiebuilders.com and ethicalcapacitylab.org.",
-    image: "/images/projects/dogoodie/img-001.webp",
-    links: [
-      { label: "DoGoodie case", path: projectPath("dogoodie") },
-      { label: "ECL case", path: projectPath("ethical-capacity-lab") },
-    ],
-  },
   {
     kind: "Client automation",
     label: "client",
@@ -56,6 +46,141 @@ const cases: CaseCard[] = [
   },
 ];
 
+// One card that alternates between the two sites from the DoGoodie contract,
+// so both get shown without taking two cards
+const websites = [
+  {
+    name: "DoGoodie",
+    image: "/images/projects/dogoodie/img-001.webp",
+    summary:
+      "A launch website for the DoGoodie builder community, with a secure challenge-intake API that writes to Google Sheets.",
+    result: "Live at dogoodiebuilders.com.",
+    path: projectPath("dogoodie"),
+  },
+  {
+    name: "Ethical Capacity Lab",
+    image: "/images/projects/ethical-capacity-lab/redesign-001.webp",
+    summary:
+      "The public front door for the Ethical Capacity Lab and its two programs, routing five audiences to clear pathways.",
+    result: "Live at ethicalcapacitylab.org.",
+    path: projectPath("ethical-capacity-lab"),
+  },
+];
+
+const ROTATE_MS = 6000;
+
+function WebsitesCard({ onOpenCase }: { onOpenCase: (path: string) => void }) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  // Once someone picks a site themselves, stop rotating for good
+  const [picked, setPicked] = useState(false);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (paused || picked || reducedMotion) return;
+    const id = setTimeout(() => setActive((i) => (i + 1) % websites.length), ROTATE_MS);
+    return () => clearTimeout(id);
+  }, [active, paused, picked, reducedMotion]);
+
+  const choose = (i: number) => {
+    setActive(i);
+    setPicked(true);
+  };
+
+  return (
+    <article
+      className="flex flex-col bg-black/70"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div className="relative aspect-video overflow-hidden bg-[#0b1220]">
+        {websites.map((site, i) => (
+          <a
+            key={site.name}
+            href={site.path}
+            onClick={(e) => handleInternalClick(e, () => onOpenCase(site.path))}
+            tabIndex={-1}
+            aria-hidden
+            className={cn(
+              "absolute inset-0 block transition-opacity duration-700",
+              i === active ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
+          >
+            <Image
+              src={site.image}
+              alt=""
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-cover object-top"
+              priority={i === 0}
+            />
+          </a>
+        ))}
+        {/* Picker: also shows which site is on screen */}
+        <div className="absolute bottom-2 left-2 z-10 flex gap-1" role="group" aria-label="Choose a website">
+          {websites.map((site, i) => (
+            <button
+              key={site.name}
+              type="button"
+              onClick={() => choose(i)}
+              aria-pressed={i === active}
+              className={cn(
+                "px-2.5 py-1 font-hud text-xs font-bold uppercase tracking-wider focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400",
+                i === active ? "bg-white text-black" : "bg-black/75 text-white/85 hover:bg-black"
+              )}
+            >
+              {site.name === "Ethical Capacity Lab" ? "ECL" : site.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-hud text-xs font-semibold uppercase tracking-wider text-white/60">
+            Client websites · one contract
+          </span>
+          <LabelBadge label="client" />
+        </div>
+        {/* Both texts share one grid cell, so the card never changes height */}
+        <div className="grid flex-1">
+          {websites.map((site, i) => (
+            <div
+              key={site.name}
+              aria-hidden={i !== active}
+              {...(i !== active ? { inert: true } : {})}
+              className={cn(
+                "col-start-1 row-start-1 flex flex-col gap-3 transition-opacity duration-700",
+                i === active ? "opacity-100" : "pointer-events-none opacity-0"
+              )}
+            >
+              <h3 className="font-hud text-xl font-semibold uppercase leading-tight tracking-wide text-white">
+                {site.name}
+              </h3>
+              <p className="text-sm sm:text-[15px] leading-relaxed text-white/80">{site.summary}</p>
+              <p className="text-sm leading-relaxed text-white/80">
+                <span className="font-hud font-semibold uppercase tracking-wider text-emerald-400">Result: </span>
+                {site.result}
+              </p>
+              <div className="mt-auto pt-1">
+                <a
+                  href={site.path}
+                  onClick={(e) => handleInternalClick(e, () => onOpenCase(site.path))}
+                  className="gta-btn gta-btn-primary"
+                >
+                  Read case study
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function FeaturedWork({ onOpenCase }: { onOpenCase: (path: string) => void }) {
   const itip = portfolioData.projects.find((p) => p.slug === "itip");
 
@@ -72,6 +197,7 @@ export default function FeaturedWork({ onOpenCase }: { onOpenCase: (path: string
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+        <WebsitesCard onOpenCase={onOpenCase} />
         {cases.map((item) => (
           <article key={item.title} className="flex flex-col bg-black/70">
             <a
