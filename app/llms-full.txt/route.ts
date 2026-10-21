@@ -40,7 +40,7 @@ export function GET() {
   out.push("## Automation workflows", "");
   automations.forEach((a) => {
     out.push(`### ${a.title}`, `URL: ${siteUrl}${automationPath(a.id)}`);
-    out.push(`Platform: ${a.platform}. ${a.label === "client" ? "Client work for DoGoodie." : "Portfolio demo on fictional data."}`, "");
+    out.push(`Platform: ${a.platform}. ${a.label === "client" ? "Client work." : "Portfolio demo on fictional data."}`, "");
     if (a.caseStudy) {
       const c = a.caseStudy;
       out.push(`Problem: ${c.problem}`, `My part: ${c.responsibility}`);

@@ -140,7 +140,7 @@ function WebsitesCard({ onOpenCase }: { onOpenCase: (path: string) => void }) {
       <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-hud text-xs font-semibold uppercase tracking-wider text-white/60">
-            Client websites · one contract
+            Client websites
           </span>
           <LabelBadge label="client" />
         </div>

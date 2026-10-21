@@ -116,7 +116,7 @@ function describe(path: string[] = []): PageInfo | null {
     return {
       path: automationPath(item.id),
       title: `${item.title} | ${ownerName}`,
-      description: `${item.tagline} ${item.label === "client" ? "Client work for DoGoodie." : "Portfolio demo on fictional data."}`,
+      description: `${item.tagline} ${item.label === "client" ? "Client work." : "Portfolio demo on fictional data."}`,
       jsonLd: [
         crumbs([
           { name: "Automation", path: sectionPath("automation") },

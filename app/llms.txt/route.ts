@@ -32,7 +32,7 @@ export function GET() {
   lines.push("## Automation workflows", "");
   list(
     automations.map((a) => {
-      const kind = a.label === "client" ? "Client work for DoGoodie" : "Portfolio demo on fictional data";
+      const kind = a.label === "client" ? "Client work" : "Portfolio demo on fictional data";
       return `[${a.title}](${siteUrl}${automationPath(a.id)}): ${kind}, ${a.platform}. ${a.tagline} Limits: ${a.scope}`;
     })
   );
